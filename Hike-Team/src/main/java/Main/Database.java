@@ -1,12 +1,9 @@
 package Main;
 
 import java.sql.Statement;
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -29,36 +26,76 @@ public class Database {
             // table for login
             Statement stmt0 = conn().createStatement();
             stmt0.executeUpdate("CREATE TABLE login("
-                    + "id int(2) NOT NULL AUTO_INCREMENT,"
+                    + "id int(2) NOT NULL AUTOINCREMENT,"
                     + "userName varchar(20) NOT NULL,"
                     + "password varchar(20) NOT NULL,"
                     + "lastLogin varchar(20),"
                     + "PRIMARY KEY (id));");
-            
+
             // table for scouts
             Statement stmt1 = conn().createStatement();
             stmt1.executeUpdate("CREATE TABLE scouts("
-                    + "id int(12) NOT NULL AUTO_INCREMENT,"
+                    + "id int(12) NOT NULL AUTOINCREMENT,"
                     + "callName varcha(20) NOT NULL,"
                     + "nameWithInitials varchar(50) NOT NULL,"
                     + "fullName varchar(80) NOT NULL,"
+                    + "class varchar(4) NOT NULL"
                     + "birthDate date NOT NULL,"
                     + "address varchar(255) NOT NULL,"
                     + "guardianName varchar(50) NOT NULL,"
                     + "guardianContact varchar(9) NOT NULL,"
+                    + "telegramId varchar(30),"
                     + "PRIMARY KEY (id));");
-            
+
             //table for attendance marking
             Statement stmt2 = conn().createStatement();
             stmt2.executeUpdate("CREATE TABLE attendance("
-                    + "id int(12) NOT NULL AUTO_INCREMENT,"
+                    + "id int(12) NOT NULL AUTOINCREMENT,"
                     + "scoutId int(12) NOT NULL,"
                     + "date date NOT NULL,"
                     + "status int(1) NOT NULL,"
                     + "PRIMARY KEY (id)"
                     + "FOREIGN KEY (scoutId) RFERENCES scouts(id));");
-            
-            // table for 
+
+            // table for tests
+            Statement stmt3 = conn().createStatement();
+            stmt3.executeUpdate("CREATE TABLE tests("
+                    + "id int(12) NOT NULL AUTOINCREMENT,"
+                    + "name varchar(50) NOT NULL,"
+                    + "date date NOT NULL,"
+                    + "defaultMark int(4) NOT NULL,"
+                    + "PRIMARY KEY (id));");
+
+            // table for test marks
+            Statement stmt4 = conn().createStatement();
+            stmt4.executeUpdate("CREATE TABLE testMakers("
+                    + "id int(12) NOT NULL AUTHOINCREMENT,"
+                    + "scoutId int(12) NOT NULL,"
+                    + "testId int(12) NOT NULL,"
+                    + "marks int(4) NOT NULL,"
+                    + "PRIMARY KEY (id),"
+                    + "FOREIGN KEY (scoutId) REFERENCES scouts(id),"
+                    + "FOREIGN KEY (testId) REFERENCES tests(id));");
+
+            // table for activities
+            Statement stmt5 = conn().createStatement();
+            stmt5.executeUpdate("CREATE TABLE activities("
+                    + "id int(12) NOT NULL AUTOINCREMENT,"
+                    + "name varchar(30) NOT NULL,"
+                    + "defaultMark int(4) NOT NULL,"
+                    + "PRIMARY KEY (id));");
+
+            // table for activity marks
+            Statement stmt6 = conn().createStatement();
+            stmt6.executeUpdate("CREATE TABLE activityMarks("
+                    + "id int(12) NOT NULL AUTOINCREMENT,"
+                    + "scoutId int(12) NOT NULL,"
+                    + "activityId int(12) NOT NULL,"
+                    + "date date NOT NULL,"
+                    + "marks int(4) NOT NULL,"
+                    + "PRIMARY KEY (id),"
+                    + "FOREGIN KEY (scoutId) RFERENCES scouts(id),"
+                    + "FOREIGN KEY (activityId) REFERENCES activities(id));");
         } catch (SQLException e) {
             System.out.println(e);
         }

@@ -1,9 +1,11 @@
 package PostLogin;
 
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.time.LocalDate;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -16,17 +18,31 @@ public class PostLogin extends javax.swing.JFrame {
      */
     public PostLogin() {
         initComponents();
-        addDropdown();
-    }
-
-    private void addDropdown(){
-        // this is using to add dropdown menu to attendance marking table
-        // cell Attendance
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-        Object[] row = {"a","b","c","d"};
-        model.addRow(row);
+        preLoader();
     }
     
+    Connection conn = Main.Database.conn();
+    LocalDate todayDate = LocalDate.now();
+    
+    private void preLoader() {
+        DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
+        int count = 0;
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT id, callName, nameWithInitials, class "
+                    + "FROM scouts");
+            while (rs.next()) {
+                Object[] row = {rs.getString(1), rs.getString(2),
+                    rs.getString(3), rs.getString(4)};
+                model.addRow(row);
+                count++;
+            }
+            jLabel75.setText("Total Team Members : " + count);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -81,6 +97,7 @@ public class PostLogin extends javax.swing.JFrame {
         jTextField29 = new javax.swing.JTextField();
         jButton17 = new javax.swing.JButton();
         jButton18 = new javax.swing.JButton();
+        jLabel75 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
@@ -251,6 +268,11 @@ public class PostLogin extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable5MouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(jTable5);
 
         jPanel15.setBorder(javax.swing.BorderFactory.createTitledBorder("Summary : "));
@@ -271,7 +293,7 @@ public class PostLogin extends javax.swing.JFrame {
 
         jLabel52.setText("# Total Marks : ");
 
-        jLabel53.setText("# Last 4 Days Marks : ");
+        jLabel53.setText("# Last 4 Days : ");
 
         jLabel54.setText("------");
 
@@ -426,6 +448,7 @@ public class PostLogin extends javax.swing.JFrame {
         jLabel74.setText("by Class (Grade) :");
 
         jButton17.setText("Reset");
+        jButton17.setEnabled(false);
 
         jButton18.setText("Go");
 
@@ -476,6 +499,8 @@ public class PostLogin extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel75.setText("Total Team Members : ---");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -486,7 +511,8 @@ public class PostLogin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel75, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -499,7 +525,8 @@ public class PostLogin extends javax.swing.JFrame {
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel75)))
                 .addContainerGap())
         );
 
@@ -598,6 +625,7 @@ public class PostLogin extends javax.swing.JFrame {
         jLabel34.setText("--- ]");
 
         jButton12.setText("Reset");
+        jButton12.setEnabled(false);
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -786,6 +814,7 @@ public class PostLogin extends javax.swing.JFrame {
         jLabel42.setText("--- ]");
 
         jButton15.setText("Reset");
+        jButton15.setEnabled(false);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -850,11 +879,11 @@ public class PostLogin extends javax.swing.JFrame {
                             .addComponent(jLabel40)
                             .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton15)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel41)
-                        .addComponent(jLabel42)))
+                        .addComponent(jLabel42))
+                    .addComponent(jButton15))
                 .addContainerGap())
         );
 
@@ -979,11 +1008,11 @@ public class PostLogin extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Call Name", "Full Name", "Class"
+                "ID", "Call Name", "Name with Initials", "Class"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1214,6 +1243,7 @@ public class PostLogin extends javax.swing.JFrame {
         jTextField16.setEnabled(false);
 
         jButton7.setText("Reset");
+        jButton7.setEnabled(false);
 
         jLabel23.setText("[ Filtered Count : ");
 
@@ -1356,6 +1386,31 @@ public class PostLogin extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jTable5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
+        int scoutId = Integer.parseInt((String) model.getValueAt(jTable5.getSelectedRow(), 0));
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(DISTINCT date) "
+                    + "FROM attendace");
+            while (rs.next()) {
+                jLabel66.setText("" + rs.getInt(1));
+            }
+            Statement stmt0 = conn.createStatement();
+            ResultSet rs0 = stmt0.executeQuery("SELECT COUNT(id) "
+                    + "FROM attendance WHERE scoutId='" + scoutId + "'");
+            while (rs0.next()) {
+                jLabel54.setText("" + rs0.getInt(1));
+            }
+            Statement stmt1 = conn.createStatement();
+            ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(DISTINCT date) "
+                    + "FROM attendace WHERE NOT (From_date > @RangeTill OR To_date < @RangeFrom)");
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_jTable5MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1487,6 +1542,7 @@ public class PostLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
+    private javax.swing.JLabel jLabel75;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
