@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,10 +21,10 @@ public class PostLogin extends javax.swing.JFrame {
         initComponents();
         preLoader();
     }
-    
+
     Connection conn = Main.Database.conn();
-    LocalDate todayDate = LocalDate.now();
-    
+    String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
     private void preLoader() {
         DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
         int count = 0;
@@ -1405,7 +1406,69 @@ public class PostLogin extends javax.swing.JFrame {
             }
             Statement stmt1 = conn.createStatement();
             ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(DISTINCT date) "
-                    + "FROM attendace WHERE NOT (From_date > @RangeTill OR To_date < @RangeFrom)");
+                    + "FROM attendace WHERE NOT (From_date > " + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + " OR "
+                    + "To_date < " + new SimpleDateFormat("yyyy-MM").format(new Date()) + "-01");
+            while (rs1.next()) {
+                jLabel67.setText("" + rs1.getInt(1));
+            }
+            Statement stmt2 = conn.createStatement();
+            ResultSet rs2 = stmt2.executeQuery("SELECT COUNT(DISTINCT date) "
+                    + "FROM attendace WHERE scoutId='" + scoutId + "' AND NOT (From_date > " + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + " OR "
+                    + "To_date < " + new SimpleDateFormat("yyyy-MM").format(new Date()) + "-01");
+            while (rs2.next()) {
+                jLabel55.setText("" + rs2.getInt(1));
+            }
+            Statement stmt3 = conn.createStatement();
+            ResultSet rs3 = stmt3.executeQuery("SELECT SUM(defaultMark) "
+                    + "FROM tests");
+            while (rs3.next()) {
+                jLabel68.setText("" + rs3.getInt(1));
+            }
+            Statement stmt4 = conn.createStatement();
+            ResultSet rs4 = stmt4.executeQuery("SELECT SUM(marks) "
+                    + "FROM testMarks WHERE id='" + scoutId + "'");
+            while (rs4.next()) {
+                jLabel56.setText("" + rs4.getInt(1));
+            }
+            Statement stmt5 = conn.createStatement();
+            ResultSet rs5 = stmt5.executeQuery("SELECT SUM(marks) "
+                    + "FROM tests ORDER BY date DESC LIMIT='4'");
+            while (rs5.next()) {
+                jLabel69.setText("" + rs5.getInt(1));
+            }
+            Statement stmt6 = conn.createStatement();
+            ResultSet rs6 = stmt6.executeQuery("SELECT SUM(marks) "
+                    + "FROM testMarks ORDER BY date WHERE id='" + scoutId + "' "
+                    + "DESC LIMIT='4'");
+            while (rs6.next()) {
+                jLabel57.setText("" + rs6.getInt(1));
+            }
+            Statement stmt7 = conn.createStatement();
+            ResultSet rs7 = stmt7.executeQuery("SELECT SUM(defaultMark) "
+                    + "FROM activities");
+            while (rs7.next()) {
+                jLabel70.setText("" + rs7.getInt(1));
+            }
+            Statement stmt8 = conn.createStatement();
+            ResultSet rs8 = stmt8.executeQuery("SELECT SUM(marks) "
+                    + "FROM activityMarks WHERE scoutId='" + scoutId + "' ");
+            while (rs8.next()) {
+                jLabel58.setText("" + rs8.getInt(1));
+            }
+            Statement stmt9 = conn.createStatement();
+            ResultSet rs9 = stmt9.executeQuery("SELECT SUM(defaultMark) "
+                    + "FROM activities ORDER BY date DESC LIMIT='4'");
+            while (rs9.next()) {
+                jLabel71.setText("" + rs9.getInt(1));
+            }
+            Statement stmt10 = conn.createStatement();
+            ResultSet rs10 = stmt10.executeQuery("SELECT SUM(marks) "
+                    + "FROM activityMarks "
+                    + "ORDER BY date WHERE id='" + scoutId + "' "
+                    + "DESC LIMIT='4'");
+            while (rs10.next()) {
+                jLabel59.setText("" + rs10.getInt(1));
+            }
         } catch (SQLException e) {
             System.out.println(e);
         }
