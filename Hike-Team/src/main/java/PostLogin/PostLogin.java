@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,6 +31,7 @@ public class PostLogin extends javax.swing.JFrame {
     private void preLoader() {
         // loads the 1st component in tabbed pane (summary)
         DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
+        model.setRowCount(0);
         int count = 0;
         try {
             Statement stmt = conn.createStatement();
@@ -133,6 +135,8 @@ public class PostLogin extends javax.swing.JFrame {
         jLabel35 = new javax.swing.JLabel();
         jTextField19 = new javax.swing.JTextField();
         jButton13 = new javax.swing.JButton();
+        jLabel76 = new javax.swing.JLabel();
+        jTextField29 = new javax.swing.JTextField();
         jPanel13 = new javax.swing.JPanel();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
@@ -769,11 +773,11 @@ public class PostLogin extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Name", "Date"
+                "ID", "Name", "Date", "Default Mark"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -787,6 +791,13 @@ public class PostLogin extends javax.swing.JFrame {
         jLabel35.setText("Name : ");
 
         jButton13.setText("Add");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
+            }
+        });
+
+        jLabel76.setText("Default Mark : ");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -795,13 +806,17 @@ public class PostLogin extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addComponent(jLabel35)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField19))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel76, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel35, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField19)
+                            .addComponent(jTextField29))))
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
@@ -811,6 +826,10 @@ public class PostLogin extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel35)
                     .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel76)
+                    .addComponent(jTextField29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -928,7 +947,7 @@ public class PostLogin extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE))
@@ -962,6 +981,11 @@ public class PostLogin extends javax.swing.JFrame {
         jLabel44.setText("Default Mark : ");
 
         jButton16.setText("Add");
+        jButton16.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton16ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -1507,19 +1531,75 @@ public class PostLogin extends javax.swing.JFrame {
                 preLoader();
             case 1:
                 comp1();
+            case 2:
+                comp2();
+            case 3:
+                comp3();
+            case 4:
+                comp4();
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         try {
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("");
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(id) "
+                    + "FROM attendance WHERE date='" + todayDate + "'");
+            while (rs.next()) {
+                Statement stmt0 = conn.createStatement();
+                if (rs.getInt(1) == 0) {
+                    for (int i = 0; i > jTable2.getRowCount(); i++) {
+                        String scoutId = jTable2.getValueAt(i, 0).toString();
+                        String status = jTable2.getValueAt(i, 4).toString();
+                        stmt0.executeUpdate("INSERT INTO attendance "
+                                + "(scoutId, date, status) VALUES ('" + scoutId + "', "
+                                + "'" + todayDate + "', '" + status + "')");
+                    }
+                } else {
+                    for (int i = 0; i > jTable2.getRowCount(); i++) {
+                        String scoutId = jTable2.getValueAt(i, 0).toString();
+                        String status = jTable2.getValueAt(i, 4).toString();
+                        stmt0.executeUpdate("UPDATE attendance "
+                                + "SET status='" + status + "' "
+                                + "WHERE scoutId='" + scoutId + "' AND "
+                                + "date='" + todayDate + "'");
+                    }
+                }
+            }
         } catch (SQLException e) {
             System.out.println(e);
         }
+        JOptionPane.showMessageDialog(this, "Success!");
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("INSERT INTO tests "
+                    + "(name, date, defaultMark) VALUES ('" + jTextField19.getText() + "', "
+                    + "'" + todayDate + "', '" + jTextField29.getText() + "')");
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        comp2();
+        JOptionPane.showMessageDialog(this, "Success!");
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        // TODO add your handling code here:
+        try {
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("INSERT INTO activities "
+                    + "(name, defaultMark) VALUES ('" + jTextField25.getText() + "', "
+                    + "'" + jTextField26.getText() + "')");
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        comp3();
+        JOptionPane.showMessageDialog(this, "Success!");
+    }//GEN-LAST:event_jButton16ActionPerformed
 
     private void comp1() {
         // 2nd component in tabbed pane
@@ -1527,7 +1607,7 @@ public class PostLogin extends javax.swing.JFrame {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (true) {
+                while (jTabbedPane1.getSelectedIndex() == 1) {
                     String todayTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
                     jLabel28.setText(todayTime);
                     try {
@@ -1539,6 +1619,7 @@ public class PostLogin extends javax.swing.JFrame {
             }
         }).start();
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT id, callName, nameWithInitials, class "
@@ -1557,6 +1638,60 @@ public class PostLogin extends javax.swing.JFrame {
                 }
                 Object[] row = {rs.getString(1), rs.getString(2),
                     rs.getString(3), rs.getString(4), attend};
+                model.addRow(row);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void comp2() {
+        //3rd component in tabbed pane
+        DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+        model.setRowCount(0);
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * "
+                    + "FROM tests");
+            while (rs.next()) {
+                Object[] row = {rs.getInt(1), rs.getInt(2),
+                    rs.getInt(3), rs.getInt(4)};
+                model.addRow(row);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void comp3() {
+        //4th component in tabbed pane
+        DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
+        model.setRowCount(0);
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * "
+                    + "FROM activities");
+            while (rs.next()) {
+                Object[] row = {rs.getInt(1), rs.getInt(2),
+                    rs.getInt(3)};
+                model.addRow(row);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    private void comp4() {
+        //5th component in tabbed pane
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT id, callName, nameWithInitials, class "
+                    + "FROM scouts");
+            while (rs.next()) {
+                Object[] row = {rs.getInt(1), rs.getInt(2),
+                    rs.getInt(3), rs.getInt(4)};
                 model.addRow(row);
             }
         } catch (SQLException e) {
@@ -1697,6 +1832,7 @@ public class PostLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
     private javax.swing.JLabel jLabel75;
+    private javax.swing.JLabel jLabel76;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -1747,6 +1883,7 @@ public class PostLogin extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField26;
     private javax.swing.JTextField jTextField27;
     private javax.swing.JTextField jTextField28;
+    private javax.swing.JTextField jTextField29;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
