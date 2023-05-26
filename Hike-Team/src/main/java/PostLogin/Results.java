@@ -1,18 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package PostLogin;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Dell
+ * @author NaveenB2004
  */
 public class Results extends javax.swing.JFrame {
 
@@ -23,14 +21,15 @@ public class Results extends javax.swing.JFrame {
         initComponents();
         startup();
     }
-
+    
     public static String eventId;
     public static String event;
     Connection conn = Main.Database.conn();
     DefaultTableModel model;
-
+    
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
         switch (event) {
             case "test":
                 evtTest();
@@ -38,7 +37,7 @@ public class Results extends javax.swing.JFrame {
                 evtActivity();
         }
     }
-
+    
     private void evtTest() {
         try {
             Statement stmt = conn.createStatement();
@@ -93,9 +92,68 @@ public class Results extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-
+    
     private void evtActivity() {
-
+        String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        jComboBox1.removeAllItems();
+        int x = 0;
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * "
+                    + "FROM activities WHERE id='" + eventId + "'");
+            while (rs.next()) {
+                jLabel4.setText(eventId);
+                jLabel5.setText(rs.getString("name"));
+                jLabel8.setText("defaultMark");
+                Statement stmt0 = conn.createStatement();
+                ResultSet rs0 = stmt0.executeQuery("SELECT DISTINCT date "
+                        + "FROM activityMarks "
+                        + "ORDER BY date WHERE activityId='" + eventId + "' "
+                        + "DESC");
+                while (rs0.next()) {
+                    if (!rs0.getString(1).equals(todayDate) && x == 0) {
+                        jComboBox1.addItem(todayDate);
+                        x++;
+                    }
+                    jComboBox1.addItem(rs0.getString(1));
+                }
+                Statement stmt1 = conn.createStatement();
+                ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(id) "
+                        + "FROM activityMarks WHERE activityId='" + eventId + "' "
+                        + "AND date='" + todayDate + "'");
+                while (rs1.next()) {
+                    Statement stmt2 = conn.createStatement();
+                    ResultSet rs2;
+                    int marks;
+                    if (rs1.getInt(1) == 0) {
+                        rs2 = stmt2.executeQuery("SELECT id, callName, nameWithInitials, class "
+                                + "FROM scouts");
+                        while (rs2.next()) {
+                            Object[] row = {rs2.getString(1), rs2.getString(2),
+                                rs2.getString(3), rs2.getString(4), 0};
+                            model.addRow(row);
+                        }
+                    } else {
+                        rs2 = stmt2.executeQuery("SELECT marks, scoutId "
+                                + "FROM activityMarks WHERE activityId='" + eventId + "' "
+                                + "AND date='" + todayDate + "'");
+                        while (rs2.next()) {
+                            marks = rs2.getInt(1);
+                            Statement stmt3 = conn.createStatement();
+                            ResultSet rs3 = stmt3.executeQuery("SELECT id, callName, nameWithInitials, class "
+                                    + "FROM scouts WHERE id='" + rs2.getInt(2) + "'");
+                            while (rs3.next()) {
+                                Object[] row = {rs3.getString(1), rs3.getString(2),
+                                    rs3.getString(3), rs3.getString(4), marks};
+                                model.addRow(row);
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
 
     /**
@@ -160,6 +218,11 @@ public class Results extends javax.swing.JFrame {
         jLabel8.setText("---");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -238,6 +301,33 @@ public class Results extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+        String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        if (!jComboBox1.getSelectedItem().toString().equals(todayDate) && event.equals("activity")) {
+            try {
+                int marks;
+                Statement stmt2 = conn.createStatement();
+                ResultSet rs2 = stmt2.executeQuery("SELECT marks, scoutId "
+                        + "FROM activityMarks WHERE activityId='" + eventId + "' "
+                        + "AND date='" + jComboBox1.getSelectedItem().toString() + "'");
+                while (rs2.next()) {
+                    marks = rs2.getInt(1);
+                    Statement stmt3 = conn.createStatement();
+                    ResultSet rs3 = stmt3.executeQuery("SELECT id, callName, nameWithInitials, class "
+                            + "FROM scouts WHERE id='" + rs2.getInt(2) + "'");
+                    while (rs3.next()) {
+                        Object[] row = {rs3.getString(1), rs3.getString(2),
+                            rs3.getString(3), rs3.getString(4), marks};
+                        model.addRow(row);
+                    }
+                }
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
