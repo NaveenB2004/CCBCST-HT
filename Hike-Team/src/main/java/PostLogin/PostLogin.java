@@ -628,6 +628,11 @@ public class PostLogin extends javax.swing.JFrame {
         });
 
         jButton10.setText("Previous Attendance");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Filters : "));
 
@@ -782,6 +787,11 @@ public class PostLogin extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
             }
         });
         jScrollPane3.setViewportView(jTable3);
@@ -970,6 +980,11 @@ public class PostLogin extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable4MouseClicked(evt);
             }
         });
         jScrollPane4.setViewportView(jTable4);
@@ -1600,6 +1615,25 @@ public class PostLogin extends javax.swing.JFrame {
         comp3();
         JOptionPane.showMessageDialog(this, "Success!");
     }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        new PreAttendance().setVisible(true);
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        // TODO add your handling code here:
+        Results.event = "test";
+        Results.eventId = jTable3.getValueAt(jTable3.getSelectedRow(), 0).toString();
+        new Results().setVisible(true);
+    }//GEN-LAST:event_jTable3MouseClicked
+
+    private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
+        // TODO add your handling code here:
+        Results.event = "activity";
+        Results.eventId = jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString();
+        new Results().setVisible(true);
+    }//GEN-LAST:event_jTable4MouseClicked
 
     private void comp1() {
         // 2nd component in tabbed pane

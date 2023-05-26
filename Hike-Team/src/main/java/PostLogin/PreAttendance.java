@@ -71,11 +71,11 @@ public class PreAttendance extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Call Name", "Name with Initials", "Class", "Attendance"
+                "ID", "Call Name", "Name with Initials", "Class", "Date", "Attendance"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

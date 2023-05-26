@@ -68,8 +68,8 @@ public class Database {
 
             // table for test marks
             Statement stmt4 = conn().createStatement();
-            stmt4.executeUpdate("CREATE TABLE testMakers("
-                    + "id int(12) NOT NULL AUTHOINCREMENT,"
+            stmt4.executeUpdate("CREATE TABLE testMarks("
+                    + "id int(12) NOT NULL AUTOINCREMENT,"
                     + "scoutId int(12) NOT NULL,"
                     + "testId int(12) NOT NULL,"
                     + "marks int(4) NOT NULL,"
