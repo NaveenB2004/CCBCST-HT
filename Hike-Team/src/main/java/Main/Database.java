@@ -36,6 +36,7 @@ public class Database {
             Statement stmt1 = conn().createStatement();
             stmt1.executeUpdate("CREATE TABLE scouts("
                     + "id int(12) NOT NULL AUTOINCREMENT,"
+                    + "schoolIndex int(12),"
                     + "callName varcha(20) NOT NULL,"
                     + "nameWithInitials varchar(50) NOT NULL,"
                     + "fullName varchar(80) NOT NULL,"
@@ -44,7 +45,7 @@ public class Database {
                     + "address varchar(255) NOT NULL,"
                     + "guardianName varchar(50) NOT NULL,"
                     + "guardianContact varchar(9) NOT NULL,"
-                    + "telegramId varchar(30),"
+                    + "whatsapp varchar(30),"
                     + "PRIMARY KEY (id));");
 
             //table for attendance marking
