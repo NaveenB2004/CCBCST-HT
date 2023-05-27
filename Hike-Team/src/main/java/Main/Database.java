@@ -53,7 +53,8 @@ public class Database {
                     + "scoutId INTEGER NOT NULL,"
                     + "date TEXT NOT NULL,"
                     + "status INTEGER NOT NULL,"
-                    + "FOREIGN KEY (scoutId) REFERENCES scouts(id));");
+                    + "FOREIGN KEY (scoutId) REFERENCES scouts(id) "
+                    + "ON DELETE CASCADE);");
 
             // table for tests
             Statement stmt3 = conn().createStatement();
@@ -70,8 +71,10 @@ public class Database {
                     + "scoutId INTEGER NOT NULL,"
                     + "testId INTEGER NOT NULL,"
                     + "marks INTEGER NOT NULL,"
-                    + "FOREIGN KEY (scoutId) REFERENCES scouts(id),"
-                    + "FOREIGN KEY (testId) REFERENCES tests(id));");
+                    + "FOREIGN KEY (scoutId) REFERENCES scouts(id) "
+                    + "ON DELETE CASCADE,"
+                    + "FOREIGN KEY (testId) REFERENCES tests(id) "
+                    + "ON DELETE CASCADE);");
 
             // table for activities
             Statement stmt5 = conn().createStatement();
@@ -88,8 +91,10 @@ public class Database {
                     + "activityId INTEGER NOT NULL,"
                     + "date TEXT NOT NULL,"
                     + "marks INTEGER NOT NULL,"
-                    + "FOREIGN KEY (scoutId) REFERENCES scouts(id),"
-                    + "FOREIGN KEY (activityId) REFERENCES activities(id));");
+                    + "FOREIGN KEY (scoutId) REFERENCES scouts(id)"
+                    + " ON DELETE CASCADE,"
+                    + "FOREIGN KEY (activityId) REFERENCES activities(id) "
+                    + "ON DELETE CASCADE);");
         } catch (SQLException e) {
             System.out.println(e);
         }

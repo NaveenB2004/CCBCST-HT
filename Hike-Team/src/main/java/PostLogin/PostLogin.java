@@ -4,11 +4,16 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,7 +32,7 @@ public class PostLogin extends javax.swing.JFrame {
     }
 
     Connection conn = Main.Database.conn();
-    String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+    static String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     private void preLoader() {
         // loads the 1st component in tabbed pane (summary)
@@ -1727,19 +1732,31 @@ public class PostLogin extends javax.swing.JFrame {
                 jTextField10.setText(rs.getString("address"));
                 jTextField11.setText(rs.getString("guardianName"));
                 jTextField12.setText(rs.getString("guardianContact"));
-                jTextField30.setText(rs.getString("whstapp"));
-
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate first_date = (LocalDate) dtf.parse(rs.getString("birthDate"));
-                LocalDate second_date = (LocalDate) dtf.parse(todayDate);
-                Period difference = Period.between(first_date, second_date);
-                jLabel13.setText("Years : " + difference.getYears() + " - Months : "
-                        + difference.getMonths() + " - Days : " + difference.getDays());
+                jTextField30.setText(rs.getString("whatsapp"));
+                jLabel13.setText(dateCalc(rs.getString("birthDate")));
             }
         } catch (SQLException e) {
             System.out.println(e);
         }
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private static String dateCalc(String date) {
+        String calculated = null;
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+            Date firstDate = sdf.parse(date);
+            Date secondDate = sdf.parse(todayDate);
+            long difference_In_Time = secondDate.getTime() - firstDate.getTime();
+            long days = TimeUnit.MILLISECONDS.toDays(difference_In_Time);
+            long yearCount = days / 365;
+            long monthCount = (days % 365) / 12;
+            long dayCount = (days % 365) % 12;
+            calculated = "Years : " + yearCount + " - Months : " + monthCount + " - Days : " + dayCount;
+        } catch (ParseException e) {
+            System.out.println(e);
+        }
+        return calculated;
+    }
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
