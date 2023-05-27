@@ -31,11 +31,11 @@ public class Results extends javax.swing.JFrame {
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        switch (event) {
-            case "test":
-                evtTest();
-            case "activity":
-                evtActivity();
+        jComboBox1.removeAllItems();
+        if (event.equals("test")) {
+            evtTest();
+        } else {
+            evtActivity();
         }
     }
 
@@ -47,9 +47,8 @@ public class Results extends javax.swing.JFrame {
             while (rs.next()) {
                 jLabel4.setText(eventId);
                 jLabel5.setText(rs.getString("name"));
-                jComboBox1.removeAllItems();
                 jComboBox1.addItem(rs.getString("date"));
-                jLabel8.setText("defaultMark");
+                jLabel8.setText(""+rs.getInt("defaultMark"));
                 Statement stmt0 = conn.createStatement();
                 ResultSet rs0 = stmt0.executeQuery("SELECT COUNT(id) "
                         + "FROM testMarks WHERE testId='" + eventId + "'");
@@ -59,20 +58,15 @@ public class Results extends javax.swing.JFrame {
                     ResultSet rs1;
                     ResultSet rs2;
                     if (rs0.getInt(1) == 0) {
-                        rs1 = stmt1.executeQuery("SELECT scoutId "
-                                + "FROM testMarks WHERE testId='" + eventId + "'");
-                        while (rs1.next()) {
-                            rs2 = stmt2.executeQuery("SELECT id, callName, nameWithInitials, class "
-                                    + "FROM scouts "
-                                    + "WHERE id='" + rs1.getInt(1) + "'");
-                            while (rs2.next()) {
-                                Object[] row = {rs2.getString(1), rs2.getString(2),
-                                    rs2.getString(3), rs2.getString(4), 0};
-                                model.addRow(row);
-                            }
+                        rs2 = stmt2.executeQuery("SELECT id, callName, nameWithInitials, class "
+                                + "FROM scouts");
+                        while (rs2.next()) {
+                            Object[] row = {rs2.getString(1), rs2.getString(2),
+                                rs2.getString(3), rs2.getString(4), 0};
+                            model.addRow(row);
                         }
                     } else {
-                        int marks = 0;
+                        int marks;
                         rs1 = stmt1.executeQuery("SELECT scoutId, marks "
                                 + "FROM testMarks WHERE testId='" + eventId + "'");
                         while (rs1.next()) {
@@ -96,7 +90,6 @@ public class Results extends javax.swing.JFrame {
 
     private void evtActivity() {
         String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        jComboBox1.removeAllItems();
         int x = 0;
         try {
             Statement stmt = conn.createStatement();
@@ -311,27 +304,29 @@ public class Results extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
         String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        if (!jComboBox1.getSelectedItem().toString().equals(todayDate) && event.equals("activity")) {
-            try {
-                int marks;
-                model.setRowCount(0);
-                Statement stmt2 = conn.createStatement();
-                ResultSet rs2 = stmt2.executeQuery("SELECT marks, scoutId "
-                        + "FROM activityMarks WHERE activityId='" + eventId + "' "
-                        + "AND date='" + jComboBox1.getSelectedItem().toString() + "'");
-                while (rs2.next()) {
-                    marks = rs2.getInt(1);
-                    Statement stmt3 = conn.createStatement();
-                    ResultSet rs3 = stmt3.executeQuery("SELECT id, callName, nameWithInitials, class "
-                            + "FROM scouts WHERE id='" + rs2.getInt(2) + "'");
-                    while (rs3.next()) {
-                        Object[] row = {rs3.getString(1), rs3.getString(2),
-                            rs3.getString(3), rs3.getString(4), marks};
-                        model.addRow(row);
+        if (jComboBox1.getSelectedItem() != null) {
+            if (!jComboBox1.getSelectedItem().toString().equals(todayDate) && event.equals("activity")) {
+                try {
+                    int marks;
+                    model.setRowCount(0);
+                    Statement stmt2 = conn.createStatement();
+                    ResultSet rs2 = stmt2.executeQuery("SELECT marks, scoutId "
+                            + "FROM activityMarks WHERE activityId='" + eventId + "' "
+                            + "AND date='" + jComboBox1.getSelectedItem().toString() + "'");
+                    while (rs2.next()) {
+                        marks = rs2.getInt(1);
+                        Statement stmt3 = conn.createStatement();
+                        ResultSet rs3 = stmt3.executeQuery("SELECT id, callName, nameWithInitials, class "
+                                + "FROM scouts WHERE id='" + rs2.getInt(2) + "'");
+                        while (rs3.next()) {
+                            Object[] row = {rs3.getString(1), rs3.getString(2),
+                                rs3.getString(3), rs3.getString(4), marks};
+                            model.addRow(row);
+                        }
                     }
+                } catch (SQLException e) {
+                    System.out.println(e);
                 }
-            } catch (SQLException e) {
-                System.out.println(e);
             }
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -346,14 +341,14 @@ public class Results extends javax.swing.JFrame {
                 while (rs.next()) {
                     Statement stmt0 = conn.createStatement();
                     if (rs.getInt(1) == 0) {
-                        for (int i = 0; i > jTable1.getRowCount(); i++) {
+                        for (int i = 0; i < jTable1.getRowCount(); i++) {
                             stmt0.executeUpdate("INSERT INTO testMarks "
                                     + "(scoutId, testId, marks) VALUES "
                                     + "('" + model.getValueAt(i, 0) + "', "
                                     + "'" + eventId + "', '" + model.getValueAt(i, 4) + "')");
                         }
                     } else {
-                        for (int i = 0; i > jTable1.getRowCount(); i++) {
+                        for (int i = 0; i < jTable1.getRowCount(); i++) {
                             stmt0.executeUpdate("UPDATE testMarks "
                                     + "SET marks='" + model.getValueAt(i, 4) + "' "
                                     + "WHERE scoutId='" + model.getValueAt(i, 0) + "' "

@@ -1490,7 +1490,7 @@ public class PostLogin extends javax.swing.JFrame {
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT COUNT(DISTINCT date) "
-                    + "FROM attendace");
+                    + "FROM attendance");
             while (rs.next()) {
                 jLabel66.setText("" + rs.getInt(1));
             }
@@ -1619,6 +1619,7 @@ public class PostLogin extends javax.swing.JFrame {
                     }
                 }
             }
+            comp1();
             JOptionPane.showMessageDialog(this, "Success!");
         } catch (SQLException e) {
             System.out.println(e);
@@ -1854,8 +1855,8 @@ public class PostLogin extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery("SELECT * "
                     + "FROM tests");
             while (rs.next()) {
-                Object[] row = {rs.getInt(1), rs.getInt(2),
-                    rs.getInt(3), rs.getInt(4)};
+                Object[] row = {rs.getString(1), rs.getString(2),
+                    rs.getString(3), rs.getString(4)};
                 model.addRow(row);
             }
         } catch (SQLException e) {
@@ -1872,8 +1873,8 @@ public class PostLogin extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery("SELECT * "
                     + "FROM activities");
             while (rs.next()) {
-                Object[] row = {rs.getInt(1), rs.getInt(2),
-                    rs.getInt(3)};
+                Object[] row = {rs.getString(1), rs.getString(2),
+                    rs.getString(3)};
                 model.addRow(row);
             }
         } catch (SQLException e) {
@@ -1890,8 +1891,8 @@ public class PostLogin extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery("SELECT id, callName, nameWithInitials, class "
                     + "FROM scouts");
             while (rs.next()) {
-                Object[] row = {rs.getInt(1), rs.getInt(2),
-                    rs.getInt(3), rs.getInt(4)};
+                Object[] row = {rs.getString(1), rs.getString(2),
+                    rs.getString(3), rs.getString(4)};
                 model.addRow(row);
             }
         } catch (SQLException e) {
