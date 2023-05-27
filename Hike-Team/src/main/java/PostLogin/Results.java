@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,12 +22,12 @@ public class Results extends javax.swing.JFrame {
         initComponents();
         startup();
     }
-    
+
     public static String eventId;
     public static String event;
     Connection conn = Main.Database.conn();
     DefaultTableModel model;
-    
+
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -37,7 +38,7 @@ public class Results extends javax.swing.JFrame {
                 evtActivity();
         }
     }
-    
+
     private void evtTest() {
         try {
             Statement stmt = conn.createStatement();
@@ -92,7 +93,7 @@ public class Results extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-    
+
     private void evtActivity() {
         String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         jComboBox1.removeAllItems();
@@ -212,6 +213,11 @@ public class Results extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Update");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Default Mark : ");
 
@@ -308,6 +314,7 @@ public class Results extends javax.swing.JFrame {
         if (!jComboBox1.getSelectedItem().toString().equals(todayDate) && event.equals("activity")) {
             try {
                 int marks;
+                model.setRowCount(0);
                 Statement stmt2 = conn.createStatement();
                 ResultSet rs2 = stmt2.executeQuery("SELECT marks, scoutId "
                         + "FROM activityMarks WHERE activityId='" + eventId + "' "
@@ -328,6 +335,71 @@ public class Results extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if (event.equals("test")) {
+            try {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT COUNT(id) FROM "
+                        + "testMarks WHERE testId='" + eventId + "'");
+                while (rs.next()) {
+                    Statement stmt0 = conn.createStatement();
+                    if (rs.getInt(1) == 0) {
+                        for (int i = 0; i > jTable1.getRowCount(); i++) {
+                            stmt0.executeUpdate("INSERT INTO testMarks "
+                                    + "(scoutId, testId, marks) VALUES "
+                                    + "('" + model.getValueAt(i, 0) + "', "
+                                    + "'" + eventId + "', '" + model.getValueAt(i, 4) + "')");
+                        }
+                    } else {
+                        for (int i = 0; i > jTable1.getRowCount(); i++) {
+                            stmt0.executeUpdate("UPDATE testMarks "
+                                    + "SET marks='" + model.getValueAt(i, 4) + "' "
+                                    + "WHERE scoutId='" + model.getValueAt(i, 0) + "' "
+                                    + "AND testId='" + eventId + "'");
+                        }
+                    }
+                }
+                JOptionPane.showMessageDialog(this, "Success!");
+            } catch (SQLException e) {
+                System.out.println(e);
+                JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            }
+        } else {
+            String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            try {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT COUNT(id) "
+                        + "FROM activityMarks "
+                        + "WHERE date='" + todayDate + "' AND activityId='" + eventId + "'");
+                while (rs.next()) {
+                    Statement stmt0 = conn.createStatement();
+                    if (rs.getInt(1) == 0) {
+                        for (int i = 0; i > jTable1.getRowCount(); i++) {
+                            stmt0.executeUpdate("INSERT INTO activityMarks "
+                                    + "(scoutId, activityId, date, marks) VALUES "
+                                    + "('" + model.getValueAt(i, 0) + "', "
+                                    + "'" + eventId + "', '" + todayDate + "', "
+                                    + "'" + model.getValueAt(i, 4) + "')");
+                        }
+                    } else {
+                        for (int i = 0; i > jTable1.getRowCount(); i++) {
+                            stmt0.executeUpdate("UPDATE activityMarks "
+                                    + "SET marks='" + model.getValueAt(i, 4) + "' "
+                                    + "WHERE scoutId='" + model.getValueAt(i, 0) + "' AND "
+                                    + "activityId='" + eventId + "' AND "
+                                    + "date='" + todayDate + "'");
+                        }
+                    }
+                }
+                JOptionPane.showMessageDialog(this, "Success!");
+            } catch (SQLException e) {
+                System.out.println(e);
+                JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
