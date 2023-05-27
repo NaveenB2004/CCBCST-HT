@@ -29,7 +29,7 @@ public class Database {
                     + "id int(2) PRIMARY KEY,"
                     + "userName varchar(20) NOT NULL,"
                     + "password varchar(20) NOT NULL,"
-                    + "lastLogin varchar(20);");
+                    + "lastLogin varchar(20));");
 
             // table for scouts
             Statement stmt1 = conn().createStatement();
