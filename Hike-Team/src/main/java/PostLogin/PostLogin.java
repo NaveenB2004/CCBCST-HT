@@ -1601,7 +1601,7 @@ public class PostLogin extends javax.swing.JFrame {
             while (rs.next()) {
                 Statement stmt0 = conn.createStatement();
                 if (rs.getInt(1) == 0) {
-                    for (int i = 0; i > jTable2.getRowCount(); i++) {
+                    for (int i = 0; i < jTable2.getRowCount(); i++) {
                         String scoutId = jTable2.getValueAt(i, 0).toString();
                         String status = jTable2.getValueAt(i, 4).toString();
                         stmt0.executeUpdate("INSERT INTO attendance "
@@ -1609,7 +1609,7 @@ public class PostLogin extends javax.swing.JFrame {
                                 + "'" + todayDate + "', '" + status + "')");
                     }
                 } else {
-                    for (int i = 0; i > jTable2.getRowCount(); i++) {
+                    for (int i = 0; i < jTable2.getRowCount(); i++) {
                         String scoutId = jTable2.getValueAt(i, 0).toString();
                         String status = jTable2.getValueAt(i, 4).toString();
                         stmt0.executeUpdate("UPDATE attendance "

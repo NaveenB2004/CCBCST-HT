@@ -22,12 +22,12 @@ public class Results extends javax.swing.JFrame {
         initComponents();
         startup();
     }
-
+    
     public static String eventId;
     public static String event;
     Connection conn = Main.Database.conn();
     DefaultTableModel model;
-
+    
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -38,7 +38,7 @@ public class Results extends javax.swing.JFrame {
             evtActivity();
         }
     }
-
+    
     private void evtTest() {
         try {
             Statement stmt = conn.createStatement();
@@ -48,7 +48,7 @@ public class Results extends javax.swing.JFrame {
                 jLabel4.setText(eventId);
                 jLabel5.setText(rs.getString("name"));
                 jComboBox1.addItem(rs.getString("date"));
-                jLabel8.setText(""+rs.getInt("defaultMark"));
+                jLabel8.setText("" + rs.getInt("defaultMark"));
                 Statement stmt0 = conn.createStatement();
                 ResultSet rs0 = stmt0.executeQuery("SELECT COUNT(id) "
                         + "FROM testMarks WHERE testId='" + eventId + "'");
@@ -87,7 +87,7 @@ public class Results extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-
+    
     private void evtActivity() {
         String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         int x = 0;
@@ -98,19 +98,8 @@ public class Results extends javax.swing.JFrame {
             while (rs.next()) {
                 jLabel4.setText(eventId);
                 jLabel5.setText(rs.getString("name"));
-                jLabel8.setText("defaultMark");
-                Statement stmt0 = conn.createStatement();
-                ResultSet rs0 = stmt0.executeQuery("SELECT DISTINCT date "
-                        + "FROM activityMarks "
-                        + "ORDER BY date WHERE activityId='" + eventId + "' "
-                        + "DESC");
-                while (rs0.next()) {
-                    if (!rs0.getString(1).equals(todayDate) && x == 0) {
-                        jComboBox1.addItem(todayDate);
-                        x++;
-                    }
-                    jComboBox1.addItem(rs0.getString(1));
-                }
+                jLabel8.setText("" + rs.getInt("defaultMark"));
+                
                 Statement stmt1 = conn.createStatement();
                 ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(id) "
                         + "FROM activityMarks WHERE activityId='" + eventId + "' "
@@ -120,6 +109,7 @@ public class Results extends javax.swing.JFrame {
                     ResultSet rs2;
                     int marks;
                     if (rs1.getInt(1) == 0) {
+                        jComboBox1.addItem(todayDate);
                         rs2 = stmt2.executeQuery("SELECT id, callName, nameWithInitials, class "
                                 + "FROM scouts");
                         while (rs2.next()) {
@@ -128,6 +118,18 @@ public class Results extends javax.swing.JFrame {
                             model.addRow(row);
                         }
                     } else {
+                        Statement stmt0 = conn.createStatement();
+                        ResultSet rs0 = stmt0.executeQuery("SELECT DISTINCT date "
+                                + "FROM activityMarks "
+                                + "WHERE activityId='" + eventId + "'");
+                        while (rs0.next()) {
+                            if (!rs0.getString(1).equals(todayDate) && x == 0) {
+                                jComboBox1.addItem(todayDate);
+                                x++;
+                            }
+                            jComboBox1.addItem(rs0.getString(1));
+                        }
+                        jComboBox1.setSelectedIndex(jComboBox1.getItemCount() - 1);
                         rs2 = stmt2.executeQuery("SELECT marks, scoutId "
                                 + "FROM activityMarks WHERE activityId='" + eventId + "' "
                                 + "AND date='" + todayDate + "'");
@@ -371,7 +373,7 @@ public class Results extends javax.swing.JFrame {
                 while (rs.next()) {
                     Statement stmt0 = conn.createStatement();
                     if (rs.getInt(1) == 0) {
-                        for (int i = 0; i > jTable1.getRowCount(); i++) {
+                        for (int i = 0; i < jTable1.getRowCount(); i++) {
                             stmt0.executeUpdate("INSERT INTO activityMarks "
                                     + "(scoutId, activityId, date, marks) VALUES "
                                     + "('" + model.getValueAt(i, 0) + "', "
@@ -379,7 +381,7 @@ public class Results extends javax.swing.JFrame {
                                     + "'" + model.getValueAt(i, 4) + "')");
                         }
                     } else {
-                        for (int i = 0; i > jTable1.getRowCount(); i++) {
+                        for (int i = 0; i < jTable1.getRowCount(); i++) {
                             stmt0.executeUpdate("UPDATE activityMarks "
                                     + "SET marks='" + model.getValueAt(i, 4) + "' "
                                     + "WHERE scoutId='" + model.getValueAt(i, 0) + "' AND "
