@@ -26,16 +26,15 @@ public class Database {
             // table for login
             Statement stmt0 = conn().createStatement();
             stmt0.executeUpdate("CREATE TABLE login("
-                    + "id int(2) NOT NULL,"
+                    + "id int(2) PRIMARY KEY,"
                     + "userName varchar(20) NOT NULL,"
                     + "password varchar(20) NOT NULL,"
-                    + "lastLogin varchar(20),"
-                    + "PRIMARY KEY (id));");
+                    + "lastLogin varchar(20);");
 
             // table for scouts
             Statement stmt1 = conn().createStatement();
             stmt1.executeUpdate("CREATE TABLE scouts("
-                    + "id int(12) NOT NULL,"
+                    + "id int(12) PRIMARY KEY,"
                     + "schoolIndex int(12),"
                     + "callName varcha(20) NOT NULL,"
                     + "nameWithInitials varchar(50) NOT NULL,"
@@ -45,56 +44,50 @@ public class Database {
                     + "address varchar(255) NOT NULL,"
                     + "guardianName varchar(50) NOT NULL,"
                     + "guardianContact varchar(9) NOT NULL,"
-                    + "whatsapp varchar(30),"
-                    + "PRIMARY KEY (id));");
+                    + "whatsapp varchar(9));");
 
             //table for attendance marking
             Statement stmt2 = conn().createStatement();
             stmt2.executeUpdate("CREATE TABLE attendance("
-                    + "id int(12) NOT NULL,"
+                    + "id int(12) PRIMARY KEY,"
                     + "scoutId int(12) NOT NULL,"
                     + "date date NOT NULL,"
                     + "status int(1) NOT NULL,"
-                    + "PRIMARY KEY (id)"
                     + "FOREIGN KEY (scoutId) REFERENCES scouts(id));");
 
             // table for tests
             Statement stmt3 = conn().createStatement();
             stmt3.executeUpdate("CREATE TABLE tests("
-                    + "id int(12) NOT NULL,"
+                    + "id int(12) PRIMARY KEY,"
                     + "name varchar(50) NOT NULL,"
                     + "date date NOT NULL,"
-                    + "defaultMark int(4) NOT NULL,"
-                    + "PRIMARY KEY (id));");
+                    + "defaultMark int(4) NOT NULL);");
 
             // table for test marks
             Statement stmt4 = conn().createStatement();
             stmt4.executeUpdate("CREATE TABLE testMarks("
-                    + "id int(12) NOT NULL,"
+                    + "id int(12) PRIMARY KEY,"
                     + "scoutId int(12) NOT NULL,"
                     + "testId int(12) NOT NULL,"
                     + "marks int(4) NOT NULL,"
-                    + "PRIMARY KEY (id),"
                     + "FOREIGN KEY (scoutId) REFERENCES scouts(id),"
                     + "FOREIGN KEY (testId) REFERENCES tests(id));");
 
             // table for activities
             Statement stmt5 = conn().createStatement();
             stmt5.executeUpdate("CREATE TABLE activities("
-                    + "id int(12) NOT NULL,"
+                    + "id int(12) PRIMARY KEY,"
                     + "name varchar(30) NOT NULL,"
-                    + "defaultMark int(4) NOT NULL,"
-                    + "PRIMARY KEY (id));");
+                    + "defaultMark int(4) NOT NULL);");
 
             // table for activity marks
             Statement stmt6 = conn().createStatement();
             stmt6.executeUpdate("CREATE TABLE activityMarks("
-                    + "id int(12) NOT NULL,"
+                    + "id int(12) PRIMARY KEY,"
                     + "scoutId int(12) NOT NULL,"
                     + "activityId int(12) NOT NULL,"
                     + "date date NOT NULL,"
                     + "marks int(4) NOT NULL,"
-                    + "PRIMARY KEY (id),"
                     + "FOREIGN KEY (scoutId) REFERENCES scouts(id),"
                     + "FOREIGN KEY (activityId) REFERENCES activities(id));");
         } catch (SQLException e) {
