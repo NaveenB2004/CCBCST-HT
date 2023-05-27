@@ -1747,7 +1747,7 @@ public class PostLogin extends javax.swing.JFrame {
             stmt.executeUpdate("INSERT INTO scouts "
                     + "(schoolIndex, callName, fullName, nameWithInitials, "
                     + "class, birthDate, address, guardianName, guardianContact, whatsapp) "
-                    + "VAUES ('" + jTextField1.getText() + "', '" + jTextField2.getText() + "', "
+                    + "VALUES ('" + jTextField1.getText() + "', '" + jTextField2.getText() + "', "
                     + "'" + jTextField3.getText() + "', '" + jTextField4.getText() + "', "
                     + "'" + jTextField8.getText() + "-" + jTextField9.getText() + "', "
                     + "'" + jTextField5.getText() + "-" + jTextField6.getText() + "-" + jTextField7.getText() + "', "
