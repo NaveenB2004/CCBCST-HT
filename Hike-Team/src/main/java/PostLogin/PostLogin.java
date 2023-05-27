@@ -366,7 +366,7 @@ public class PostLogin extends javax.swing.JFrame {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel55)
+                        .addComponent(jLabel55, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel61)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -375,7 +375,7 @@ public class PostLogin extends javax.swing.JFrame {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel49, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel56)
+                        .addComponent(jLabel56, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel62)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -383,7 +383,7 @@ public class PostLogin extends javax.swing.JFrame {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel50, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel57)
+                        .addComponent(jLabel57, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel63)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -392,7 +392,7 @@ public class PostLogin extends javax.swing.JFrame {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel52, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel58)
+                        .addComponent(jLabel58, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel64)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -400,7 +400,7 @@ public class PostLogin extends javax.swing.JFrame {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel53, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel59)
+                        .addComponent(jLabel59, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel65)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1496,24 +1496,34 @@ public class PostLogin extends javax.swing.JFrame {
             }
             Statement stmt0 = conn.createStatement();
             ResultSet rs0 = stmt0.executeQuery("SELECT COUNT(id) "
-                    + "FROM attendance WHERE scoutId='" + scoutId + "'");
+                    + "FROM attendance WHERE scoutId='" + scoutId + "' AND status='1'");
             while (rs0.next()) {
                 jLabel54.setText("" + rs0.getInt(1));
             }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        try {
             Statement stmt1 = conn.createStatement();
             ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(DISTINCT date) "
-                    + "FROM attendace WHERE NOT (From_date > " + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + " OR "
-                    + "To_date < " + new SimpleDateFormat("yyyy-MM").format(new Date()) + "-01");
+                    + "FROM attendance WHERE date <= '" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "' AND date >= '"
+                    + new SimpleDateFormat("yyyy-MM").format(new Date()) + "-01'");
             while (rs1.next()) {
                 jLabel67.setText("" + rs1.getInt(1));
             }
             Statement stmt2 = conn.createStatement();
             ResultSet rs2 = stmt2.executeQuery("SELECT COUNT(DISTINCT date) "
-                    + "FROM attendace WHERE scoutId='" + scoutId + "' AND NOT (From_date > " + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + " OR "
-                    + "To_date < " + new SimpleDateFormat("yyyy-MM").format(new Date()) + "-01");
+                    + "FROM attendance WHERE date <= '" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "' AND date >= '"
+                    + new SimpleDateFormat("yyyy-MM").format(new Date()) + "-01' AND scoutId='" + scoutId + "'");
             while (rs2.next()) {
                 jLabel55.setText("" + rs2.getInt(1));
             }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        try {
             Statement stmt3 = conn.createStatement();
             ResultSet rs3 = stmt3.executeQuery("SELECT SUM(defaultMark) "
                     + "FROM tests");
@@ -1526,19 +1536,29 @@ public class PostLogin extends javax.swing.JFrame {
             while (rs4.next()) {
                 jLabel56.setText("" + rs4.getInt(1));
             }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        try {
             Statement stmt5 = conn.createStatement();
             ResultSet rs5 = stmt5.executeQuery("SELECT SUM(marks) "
-                    + "FROM tests ORDER BY date DESC LIMIT='4'");
+                    + "FROM testMarks ORDER BY id DESC LIMIT 4");
             while (rs5.next()) {
                 jLabel69.setText("" + rs5.getInt(1));
             }
             Statement stmt6 = conn.createStatement();
             ResultSet rs6 = stmt6.executeQuery("SELECT SUM(marks) "
-                    + "FROM testMarks ORDER BY date WHERE id='" + scoutId + "' "
-                    + "DESC LIMIT='4'");
+                    + "FROM testMarks WHERE id='" + scoutId + "' "
+                    + "ORDER BY id DESC LIMIT 4");
             while (rs6.next()) {
                 jLabel57.setText("" + rs6.getInt(1));
             }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        try {
             Statement stmt7 = conn.createStatement();
             ResultSet rs7 = stmt7.executeQuery("SELECT SUM(defaultMark) "
                     + "FROM activities");
@@ -1551,17 +1571,24 @@ public class PostLogin extends javax.swing.JFrame {
             while (rs8.next()) {
                 jLabel58.setText("" + rs8.getInt(1));
             }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        try {
             Statement stmt9 = conn.createStatement();
             ResultSet rs9 = stmt9.executeQuery("SELECT SUM(defaultMark) "
-                    + "FROM activities ORDER BY date DESC LIMIT='4'");
+                    + "FROM activities "
+                    + "ORDER BY id DESC "
+                    + "LIMIT 4");
             while (rs9.next()) {
                 jLabel71.setText("" + rs9.getInt(1));
             }
             Statement stmt10 = conn.createStatement();
             ResultSet rs10 = stmt10.executeQuery("SELECT SUM(marks) "
                     + "FROM activityMarks "
-                    + "ORDER BY date WHERE id='" + scoutId + "' "
-                    + "DESC LIMIT='4'");
+                    + "WHERE scoutId='" + scoutId + "' "
+                    + "ORDER BY id DESC LIMIT 4");
             while (rs10.next()) {
                 jLabel59.setText("" + rs10.getInt(1));
             }
