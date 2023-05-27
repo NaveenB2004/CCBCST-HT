@@ -6,14 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -363,7 +358,7 @@ public class PostLogin extends javax.swing.JFrame {
                     .addGroup(jPanel15Layout.createSequentialGroup()
                         .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel54)
+                        .addComponent(jLabel54, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel60)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1826,6 +1821,7 @@ public class PostLogin extends javax.swing.JFrame {
             @Override
             public void run() {
                 while (jTabbedPane1.getSelectedIndex() == 1) {
+                    System.out.println("threads");
                     String todayTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
                     jLabel28.setText(todayTime);
                     try {

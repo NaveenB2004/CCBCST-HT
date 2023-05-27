@@ -396,6 +396,7 @@ public class Results extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
             }
         }
+        startup();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

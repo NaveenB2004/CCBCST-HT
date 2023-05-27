@@ -52,7 +52,7 @@ public class Database {
                     + "id INTEGER PRIMARY KEY,"
                     + "scoutId INTEGER NOT NULL,"
                     + "date TEXT NOT NULL,"
-                    + "status INTEGER NOT NULL,"
+                    + "status TEXT NOT NULL,"
                     + "FOREIGN KEY (scoutId) REFERENCES scouts(id) "
                     + "ON DELETE CASCADE);");
 
