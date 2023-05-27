@@ -10,12 +10,16 @@ public class HikeTeam {
 
     public static void main(String[] args) {
         FlatDarkLaf.setup();
-//        new Main.SplashScreen().setVisible(true);
+        new Main.SplashScreen().setVisible(true);
         if (!new File("CCBCST.db").exists()) {
             new Main.Database().mkdb();
         }
-//        Main.SplashScreen.disposeVar.setText("dispose");
-//        new Main.Home().setVisible(true);
-        new PostLogin.PostLogin().setVisible(true);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+        Main.SplashScreen.disposeVar.setText("dispose");
+        new Main.Home().setVisible(true);
     }
 }
