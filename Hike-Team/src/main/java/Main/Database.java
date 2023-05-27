@@ -26,68 +26,68 @@ public class Database {
             // table for login
             Statement stmt0 = conn().createStatement();
             stmt0.executeUpdate("CREATE TABLE login("
-                    + "id int(2) PRIMARY KEY,"
-                    + "userName varchar(20) NOT NULL,"
-                    + "password varchar(20) NOT NULL,"
-                    + "lastLogin varchar(20));");
+                    + "id INTEGER PRIMARY KEY,"
+                    + "userName TEXT NOT NULL,"
+                    + "password TEXT NOT NULL,"
+                    + "lastLogin TEXT);");
 
             // table for scouts
             Statement stmt1 = conn().createStatement();
             stmt1.executeUpdate("CREATE TABLE scouts("
-                    + "id int(12) PRIMARY KEY,"
-                    + "schoolIndex int(12),"
-                    + "callName varcha(20) NOT NULL,"
-                    + "nameWithInitials varchar(50) NOT NULL,"
-                    + "fullName varchar(80) NOT NULL,"
-                    + "class varchar(4) NOT NULL,"
-                    + "birthDate date NOT NULL,"
-                    + "address varchar(255) NOT NULL,"
-                    + "guardianName varchar(50) NOT NULL,"
-                    + "guardianContact varchar(9) NOT NULL,"
-                    + "whatsapp varchar(9));");
+                    + "id INTEGER PRIMARY KEY,"
+                    + "schoolIndex TEXT,"
+                    + "callName TEXT NOT NULL,"
+                    + "nameWithInitials TEXT NOT NULL,"
+                    + "fullName TEXT NOT NULL,"
+                    + "class TEXT NOT NULL,"
+                    + "birthDate TEXT NOT NULL,"
+                    + "address TEXT NOT NULL,"
+                    + "guardianName TEXT NOT NULL,"
+                    + "guardianContact TEXT NOT NULL,"
+                    + "whatsapp TEXT);");
 
             //table for attendance marking
             Statement stmt2 = conn().createStatement();
             stmt2.executeUpdate("CREATE TABLE attendance("
-                    + "id int(12) PRIMARY KEY,"
-                    + "scoutId int(12) NOT NULL,"
-                    + "date date NOT NULL,"
-                    + "status int(1) NOT NULL,"
+                    + "id INTEGER PRIMARY KEY,"
+                    + "scoutId INTEGER NOT NULL,"
+                    + "date TEXT NOT NULL,"
+                    + "status INTEGER NOT NULL,"
                     + "FOREIGN KEY (scoutId) REFERENCES scouts(id));");
 
             // table for tests
             Statement stmt3 = conn().createStatement();
             stmt3.executeUpdate("CREATE TABLE tests("
-                    + "id int(12) PRIMARY KEY,"
-                    + "name varchar(50) NOT NULL,"
-                    + "date date NOT NULL,"
-                    + "defaultMark int(4) NOT NULL);");
+                    + "id INTEGER PRIMARY KEY,"
+                    + "name TEXT NOT NULL,"
+                    + "date TEXT NOT NULL,"
+                    + "defaultMark INTEGER NOT NULL);");
 
             // table for test marks
             Statement stmt4 = conn().createStatement();
             stmt4.executeUpdate("CREATE TABLE testMarks("
-                    + "id int(12) PRIMARY KEY,"
-                    + "scoutId int(12) NOT NULL,"
-                    + "testId int(12) NOT NULL,"
-                    + "marks int(4) NOT NULL,"
+                    + "id INTEGER PRIMARY KEY,"
+                    + "scoutId INTEGER NOT NULL,"
+                    + "testId INTEGER NOT NULL,"
+                    + "marks INTEGER NOT NULL,"
                     + "FOREIGN KEY (scoutId) REFERENCES scouts(id),"
                     + "FOREIGN KEY (testId) REFERENCES tests(id));");
 
             // table for activities
             Statement stmt5 = conn().createStatement();
             stmt5.executeUpdate("CREATE TABLE activities("
-                    + "id int(12) PRIMARY KEY,"
-                    + "name varchar(30) NOT NULL,"
-                    + "defaultMark int(4) NOT NULL);");
+                    + "id INTEGER PRIMARY KEY,"
+                    + "name TEXT NOT NULL,"
+                    + "defaultMark INTEGER NOT NULL);");
 
             // table for activity marks
             Statement stmt6 = conn().createStatement();
             stmt6.executeUpdate("CREATE TABLE activityMarks("
-                    + "id int(12) PRIMARY KEY,"
-                    + "scoutId int(12) NOT NULL,"
-                    + "activityId int(12) NOT NULL,"
-                    + "date date NOT NULL,"
-                    + "marks int(4) NOT NULL,"
+                    + "id INTEGER PRIMARY KEY,"
+                    + "scoutId INTEGER NOT NULL,"
+                    + "activityId INTEGER NOT NULL,"
+                    + "date TEXT NOT NULL,"
+                    + "marks INTEGER NOT NULL,"
                     + "FOREIGN KEY (scoutId) REFERENCES scouts(id),"
                     + "FOREIGN KEY (activityId) REFERENCES activities(id));");
         } catch (SQLException e) {

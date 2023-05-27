@@ -810,7 +810,7 @@
                             <Column editable="false" title="Call Name" type="java.lang.Object"/>
                             <Column editable="false" title="Name with Initials" type="java.lang.Object"/>
                             <Column editable="false" title="Class" type="java.lang.Object"/>
-                            <Column editable="false" title="Attendance" type="java.lang.Object"/>
+                            <Column editable="true" title="Attendance" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
