@@ -1,5 +1,6 @@
 package PostLogin;
 
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,6 +20,7 @@ public class PreAttendance extends javax.swing.JFrame {
     public PreAttendance() {
         initComponents();
         startup();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
     }
 
     Connection conn = Main.Database.conn();

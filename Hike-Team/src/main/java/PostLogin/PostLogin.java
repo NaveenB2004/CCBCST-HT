@@ -1,5 +1,6 @@
 package PostLogin;
 
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,6 +25,7 @@ public class PostLogin extends javax.swing.JFrame {
     public PostLogin() {
         initComponents();
         preLoader();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
     }
 
     Connection conn = Main.Database.conn();

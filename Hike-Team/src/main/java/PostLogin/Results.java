@@ -1,5 +1,6 @@
 package PostLogin;
 
+import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,6 +22,7 @@ public class Results extends javax.swing.JFrame {
     public Results() {
         initComponents();
         startup();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
     }
     
     public static String eventId;

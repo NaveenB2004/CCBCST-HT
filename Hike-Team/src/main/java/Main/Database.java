@@ -95,6 +95,12 @@ public class Database {
                     + " ON DELETE CASCADE,"
                     + "FOREIGN KEY (activityId) REFERENCES activities(id) "
                     + "ON DELETE CASCADE);");
+
+            // add user login credentials
+            Statement stmt7 = conn().createStatement();
+            stmt7.executeUpdate("INSERT INTO login "
+                    + "(id, username, password, lastLogin) VALUES "
+                    + "(1, 'admin', 'admin', 'First Login!')");
         } catch (SQLException e) {
             System.out.println(e);
         }

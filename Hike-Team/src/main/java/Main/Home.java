@@ -1,12 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Main;
+
+import java.awt.Toolkit;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Dell
+ * @author NaveenB2004
  */
 public class Home extends javax.swing.JFrame {
 
@@ -15,6 +20,7 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
     }
 
     /**
@@ -77,6 +83,11 @@ public class Home extends javax.swing.JFrame {
         jLabel5.setText("Password : ");
 
         jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,6 +149,43 @@ public class Home extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String username = jTextField1.getText();
+        String password = String.valueOf(jPasswordField1.getPassword());
+        Connection conn = Database.conn();
+        String logtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT COUNT(id) "
+                    + "FROM login "
+                    + "WHERE username='" + username + "' AND password='" + password + "' "
+                    + "AND id='1'");
+            while (rs.next()) {
+                if (rs.getInt(1) != 0) {
+                    new PostLogin.PostLogin().setVisible(true);
+                    this.dispose();
+                    Statement stmt0 = conn.createStatement();
+                    ResultSet rs0 = stmt0.executeQuery("SELECT lastLogin "
+                            + "FROM login");
+                    while (rs.next()) {
+                        PostLogin.Settings.lastLogin = rs.getString(1);
+                        Statement stmt1 = conn.createStatement();
+                        stmt1.executeUpdate("UPDATE login SET "
+                                + "lastLogin='" + logtime + "' "
+                                + "WHERE id='1'");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Invalid username or password!");
+                }
+            }
+            conn.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Error!\n" + e);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
