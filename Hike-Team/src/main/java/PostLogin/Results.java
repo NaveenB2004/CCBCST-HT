@@ -24,12 +24,12 @@ public class Results extends javax.swing.JFrame {
         startup();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
     }
-    
+
     public static String eventId;
     public static String event;
     Connection conn = Main.Database.conn();
     DefaultTableModel model;
-    
+
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -40,8 +40,10 @@ public class Results extends javax.swing.JFrame {
             evtActivity();
         }
     }
-    
+
     private void evtTest() {
+        this.setTitle("Test Results");
+        jLabel9.setText("Test");
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * "
@@ -89,8 +91,10 @@ public class Results extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-    
+
     private void evtActivity() {
+        this.setTitle("Activity Results");
+        jLabel9.setText("Activity");
         String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         int x = 0;
         try {
@@ -101,7 +105,7 @@ public class Results extends javax.swing.JFrame {
                 jLabel4.setText(eventId);
                 jLabel5.setText(rs.getString("name"));
                 jLabel8.setText("" + rs.getInt("defaultMark"));
-                
+
                 Statement stmt1 = conn.createStatement();
                 ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(id) "
                         + "FROM activityMarks WHERE activityId='" + eventId + "' "
@@ -111,7 +115,7 @@ public class Results extends javax.swing.JFrame {
                     ResultSet rs2;
                     int marks;
                     if (rs1.getInt(1) == 0) {
-                        jComboBox1.addItem(todayDate);
+                        jComboBox1.addItem("---");
                         rs2 = stmt2.executeQuery("SELECT id, callName, nameWithInitials, class "
                                 + "FROM scouts");
                         while (rs2.next()) {
@@ -175,9 +179,11 @@ public class Results extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Test Results");
+        setTitle("Results"); // NOI18N
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -227,6 +233,10 @@ public class Results extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("Type : ");
+
+        jLabel9.setText("---");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -255,16 +265,24 @@ public class Results extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -278,7 +296,7 @@ public class Results extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -366,20 +384,21 @@ public class Results extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
             }
         } else {
-            String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
             try {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT COUNT(id) "
                         + "FROM activityMarks "
-                        + "WHERE date='" + todayDate + "' AND activityId='" + eventId + "'");
+                        + "WHERE date='" + jComboBox1.getSelectedItem().toString() + "' "
+                        + "AND activityId='" + eventId + "'");
                 while (rs.next()) {
                     Statement stmt0 = conn.createStatement();
                     if (rs.getInt(1) == 0) {
+                        String date = JOptionPane.showInputDialog("Enter date to insert data :\n(YYYY-MM-DD)");
                         for (int i = 0; i < jTable1.getRowCount(); i++) {
                             stmt0.executeUpdate("INSERT INTO activityMarks "
                                     + "(scoutId, activityId, date, marks) VALUES "
                                     + "('" + model.getValueAt(i, 0) + "', "
-                                    + "'" + eventId + "', '" + todayDate + "', "
+                                    + "'" + eventId + "', '" + date + "', "
                                     + "'" + model.getValueAt(i, 4) + "')");
                         }
                     } else {
@@ -388,7 +407,7 @@ public class Results extends javax.swing.JFrame {
                                     + "SET marks='" + model.getValueAt(i, 4) + "' "
                                     + "WHERE scoutId='" + model.getValueAt(i, 0) + "' AND "
                                     + "activityId='" + eventId + "' AND "
-                                    + "date='" + todayDate + "'");
+                                    + "date='" + jComboBox1.getSelectedItem().toString() + "'");
                         }
                     }
                 }
@@ -445,8 +464,10 @@ public class Results extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
