@@ -93,14 +93,19 @@ public class process {
     }
 
     public void installer() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
         new File("CCBCST Hike-Team.jar").delete();
         new File("CCBCST Hike-Team.nnb").renameTo(new File("CCBCST Hike-Team.jar"));
         try {
             new ProcessBuilder("cmd.exe", "/c",
-                    "java -jar \"CCBCST Hike-Team.jar\"").start();
+                    "JRE\\bin\\java.exe -jar \"CCBCST Hike-Team.jar\"").start();
+            System.exit(0);
         } catch (IOException ex) {
             System.out.println(ex);
         }
-        System.exit(0);
     }
 }

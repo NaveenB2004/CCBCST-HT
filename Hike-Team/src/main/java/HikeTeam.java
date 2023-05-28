@@ -1,3 +1,4 @@
+
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.io.File;
@@ -50,7 +51,8 @@ public class HikeTeam {
 
         // install updates when available
         try {
-            new ProcessBuilder("cmd.exe", "/c", "java -jar updater.jar install").start();
+            new ProcessBuilder("cmd.exe", "/c",
+                    "JRE\\bin\\java.exe -jar updater.jar install").start();
             System.exit(0);
         } catch (IOException e) {
             System.out.println(e);

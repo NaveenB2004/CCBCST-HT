@@ -8,10 +8,11 @@ import com.formdev.flatlaf.FlatDarkLaf;
 public class Updater {
 
     public static void main(String[] args) {
-        String installer = args[0];
-        if (installer.equals("install")) {
+        try {
+            System.out.println(args[0]);
             new process.process().installer();
-        } else {
+        } catch (Exception e) {
+            System.out.println(e);
             new process.process().checkUpdates();
             FlatDarkLaf.setup();
         }
