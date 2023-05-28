@@ -2,9 +2,11 @@ package process;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
@@ -47,7 +49,7 @@ public class process {
 
         try {
             if (Float.parseFloat(thisVer) < Float.parseFloat(tempVer)) {
-                downloadUpdate();
+                downloadUpdate(tempVer);
             }
         } catch (NumberFormatException e) {
             System.out.println(e);
@@ -55,7 +57,7 @@ public class process {
 
     }
 
-    private void downloadUpdate() {
+    private void downloadUpdate(String tempVer) {
         new prograss().setVisible(true);
         String newURL = null;
         URL urlx = null;
@@ -80,6 +82,12 @@ public class process {
         try {
             FileUtils.copyURLToFile(urlx, new File("CCBCST Hike-Team.nnb"));
         } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        try (PrintStream out = new PrintStream(
+                new File("version.ini"))) {
+            out.println(tempVer);
+        } catch (FileNotFoundException ex) {
             System.out.println(ex);
         }
     }
