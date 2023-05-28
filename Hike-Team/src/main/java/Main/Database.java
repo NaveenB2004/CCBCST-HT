@@ -30,6 +30,7 @@ public class Database {
                     + "userName TEXT NOT NULL,"
                     + "password TEXT NOT NULL,"
                     + "lastLogin TEXT);");
+            conn().close();
 
             // table for scouts
             Statement stmt1 = conn().createStatement();
@@ -45,6 +46,7 @@ public class Database {
                     + "guardianName TEXT NOT NULL,"
                     + "guardianContact TEXT NOT NULL,"
                     + "whatsapp TEXT);");
+            conn().close();
 
             //table for attendance marking
             Statement stmt2 = conn().createStatement();
@@ -55,6 +57,7 @@ public class Database {
                     + "status TEXT NOT NULL,"
                     + "FOREIGN KEY (scoutId) REFERENCES scouts(id) "
                     + "ON DELETE CASCADE);");
+            conn().close();
 
             // table for tests
             Statement stmt3 = conn().createStatement();
@@ -63,6 +66,7 @@ public class Database {
                     + "name TEXT NOT NULL,"
                     + "date TEXT NOT NULL,"
                     + "defaultMark INTEGER NOT NULL);");
+            conn().close();
 
             // table for test marks
             Statement stmt4 = conn().createStatement();
@@ -75,6 +79,7 @@ public class Database {
                     + "ON DELETE CASCADE,"
                     + "FOREIGN KEY (testId) REFERENCES tests(id) "
                     + "ON DELETE CASCADE);");
+            conn().close();
 
             // table for activities
             Statement stmt5 = conn().createStatement();
@@ -82,6 +87,7 @@ public class Database {
                     + "id INTEGER PRIMARY KEY,"
                     + "name TEXT NOT NULL,"
                     + "defaultMark INTEGER NOT NULL);");
+            conn().close();
 
             // table for activity marks
             Statement stmt6 = conn().createStatement();
@@ -95,12 +101,14 @@ public class Database {
                     + " ON DELETE CASCADE,"
                     + "FOREIGN KEY (activityId) REFERENCES activities(id) "
                     + "ON DELETE CASCADE);");
+            conn().close();
 
             // add user login credentials
             Statement stmt7 = conn().createStatement();
             stmt7.executeUpdate("INSERT INTO login "
                     + "(id, username, password, lastLogin) VALUES "
                     + "(1, 'admin', 'admin', 'First Login!')");
+            conn().close();
         } catch (SQLException e) {
             System.out.println(e);
         }

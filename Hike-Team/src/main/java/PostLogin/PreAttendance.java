@@ -44,12 +44,14 @@ public class PreAttendance extends javax.swing.JFrame {
                     model.addRow(row);
                 }
             }
+            conn.close();
             Statement stmt1 = conn.createStatement();
             ResultSet rs1 = stmt1.executeQuery("SELECT DISTINCT date "
                     + "FROM attendance");
             while (rs1.next()) {
                 jComboBox3.addItem(rs1.getString(1));
             }
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -279,6 +281,7 @@ public class PreAttendance extends javax.swing.JFrame {
                         model.addRow(row);
                     }
                 }
+            conn.close();
             } catch (SQLException e) {
                 System.out.println(e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);

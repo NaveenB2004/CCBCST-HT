@@ -87,6 +87,7 @@ public class Results extends javax.swing.JFrame {
                     }
                 }
             }
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -153,6 +154,7 @@ public class Results extends javax.swing.JFrame {
                     }
                 }
             }
+            conn.close();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -346,6 +348,7 @@ public class Results extends javax.swing.JFrame {
                             model.addRow(row);
                         }
                     }
+                    conn.close();
                 } catch (SQLException e) {
                     System.out.println(e);
                 }
@@ -378,6 +381,7 @@ public class Results extends javax.swing.JFrame {
                         }
                     }
                 }
+                conn.close();
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException e) {
                 System.out.println(e);
@@ -411,6 +415,7 @@ public class Results extends javax.swing.JFrame {
                         }
                     }
                 }
+                conn.close();
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException e) {
                 System.out.println(e);

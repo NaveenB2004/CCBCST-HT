@@ -60,6 +60,7 @@ public class Settings extends javax.swing.JFrame {
             while (rs.next()) {
                 jLabel5.setText(rs.getString(1));
             }
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -228,6 +229,7 @@ public class Settings extends javax.swing.JFrame {
                 stmt.executeUpdate("UPDATE login SET "
                         + "username='" + username + "', password='" + password + "' "
                         + "WHERE id='1'");
+                conn.close();
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException e) {
                 System.out.println(e);
