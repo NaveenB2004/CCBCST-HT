@@ -26,11 +26,12 @@ public class PostLogin extends javax.swing.JFrame {
         initComponents();
         preLoader();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
+        setExtendedState(this.MAXIMIZED_BOTH);
     }
-    
+
     Connection conn = Main.Database.conn();
     static String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    
+
     private void preLoader() {
         // loads the 1st component in tabbed pane (summary)
         jLabel66.setText("---");
@@ -46,7 +47,7 @@ public class PostLogin extends javax.swing.JFrame {
         jLabel59.setText("---");
         jLabel71.setText("---");
         jLabel78.setText("---");
-        
+
         DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
         model.setRowCount(0);
         int count = 0;
@@ -156,6 +157,10 @@ public class PostLogin extends javax.swing.JFrame {
         jLabel87 = new javax.swing.JLabel();
         jLabel88 = new javax.swing.JLabel();
         jLabel89 = new javax.swing.JLabel();
+        jLabel94 = new javax.swing.JLabel();
+        jTextField36 = new javax.swing.JTextField();
+        jLabel95 = new javax.swing.JLabel();
+        jButton21 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
@@ -833,6 +838,17 @@ public class PostLogin extends javax.swing.JFrame {
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
+        jLabel94.setText("Fetch data for date : ");
+
+        jLabel95.setText("(YYYY-MM-DD)");
+
+        jButton21.setText("Fetch");
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton21ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -848,7 +864,18 @@ public class PostLogin extends javax.swing.JFrame {
                         .addComponent(jLabel79)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel80, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel19, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField36)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(jLabel94)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(jLabel95)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton21)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -861,7 +888,16 @@ public class PostLogin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel10Layout.createSequentialGroup()
+                                .addComponent(jLabel94)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel95)
+                                    .addComponent(jButton21))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel79)
@@ -1734,7 +1770,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
         try {
             Statement stmt1 = conn.createStatement();
             ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(DISTINCT date) "
@@ -1753,7 +1789,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
         try {
             Statement stmt3 = conn.createStatement();
             ResultSet rs3 = stmt3.executeQuery("SELECT SUM(defaultMark) "
@@ -1770,7 +1806,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
         try {
             Statement stmt5 = conn.createStatement();
             ResultSet rs5 = stmt5.executeQuery("SELECT SUM(marks) "
@@ -1788,7 +1824,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
         try {
             Statement stmt7 = conn.createStatement();
             ResultSet rs7 = stmt7.executeQuery("SELECT SUM(defaultMark) "
@@ -1805,7 +1841,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
         try {
             Statement stmt9 = conn.createStatement();
             ResultSet rs9 = stmt9.executeQuery("SELECT SUM(defaultMark) "
@@ -1826,7 +1862,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
         int total = 0;
         try {
             Statement stmt11 = conn.createStatement();
@@ -1979,7 +2015,7 @@ public class PostLogin extends javax.swing.JFrame {
         jButton6.setEnabled(false);
         jButton4.setEnabled(true);
         jButton5.setEnabled(true);
-        
+
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int selectedRow = jTable1.getSelectedRow();
         try {
@@ -2010,7 +2046,7 @@ public class PostLogin extends javax.swing.JFrame {
             System.out.println(e);
         }
     }//GEN-LAST:event_jTable1MouseClicked
-    
+
     private static String dateCalc(String date) {
         String calculated = null;
         try {
@@ -2116,7 +2152,12 @@ public class PostLogin extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_jButton20ActionPerformed
-    
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        // TODO add your handling code here:
+        comp1();
+    }//GEN-LAST:event_jButton21ActionPerformed
+
     private void comp1() {
         // 2nd component in tabbed pane
         jLabel27.setText(todayDate);
@@ -2124,7 +2165,6 @@ public class PostLogin extends javax.swing.JFrame {
             @Override
             public void run() {
                 while (jTabbedPane1.getSelectedIndex() == 1) {
-                    System.out.println("threads");
                     String todayTime = new SimpleDateFormat("HH:mm:ss").format(new Date());
                     jLabel28.setText(todayTime);
                     try {
@@ -2135,7 +2175,7 @@ public class PostLogin extends javax.swing.JFrame {
                 }
             }
         }).start();
-        String date = JOptionPane.showInputDialog("Enter date for fetch data:\n(YYYY-MM-DD)");
+        String date = jTextField36.getText();
         jLabel80.setText(date);
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
@@ -2163,7 +2203,7 @@ public class PostLogin extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-    
+
     private void comp2() {
         //3rd component in tabbed pane
         jTextField19.setText("");
@@ -2171,7 +2211,7 @@ public class PostLogin extends javax.swing.JFrame {
         jTextField32.setText("");
         jTextField33.setText("");
         jTextField29.setText("");
-        
+
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         model.setRowCount(0);
         try {
@@ -2187,7 +2227,7 @@ public class PostLogin extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-    
+
     private void comp3() {
         //4th component in tabbed pane
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
@@ -2205,7 +2245,7 @@ public class PostLogin extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-    
+
     private void comp4() {
         //5th component in tabbed pane
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -2274,6 +2314,7 @@ public class PostLogin extends javax.swing.JFrame {
     private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -2379,6 +2420,8 @@ public class PostLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel91;
     private javax.swing.JLabel jLabel92;
     private javax.swing.JLabel jLabel93;
+    private javax.swing.JLabel jLabel94;
+    private javax.swing.JLabel jLabel95;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -2438,6 +2481,7 @@ public class PostLogin extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField33;
     private javax.swing.JTextField jTextField34;
     private javax.swing.JTextField jTextField35;
+    private javax.swing.JTextField jTextField36;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;

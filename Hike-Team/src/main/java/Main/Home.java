@@ -169,7 +169,7 @@ public class Home extends javax.swing.JFrame {
                     Statement stmt0 = conn.createStatement();
                     ResultSet rs0 = stmt0.executeQuery("SELECT lastLogin "
                             + "FROM login");
-                    while (rs.next()) {
+                    while (rs0.next()) {
                         PostLogin.Settings.lastLogin = rs.getString(1);
                         Statement stmt1 = conn.createStatement();
                         stmt1.executeUpdate("UPDATE login SET "

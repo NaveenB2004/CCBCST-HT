@@ -13,13 +13,13 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon></icon>
+  <icon>C:\Users\Dell\Documents\CCBCST\scout logo.ico</icon>
   <jre>
     <path>JRE</path>
     <requiresJdk>false</requiresJdk>
     <requires64Bit>false</requires64Bit>
-    <minVersion>8</minVersion>
-    <maxVersion>18</maxVersion>
+    <minVersion>17</minVersion>
+    <maxVersion></maxVersion>
   </jre>
   <versionInfo>
     <fileVersion>0.1.0.0</fileVersion>
