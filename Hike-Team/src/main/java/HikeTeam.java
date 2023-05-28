@@ -50,12 +50,14 @@ public class HikeTeam {
         new Main.SplashScreen().setVisible(true);
 
         // install updates when available
-        try {
-            new ProcessBuilder("cmd.exe", "/c",
-                    "JRE\\bin\\java.exe -jar updater.jar install").start();
-            System.exit(0);
-        } catch (IOException e) {
-            System.out.println(e);
+        if (new File("CCBCST Hike-Team.nnb").exists()) {
+            try {
+                new ProcessBuilder("cmd.exe", "/c",
+                        "JRE\\bin\\java.exe -jar updater.jar install").start();
+                System.exit(0);
+            } catch (IOException e) {
+                System.out.println(e);
+            }
         }
 
         // get db status
