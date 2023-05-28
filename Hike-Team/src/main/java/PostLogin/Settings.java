@@ -238,7 +238,8 @@ public class Settings extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        try (PrintStream out = new PrintStream(new File("theme.ini"))) {
+        try (PrintStream out = new PrintStream(
+                new File("theme.ini"))) {
             out.println("" + jComboBox1.getSelectedIndex());
         } catch (FileNotFoundException ex) {
             System.out.println(ex);

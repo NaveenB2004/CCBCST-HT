@@ -2,7 +2,9 @@
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
@@ -16,6 +18,9 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class HikeTeam {
 
     public static void main(String[] args) {
+        String version = "0.1";
+
+        // set theme
         if (new File("theme.ini").exists()) {
             try (Stream<String> lines = Files.lines(Paths.get("theme.ini"))) {
                 String theme = lines.skip(0).findFirst().get();
@@ -32,7 +37,7 @@ public class HikeTeam {
                                     UIManager.getSystemLookAndFeelClassName());
                         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
                                 | UnsupportedLookAndFeelException ex) {
-                            System.out.println("0003" + ex);
+                            System.out.println(ex);
                         }
                     }
                 }
@@ -43,9 +48,28 @@ public class HikeTeam {
             FlatDarkLaf.setup();
         }
         new Main.SplashScreen().setVisible(true);
-        if (!new File("CCBCST.db").exists()) {
+
+        // install updates when available
+        try {
+            new ProcessBuilder("cmd.exe", "/c", "java -jar updater.jar install").start();
+            System.exit(0);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+
+        // get db status
+        if (!new File("database.db").exists()) {
             new Main.Database().mkdb();
         }
+
+        // set application version
+        try (PrintStream out = new PrintStream(
+                new File("version.ini"))) {
+            out.println(version);
+        } catch (FileNotFoundException ex) {
+            System.out.println(ex);
+        }
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

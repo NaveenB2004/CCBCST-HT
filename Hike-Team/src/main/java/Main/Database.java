@@ -14,7 +14,7 @@ public class Database {
     public static Connection conn() {
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:sqlite:CCBCST.db");
+            conn = DriverManager.getConnection("jdbc:sqlite:database.db");
         } catch (SQLException e) {
             System.out.println(e);
         }
