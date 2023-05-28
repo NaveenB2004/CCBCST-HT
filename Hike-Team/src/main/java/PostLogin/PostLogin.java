@@ -29,7 +29,6 @@ public class PostLogin extends javax.swing.JFrame {
         setExtendedState(this.MAXIMIZED_BOTH);
     }
 
-    Connection conn = Main.Database.conn();
     static String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
     private void preLoader() {
@@ -52,6 +51,7 @@ public class PostLogin extends javax.swing.JFrame {
         model.setRowCount(0);
         int count = 0;
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT id, callName, nameWithInitials, class "
                     + "FROM scouts");
@@ -1756,6 +1756,7 @@ public class PostLogin extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
         int scoutId = Integer.parseInt((String) model.getValueAt(jTable5.getSelectedRow(), 0));
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT COUNT(DISTINCT date) "
                     + "FROM attendance");
@@ -1763,98 +1764,108 @@ public class PostLogin extends javax.swing.JFrame {
                 jLabel66.setText("" + rs.getInt(1) * 10);
             }
             conn.close();
-            Statement stmt0 = conn.createStatement();
+            Connection conn0 = Main.Database.conn();
+            Statement stmt0 = conn0.createStatement();
             ResultSet rs0 = stmt0.executeQuery("SELECT COUNT(id) "
                     + "FROM attendance WHERE scoutId='" + scoutId + "' AND status='0' OR  status='-5'");
             while (rs0.next()) {
                 jLabel54.setText("" + rs0.getInt(1));
             }
-            conn.close();
+            conn0.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
 
         try {
-            Statement stmt1 = conn.createStatement();
+            Connection conn1 = Main.Database.conn();
+            Statement stmt1 = conn1.createStatement();
             ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(DISTINCT date) "
                     + "FROM attendance WHERE date <= '" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "' AND date >= '"
                     + new SimpleDateFormat("yyyy-MM").format(new Date()) + "-01'");
             while (rs1.next()) {
                 jLabel67.setText("" + rs1.getInt(1));
             }
-            conn.close();
-            Statement stmt2 = conn.createStatement();
+            conn1.close();
+            Connection conn2 = Main.Database.conn();
+            Statement stmt2 = conn2.createStatement();
             ResultSet rs2 = stmt2.executeQuery("SELECT COUNT(DISTINCT date) "
                     + "FROM attendance WHERE date <= '" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "' AND date >= '"
                     + new SimpleDateFormat("yyyy-MM").format(new Date()) + "-01' AND scoutId='" + scoutId + "'");
             while (rs2.next()) {
                 jLabel55.setText("" + rs2.getInt(1));
             }
-            conn.close();
+            conn2.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
 
         try {
-            Statement stmt3 = conn.createStatement();
+            Connection conn3 = Main.Database.conn();
+            Statement stmt3 = conn3.createStatement();
             ResultSet rs3 = stmt3.executeQuery("SELECT SUM(defaultMark) "
                     + "FROM tests");
             while (rs3.next()) {
                 jLabel68.setText("" + rs3.getInt(1));
             }
-            conn.close();
-            Statement stmt4 = conn.createStatement();
+            conn3.close();
+            Connection conn4 = Main.Database.conn();
+            Statement stmt4 = conn4.createStatement();
             ResultSet rs4 = stmt4.executeQuery("SELECT SUM(marks) "
                     + "FROM testMarks WHERE id='" + scoutId + "'");
             while (rs4.next()) {
                 jLabel56.setText("" + rs4.getInt(1));
             }
-            conn.close();
+            conn4.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
 
         try {
-            Statement stmt5 = conn.createStatement();
+            Connection conn5 = Main.Database.conn();
+            Statement stmt5 = conn5.createStatement();
             ResultSet rs5 = stmt5.executeQuery("SELECT SUM(marks) "
                     + "FROM testMarks ORDER BY id DESC LIMIT 4");
             while (rs5.next()) {
                 jLabel69.setText("" + rs5.getInt(1));
             }
-            conn.close();
-            Statement stmt6 = conn.createStatement();
+            conn5.close();
+            Connection conn6 = Main.Database.conn();
+            Statement stmt6 = conn6.createStatement();
             ResultSet rs6 = stmt6.executeQuery("SELECT SUM(marks) "
                     + "FROM testMarks WHERE id='" + scoutId + "' "
                     + "ORDER BY id DESC LIMIT 4");
             while (rs6.next()) {
                 jLabel57.setText("" + rs6.getInt(1));
             }
-            conn.close();
+            conn6.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
 
         try {
-            Statement stmt7 = conn.createStatement();
+            Connection conn7 = Main.Database.conn();
+            Statement stmt7 = conn7.createStatement();
             ResultSet rs7 = stmt7.executeQuery("SELECT SUM(defaultMark) "
                     + "FROM activities");
             while (rs7.next()) {
                 jLabel70.setText("" + rs7.getInt(1));
             }
-            conn.close();
-            Statement stmt8 = conn.createStatement();
+            conn7.close();
+            Connection conn8 = Main.Database.conn();
+            Statement stmt8 = conn8.createStatement();
             ResultSet rs8 = stmt8.executeQuery("SELECT SUM(marks) "
                     + "FROM activityMarks WHERE scoutId='" + scoutId + "' ");
             while (rs8.next()) {
                 jLabel58.setText("" + rs8.getInt(1));
             }
-            conn.close();
+            conn8.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
 
         try {
-            Statement stmt9 = conn.createStatement();
+            Connection conn9 = Main.Database.conn();
+            Statement stmt9 = conn9.createStatement();
             ResultSet rs9 = stmt9.executeQuery("SELECT SUM(defaultMark) "
                     + "FROM activities "
                     + "ORDER BY id DESC "
@@ -1862,8 +1873,9 @@ public class PostLogin extends javax.swing.JFrame {
             while (rs9.next()) {
                 jLabel71.setText("" + rs9.getInt(1));
             }
-            conn.close();
-            Statement stmt10 = conn.createStatement();
+            conn9.close();
+            Connection conn10 = Main.Database.conn();
+            Statement stmt10 = conn10.createStatement();
             ResultSet rs10 = stmt10.executeQuery("SELECT SUM(marks) "
                     + "FROM activityMarks "
                     + "WHERE scoutId='" + scoutId + "' "
@@ -1871,20 +1883,21 @@ public class PostLogin extends javax.swing.JFrame {
             while (rs10.next()) {
                 jLabel59.setText("" + rs10.getInt(1));
             }
-            conn.close();
+            conn10.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
 
         int total = 0;
         try {
-            Statement stmt11 = conn.createStatement();
+            Connection conn11 = Main.Database.conn();
+            Statement stmt11 = conn11.createStatement();
             ResultSet rs11 = stmt11.executeQuery("SELECT SUM(status) "
                     + "FROM attendance WHERE scoutId='" + scoutId + "'");
             while (rs11.next()) {
                 total = rs11.getInt(1);
             }
-            conn.close();
+            conn11.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -1920,11 +1933,13 @@ public class PostLogin extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // TODO add your handling code here:
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT COUNT(id) "
                     + "FROM attendance WHERE date='" + jLabel80.getText() + "'");
             while (rs.next()) {
-                Statement stmt0 = conn.createStatement();
+                Connection conn0 = Main.Database.conn();
+                Statement stmt0 = conn0.createStatement();
                 if (rs.getInt(1) == 0) {
                     for (int i = 0; i < jTable2.getRowCount(); i++) {
                         String scoutId = jTable2.getValueAt(i, 0).toString();
@@ -1943,6 +1958,7 @@ public class PostLogin extends javax.swing.JFrame {
                                 + "date='" + jLabel80.getText() + "'");
                     }
                 }
+                conn0.close();
             }
             conn.close();
             comp1();
@@ -1956,6 +1972,7 @@ public class PostLogin extends javax.swing.JFrame {
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("INSERT INTO tests "
                     + "(name, date, defaultMark) VALUES ('" + jTextField19.getText() + "', "
@@ -1973,6 +1990,7 @@ public class PostLogin extends javax.swing.JFrame {
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("INSERT INTO activities "
                     + "(name, defaultMark) VALUES ('" + jTextField25.getText() + "', "
@@ -2036,6 +2054,7 @@ public class PostLogin extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int selectedRow = jTable1.getSelectedRow();
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * "
                     + "FROM scouts "
@@ -2086,6 +2105,7 @@ public class PostLogin extends javax.swing.JFrame {
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("INSERT INTO scouts "
                     + "(schoolIndex, callName, fullName, nameWithInitials, "
@@ -2109,6 +2129,7 @@ public class PostLogin extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("UPDATE scouts SET "
                     + "schoolIndex='" + jTextField1.getText() + "', "
@@ -2135,6 +2156,7 @@ public class PostLogin extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("DELETE FROM scouts WHERE id='" + jLabel11.getText() + "'");
             conn.close();
@@ -2150,6 +2172,7 @@ public class PostLogin extends javax.swing.JFrame {
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         // TODO add your handling code here:
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("DELETE FROM activities "
                     + "WHERE id='" + jTextField34.getText() + "'");
@@ -2164,6 +2187,7 @@ public class PostLogin extends javax.swing.JFrame {
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         // TODO add your handling code here:
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("DELETE FROM tests "
                     + "WHERE id='" + jTextField35.getText() + "'");
@@ -2203,12 +2227,14 @@ public class PostLogin extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT id, callName, nameWithInitials, class "
                     + "FROM scouts");
             while (rs.next()) {
                 int attend = 0;
-                Statement stmt0 = conn.createStatement();
+                Connection conn0 = Main.Database.conn();
+                Statement stmt0 = conn0.createStatement();
                 ResultSet rs0 = stmt0.executeQuery("SELECT status "
                         + "FROM attendance "
                         + "WHERE scoutId='" + rs.getInt(1) + "' AND "
@@ -2218,6 +2244,7 @@ public class PostLogin extends javax.swing.JFrame {
                         attend = 1;
                     }
                 }
+                conn0.close();
                 Object[] row = {rs.getString(1), rs.getString(2),
                     rs.getString(3), rs.getString(4), attend};
                 model.addRow(row);
@@ -2239,6 +2266,7 @@ public class PostLogin extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         model.setRowCount(0);
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * "
                     + "FROM tests");
@@ -2258,6 +2286,7 @@ public class PostLogin extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
         model.setRowCount(0);
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * "
                     + "FROM activities");
@@ -2277,6 +2306,7 @@ public class PostLogin extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT id, callName, nameWithInitials, class "
                     + "FROM scouts");

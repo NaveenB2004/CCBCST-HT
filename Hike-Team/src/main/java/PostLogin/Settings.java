@@ -35,7 +35,6 @@ public class Settings extends javax.swing.JFrame {
     }
 
     public static String lastLogin;
-    Connection conn = Main.Database.conn();
 
     private void startup() {
         if (new File("theme.ini").exists()) {
@@ -54,6 +53,7 @@ public class Settings extends javax.swing.JFrame {
             }
         }
         try {
+            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT lastLogin "
                     + "FROM login WHERE id='1'");
@@ -225,6 +225,7 @@ public class Settings extends javax.swing.JFrame {
         String password = String.valueOf(jPasswordField1.getPassword());
         if (password.equals(String.valueOf(jPasswordField2.getPassword()))) {
             try {
+                Connection conn = Main.Database.conn();
                 Statement stmt = conn.createStatement();
                 stmt.executeUpdate("UPDATE login SET "
                         + "username='" + username + "', password='" + password + "' "
