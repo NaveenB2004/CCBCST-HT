@@ -24,18 +24,16 @@ public class Database {
     public void mkdb() {
         try {
             // table for login
-            Connection conn0 = conn();
-            Statement stmt0 = conn0.createStatement();
+            Statement stmt0 = conn().createStatement();
             stmt0.executeUpdate("CREATE TABLE login("
                     + "id INTEGER PRIMARY KEY,"
                     + "userName TEXT NOT NULL,"
                     + "password TEXT NOT NULL,"
                     + "lastLogin TEXT);");
-            conn0.close();
+            conn().close();
 
             // table for scouts
-            Connection conn1 = conn();
-            Statement stmt1 = conn1.createStatement();
+            Statement stmt1 = conn().createStatement();
             stmt1.executeUpdate("CREATE TABLE scouts("
                     + "id INTEGER PRIMARY KEY,"
                     + "schoolIndex TEXT,"
@@ -48,11 +46,10 @@ public class Database {
                     + "guardianName TEXT NOT NULL,"
                     + "guardianContact TEXT NOT NULL,"
                     + "whatsapp TEXT);");
-            conn1.close();
+            conn().close();
 
             //table for attendance marking
-            Connection conn2 = conn();
-            Statement stmt2 = conn2.createStatement();
+            Statement stmt2 = conn().createStatement();
             stmt2.executeUpdate("CREATE TABLE attendance("
                     + "id INTEGER PRIMARY KEY,"
                     + "scoutId INTEGER NOT NULL,"
@@ -60,21 +57,19 @@ public class Database {
                     + "status TEXT NOT NULL,"
                     + "FOREIGN KEY (scoutId) REFERENCES scouts(id) "
                     + "ON DELETE CASCADE);");
-            conn2.close();
+            conn().close();
 
             // table for tests
-            Connection conn3 = conn();
-            Statement stmt3 = conn3.createStatement();
+            Statement stmt3 = conn().createStatement();
             stmt3.executeUpdate("CREATE TABLE tests("
                     + "id INTEGER PRIMARY KEY,"
                     + "name TEXT NOT NULL,"
                     + "date TEXT NOT NULL,"
                     + "defaultMark INTEGER NOT NULL);");
-            conn3.close();
+            conn().close();
 
             // table for test marks
-            Connection conn4 = conn();
-            Statement stmt4 = conn4.createStatement();
+            Statement stmt4 = conn().createStatement();
             stmt4.executeUpdate("CREATE TABLE testMarks("
                     + "id INTEGER PRIMARY KEY,"
                     + "scoutId INTEGER NOT NULL,"
@@ -84,20 +79,18 @@ public class Database {
                     + "ON DELETE CASCADE,"
                     + "FOREIGN KEY (testId) REFERENCES tests(id) "
                     + "ON DELETE CASCADE);");
-            conn4.close();
+            conn().close();
 
             // table for activities
-            Connection conn5 = conn();
-            Statement stmt5 = conn5.createStatement();
+            Statement stmt5 = conn().createStatement();
             stmt5.executeUpdate("CREATE TABLE activities("
                     + "id INTEGER PRIMARY KEY,"
                     + "name TEXT NOT NULL,"
                     + "defaultMark INTEGER NOT NULL);");
-            conn5.close();
+            conn().close();
 
             // table for activity marks
-            Connection conn6 = conn();
-            Statement stmt6 = conn6.createStatement();
+            Statement stmt6 = conn().createStatement();
             stmt6.executeUpdate("CREATE TABLE activityMarks("
                     + "id INTEGER PRIMARY KEY,"
                     + "scoutId INTEGER NOT NULL,"
@@ -108,15 +101,14 @@ public class Database {
                     + " ON DELETE CASCADE,"
                     + "FOREIGN KEY (activityId) REFERENCES activities(id) "
                     + "ON DELETE CASCADE);");
-            conn6.close();
+            conn().close();
 
             // add user login credentials
-            Connection conn7 = conn();
-            Statement stmt7 = conn7.createStatement();
+            Statement stmt7 = conn().createStatement();
             stmt7.executeUpdate("INSERT INTO login "
                     + "(id, username, password, lastLogin) VALUES "
                     + "(1, 'admin', 'admin', 'First Login!')");
-            conn7.close();
+            conn().close();
         } catch (SQLException e) {
             System.out.println(e);
         }

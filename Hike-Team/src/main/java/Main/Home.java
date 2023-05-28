@@ -154,9 +154,9 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
         String username = jTextField1.getText();
         String password = String.valueOf(jPasswordField1.getPassword());
+        Connection conn = Database.conn();
         String logtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         try {
-            Connection conn = Database.conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT COUNT(id) "
                     + "FROM login "
@@ -166,20 +166,16 @@ public class Home extends javax.swing.JFrame {
                 if (rs.getInt(1) != 0) {
                     new PostLogin.PostLogin().setVisible(true);
                     this.dispose();
-                    Connection conn0 = Database.conn();
-                    Statement stmt0 = conn0.createStatement();
+                    Statement stmt0 = conn.createStatement();
                     ResultSet rs0 = stmt0.executeQuery("SELECT lastLogin "
                             + "FROM login");
                     while (rs0.next()) {
                         PostLogin.Settings.lastLogin = rs.getString(1);
-                        Connection conn1 = Database.conn();
-                        Statement stmt1 = conn1.createStatement();
+                        Statement stmt1 = conn.createStatement();
                         stmt1.executeUpdate("UPDATE login SET "
                                 + "lastLogin='" + logtime + "' "
                                 + "WHERE id='1'");
-                        conn1.close();
                     }
-                    conn0.close();
                 } else {
                     JOptionPane.showMessageDialog(this, "Invalid username or password!");
                 }

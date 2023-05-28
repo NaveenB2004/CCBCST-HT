@@ -27,6 +27,7 @@ public class Results extends javax.swing.JFrame {
 
     public static String eventId;
     public static String event;
+    Connection conn = Main.Database.conn();
     DefaultTableModel model;
 
     private void startup() {
@@ -44,7 +45,6 @@ public class Results extends javax.swing.JFrame {
         this.setTitle("Test Results");
         jLabel9.setText("Test");
         try {
-            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * "
                     + "FROM tests WHERE id='" + eventId + "'");
@@ -53,15 +53,12 @@ public class Results extends javax.swing.JFrame {
                 jLabel5.setText(rs.getString("name"));
                 jComboBox1.addItem(rs.getString("date"));
                 jLabel8.setText("" + rs.getInt("defaultMark"));
-                Connection conn0 = Main.Database.conn();
-                Statement stmt0 = conn0.createStatement();
+                Statement stmt0 = conn.createStatement();
                 ResultSet rs0 = stmt0.executeQuery("SELECT COUNT(id) "
                         + "FROM testMarks WHERE testId='" + eventId + "'");
                 while (rs0.next()) {
-                    Connection conn1 = Main.Database.conn();
-                    Connection conn2 = Main.Database.conn();
-                    Statement stmt1 = conn1.createStatement();
-                    Statement stmt2 = conn2.createStatement();
+                    Statement stmt1 = conn.createStatement();
+                    Statement stmt2 = conn.createStatement();
                     ResultSet rs1;
                     ResultSet rs2;
                     if (rs0.getInt(1) == 0) {
@@ -72,7 +69,6 @@ public class Results extends javax.swing.JFrame {
                                 rs2.getString(3), rs2.getString(4), 0};
                             model.addRow(row);
                         }
-                        conn2.close();
                     } else {
                         int marks;
                         rs1 = stmt1.executeQuery("SELECT scoutId, marks "
@@ -87,12 +83,9 @@ public class Results extends javax.swing.JFrame {
                                     rs2.getString(3), rs2.getString(4), marks};
                                 model.addRow(row);
                             }
-                            conn2.close();
                         }
-                        conn1.close();
                     }
                 }
-                conn0.close();
             }
             conn.close();
         } catch (SQLException e) {
@@ -106,7 +99,6 @@ public class Results extends javax.swing.JFrame {
         String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         int x = 0;
         try {
-            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * "
                     + "FROM activities WHERE id='" + eventId + "'");
@@ -114,14 +106,13 @@ public class Results extends javax.swing.JFrame {
                 jLabel4.setText(eventId);
                 jLabel5.setText(rs.getString("name"));
                 jLabel8.setText("" + rs.getInt("defaultMark"));
-                Connection conn1 = Main.Database.conn();
-                Statement stmt1 = conn1.createStatement();
+
+                Statement stmt1 = conn.createStatement();
                 ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(id) "
                         + "FROM activityMarks WHERE activityId='" + eventId + "' "
                         + "AND date='" + todayDate + "'");
                 while (rs1.next()) {
-                    Connection conn2 = Main.Database.conn();
-                    Statement stmt2 = conn2.createStatement();
+                    Statement stmt2 = conn.createStatement();
                     ResultSet rs2;
                     int marks;
                     if (rs1.getInt(1) == 0) {
@@ -133,10 +124,8 @@ public class Results extends javax.swing.JFrame {
                                 rs2.getString(3), rs2.getString(4), 0};
                             model.addRow(row);
                         }
-                        conn2.close();
                     } else {
-                        Connection conn0 = Main.Database.conn();
-                        Statement stmt0 = conn0.createStatement();
+                        Statement stmt0 = conn.createStatement();
                         ResultSet rs0 = stmt0.executeQuery("SELECT DISTINCT date "
                                 + "FROM activityMarks "
                                 + "WHERE activityId='" + eventId + "'");
@@ -147,14 +136,12 @@ public class Results extends javax.swing.JFrame {
                             }
                             jComboBox1.addItem(rs0.getString(1));
                         }
-                        conn0.close();
                         jComboBox1.setSelectedIndex(jComboBox1.getItemCount() - 1);
                         rs2 = stmt2.executeQuery("SELECT marks, scoutId "
                                 + "FROM activityMarks WHERE activityId='" + eventId + "' "
                                 + "AND date='" + todayDate + "'");
                         while (rs2.next()) {
                             marks = rs2.getInt(1);
-                            Connection conn3 = Main.Database.conn();
                             Statement stmt3 = conn.createStatement();
                             ResultSet rs3 = stmt3.executeQuery("SELECT id, callName, nameWithInitials, class "
                                     + "FROM scouts WHERE id='" + rs2.getInt(2) + "'");
@@ -163,12 +150,9 @@ public class Results extends javax.swing.JFrame {
                                     rs3.getString(3), rs3.getString(4), marks};
                                 model.addRow(row);
                             }
-                            conn3.close();
                         }
-                        conn2.close();
                     }
                 }
-                conn1.close();
             }
             conn.close();
         } catch (SQLException ex) {
@@ -349,14 +333,12 @@ public class Results extends javax.swing.JFrame {
                 try {
                     int marks;
                     model.setRowCount(0);
-                    Connection conn2 = Main.Database.conn();
-                    Statement stmt2 = conn2.createStatement();
+                    Statement stmt2 = conn.createStatement();
                     ResultSet rs2 = stmt2.executeQuery("SELECT marks, scoutId "
                             + "FROM activityMarks WHERE activityId='" + eventId + "' "
                             + "AND date='" + jComboBox1.getSelectedItem().toString() + "'");
                     while (rs2.next()) {
                         marks = rs2.getInt(1);
-                        Connection conn = Main.Database.conn();
                         Statement stmt3 = conn.createStatement();
                         ResultSet rs3 = stmt3.executeQuery("SELECT id, callName, nameWithInitials, class "
                                 + "FROM scouts WHERE id='" + rs2.getInt(2) + "'");
@@ -365,9 +347,8 @@ public class Results extends javax.swing.JFrame {
                                 rs3.getString(3), rs3.getString(4), marks};
                             model.addRow(row);
                         }
-                        conn.close();
                     }
-                    conn2.close();
+                    conn.close();
                 } catch (SQLException e) {
                     System.out.println(e);
                 }
@@ -379,13 +360,11 @@ public class Results extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (event.equals("test")) {
             try {
-                Connection conn = Main.Database.conn();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT COUNT(id) FROM "
                         + "testMarks WHERE testId='" + eventId + "'");
                 while (rs.next()) {
-                    Connection conn0 = Main.Database.conn();
-                    Statement stmt0 = conn0.createStatement();
+                    Statement stmt0 = conn.createStatement();
                     if (rs.getInt(1) == 0) {
                         for (int i = 0; i < jTable1.getRowCount(); i++) {
                             stmt0.executeUpdate("INSERT INTO testMarks "
@@ -401,7 +380,6 @@ public class Results extends javax.swing.JFrame {
                                     + "AND testId='" + eventId + "'");
                         }
                     }
-                    conn0.close();
                 }
                 conn.close();
                 JOptionPane.showMessageDialog(this, "Success!");
@@ -411,15 +389,13 @@ public class Results extends javax.swing.JFrame {
             }
         } else {
             try {
-                Connection conn = Main.Database.conn();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT COUNT(id) "
                         + "FROM activityMarks "
                         + "WHERE date='" + jComboBox1.getSelectedItem().toString() + "' "
                         + "AND activityId='" + eventId + "'");
                 while (rs.next()) {
-                    Connection conn0 = Main.Database.conn();
-                    Statement stmt0 = conn0.createStatement();
+                    Statement stmt0 = conn.createStatement();
                     if (rs.getInt(1) == 0) {
                         String date = JOptionPane.showInputDialog("Enter date to insert data :\n(YYYY-MM-DD)");
                         for (int i = 0; i < jTable1.getRowCount(); i++) {
@@ -438,7 +414,6 @@ public class Results extends javax.swing.JFrame {
                                     + "date='" + jComboBox1.getSelectedItem().toString() + "'");
                         }
                     }
-                    conn0.close();
                 }
                 conn.close();
                 JOptionPane.showMessageDialog(this, "Success!");

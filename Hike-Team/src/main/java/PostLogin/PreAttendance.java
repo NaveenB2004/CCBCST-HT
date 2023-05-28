@@ -23,18 +23,17 @@ public class PreAttendance extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
     }
 
+    Connection conn = Main.Database.conn();
     DefaultTableModel model;
 
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
         try {
-            Connection conn = Main.Database.conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * "
                     + "FROM attendance");
             while (rs.next()) {
-                Connection conn0 = Main.Database.conn();
-                Statement stmt0 = conn0.createStatement();
+                Statement stmt0 = conn.createStatement();
                 ResultSet rs0 = stmt0.executeQuery("SELECT callName, nameWithInitials, class "
                         + "FROM scouts "
                         + "WHERE id='" + rs.getInt("scoutId") + "'");
@@ -44,17 +43,15 @@ public class PreAttendance extends javax.swing.JFrame {
                         rs.getString("date"), rs.getString("status")};
                     model.addRow(row);
                 }
-                conn0.close();
             }
             conn.close();
-            Connection conn1 = Main.Database.conn();
-            Statement stmt1 = conn1.createStatement();
+            Statement stmt1 = conn.createStatement();
             ResultSet rs1 = stmt1.executeQuery("SELECT DISTINCT date "
                     + "FROM attendance");
             while (rs1.next()) {
                 jComboBox3.addItem(rs1.getString(1));
             }
-            conn1.close();
+            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -269,13 +266,11 @@ public class PreAttendance extends javax.swing.JFrame {
         model.setRowCount(0);
         if (jComboBox3.getSelectedIndex() != 0) {
             try {
-                Connection conn = Main.Database.conn();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * "
                         + "FROM attendance WHERE date='" + jComboBox3.getSelectedItem().toString() + "'");
                 while (rs.next()) {
-                    Connection conn0 = Main.Database.conn();
-                    Statement stmt0 = conn0.createStatement();
+                    Statement stmt0 = conn.createStatement();
                     ResultSet rs0 = stmt0.executeQuery("SELECT callName, nameWithInitials, class "
                             + "FROM scouts "
                             + "WHERE id='" + rs.getInt("scoutId") + "'");
@@ -285,9 +280,8 @@ public class PreAttendance extends javax.swing.JFrame {
                             rs.getString("date"), rs.getString("status")};
                         model.addRow(row);
                     }
-                    conn0.close();
                 }
-                conn.close();
+            conn.close();
             } catch (SQLException e) {
                 System.out.println(e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
