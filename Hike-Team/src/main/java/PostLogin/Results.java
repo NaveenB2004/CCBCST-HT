@@ -303,7 +303,6 @@ public class Results extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         if (jComboBox1.getSelectedItem() != null && jComboBox1.getSelectedIndex() != 0
                 && event.equals("activity")) {
             try {
