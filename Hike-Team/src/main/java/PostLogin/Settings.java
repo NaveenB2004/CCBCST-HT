@@ -3,6 +3,7 @@ package PostLogin;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.Component;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -38,6 +39,12 @@ public class Settings extends javax.swing.JFrame {
     Connection conn = Main.Database.conn();
 
     private void startup() {
+        //disable password change pannel
+        Component[] com = jPanel1.getComponents();
+        for (Component com1 : com) {
+            com1.setEnabled(false);
+        }
+
         if (new File("theme.ini").exists()) {
             try (Stream<String> lines = Files.lines(Paths.get("theme.ini"))) {
                 String theme = lines.skip(0).findFirst().get();
@@ -229,7 +236,6 @@ public class Settings extends javax.swing.JFrame {
                 stmt.executeUpdate("UPDATE login SET "
                         + "username='" + username + "', password='" + password + "' "
                         + "WHERE id='1'");
-                conn.close();
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException e) {
                 System.out.println(e);

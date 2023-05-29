@@ -29,8 +29,7 @@ public class Database {
                     + "id INTEGER PRIMARY KEY,"
                     + "userName TEXT NOT NULL,"
                     + "password TEXT NOT NULL,"
-                    + "lastLogin TEXT);");
-            conn().close();
+                    + "lastLogin TEXT)");
 
             // table for scouts
             Statement stmt1 = conn().createStatement();
@@ -45,8 +44,7 @@ public class Database {
                     + "address TEXT NOT NULL,"
                     + "guardianName TEXT NOT NULL,"
                     + "guardianContact TEXT NOT NULL,"
-                    + "whatsapp TEXT);");
-            conn().close();
+                    + "whatsapp TEXT)");
 
             //table for attendance marking
             Statement stmt2 = conn().createStatement();
@@ -56,8 +54,7 @@ public class Database {
                     + "date TEXT NOT NULL,"
                     + "status TEXT NOT NULL,"
                     + "FOREIGN KEY (scoutId) REFERENCES scouts(id) "
-                    + "ON DELETE CASCADE);");
-            conn().close();
+                    + "ON DELETE CASCADE)");
 
             // table for tests
             Statement stmt3 = conn().createStatement();
@@ -65,8 +62,7 @@ public class Database {
                     + "id INTEGER PRIMARY KEY,"
                     + "name TEXT NOT NULL,"
                     + "date TEXT NOT NULL,"
-                    + "defaultMark INTEGER NOT NULL);");
-            conn().close();
+                    + "defaultMark INTEGER NOT NULL)");
 
             // table for test marks
             Statement stmt4 = conn().createStatement();
@@ -78,16 +74,14 @@ public class Database {
                     + "FOREIGN KEY (scoutId) REFERENCES scouts(id) "
                     + "ON DELETE CASCADE,"
                     + "FOREIGN KEY (testId) REFERENCES tests(id) "
-                    + "ON DELETE CASCADE);");
-            conn().close();
+                    + "ON DELETE CASCADE)");
 
             // table for activities
             Statement stmt5 = conn().createStatement();
             stmt5.executeUpdate("CREATE TABLE activities("
                     + "id INTEGER PRIMARY KEY,"
                     + "name TEXT NOT NULL,"
-                    + "defaultMark INTEGER NOT NULL);");
-            conn().close();
+                    + "defaultMark INTEGER NOT NULL)");
 
             // table for activity marks
             Statement stmt6 = conn().createStatement();
@@ -100,8 +94,7 @@ public class Database {
                     + "FOREIGN KEY (scoutId) REFERENCES scouts(id)"
                     + " ON DELETE CASCADE,"
                     + "FOREIGN KEY (activityId) REFERENCES activities(id) "
-                    + "ON DELETE CASCADE);");
-            conn().close();
+                    + "ON DELETE CASCADE)");
 
             // add user login credentials
             Statement stmt7 = conn().createStatement();

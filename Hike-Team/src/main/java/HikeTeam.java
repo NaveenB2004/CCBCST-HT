@@ -18,7 +18,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class HikeTeam {
 
     public static void main(String[] args) {
-        String version = "0.1";
+        String version = "0.2";
 
         // set theme
         if (new File("theme.ini").exists()) {

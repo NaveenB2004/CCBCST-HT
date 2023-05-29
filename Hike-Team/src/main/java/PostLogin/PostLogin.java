@@ -61,7 +61,6 @@ public class PostLogin extends javax.swing.JFrame {
                 model.addRow(row);
                 count++;
             }
-            conn.close();
             jLabel78.setText("" + count);
         } catch (SQLException e) {
             System.out.println(e);
@@ -1762,14 +1761,18 @@ public class PostLogin extends javax.swing.JFrame {
             while (rs.next()) {
                 jLabel66.setText("" + rs.getInt(1) * 10);
             }
-            conn.close();
             Statement stmt0 = conn.createStatement();
             ResultSet rs0 = stmt0.executeQuery("SELECT COUNT(id) "
-                    + "FROM attendance WHERE scoutId='" + scoutId + "' AND status='0' OR  status='-5'");
+                    + "FROM attendance WHERE scoutId='" + scoutId + "' AND status='0'");
             while (rs0.next()) {
-                jLabel54.setText("" + rs0.getInt(1));
+                Statement stmt0x = conn.createStatement();
+                ResultSet rs0x = stmt0x.executeQuery("SELECT COUNT(id) "
+                        + "FROM attendance WHERE scoutId='" + scoutId + "' AND status='-5'");
+                while (rs0x.next()) {
+                    int x = rs0.getInt(1) + rs0x.getInt(1);
+                    jLabel54.setText("" + x);
+                }
             }
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -1782,7 +1785,6 @@ public class PostLogin extends javax.swing.JFrame {
             while (rs1.next()) {
                 jLabel67.setText("" + rs1.getInt(1));
             }
-            conn.close();
             Statement stmt2 = conn.createStatement();
             ResultSet rs2 = stmt2.executeQuery("SELECT COUNT(DISTINCT date) "
                     + "FROM attendance WHERE date <= '" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "' AND date >= '"
@@ -1790,7 +1792,6 @@ public class PostLogin extends javax.swing.JFrame {
             while (rs2.next()) {
                 jLabel55.setText("" + rs2.getInt(1));
             }
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -1802,34 +1803,30 @@ public class PostLogin extends javax.swing.JFrame {
             while (rs3.next()) {
                 jLabel68.setText("" + rs3.getInt(1));
             }
-            conn.close();
             Statement stmt4 = conn.createStatement();
             ResultSet rs4 = stmt4.executeQuery("SELECT SUM(marks) "
-                    + "FROM testMarks WHERE id='" + scoutId + "'");
+                    + "FROM testMarks WHERE scoutId='" + scoutId + "'");
             while (rs4.next()) {
                 jLabel56.setText("" + rs4.getInt(1));
             }
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
 
         try {
             Statement stmt5 = conn.createStatement();
-            ResultSet rs5 = stmt5.executeQuery("SELECT SUM(marks) "
-                    + "FROM testMarks ORDER BY id DESC LIMIT 4");
+            ResultSet rs5 = stmt5.executeQuery("SELECT SUM(defaultMark) "
+                    + "FROM tests ORDER BY id DESC LIMIT 4");
             while (rs5.next()) {
                 jLabel69.setText("" + rs5.getInt(1));
             }
-            conn.close();
             Statement stmt6 = conn.createStatement();
             ResultSet rs6 = stmt6.executeQuery("SELECT SUM(marks) "
-                    + "FROM testMarks WHERE id='" + scoutId + "' "
+                    + "FROM testMarks WHERE scoutId='" + scoutId + "' "
                     + "ORDER BY id DESC LIMIT 4");
             while (rs6.next()) {
                 jLabel57.setText("" + rs6.getInt(1));
             }
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -1841,14 +1838,12 @@ public class PostLogin extends javax.swing.JFrame {
             while (rs7.next()) {
                 jLabel70.setText("" + rs7.getInt(1));
             }
-            conn.close();
             Statement stmt8 = conn.createStatement();
             ResultSet rs8 = stmt8.executeQuery("SELECT SUM(marks) "
                     + "FROM activityMarks WHERE scoutId='" + scoutId + "' ");
             while (rs8.next()) {
                 jLabel58.setText("" + rs8.getInt(1));
             }
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -1862,7 +1857,6 @@ public class PostLogin extends javax.swing.JFrame {
             while (rs9.next()) {
                 jLabel71.setText("" + rs9.getInt(1));
             }
-            conn.close();
             Statement stmt10 = conn.createStatement();
             ResultSet rs10 = stmt10.executeQuery("SELECT SUM(marks) "
                     + "FROM activityMarks "
@@ -1871,7 +1865,6 @@ public class PostLogin extends javax.swing.JFrame {
             while (rs10.next()) {
                 jLabel59.setText("" + rs10.getInt(1));
             }
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -1884,7 +1877,6 @@ public class PostLogin extends javax.swing.JFrame {
             while (rs11.next()) {
                 total = rs11.getInt(1);
             }
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -1897,7 +1889,6 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         // TODO add your handling code here:
-
         jButton17.setEnabled(true);
     }//GEN-LAST:event_jButton18ActionPerformed
 
@@ -1944,7 +1935,6 @@ public class PostLogin extends javax.swing.JFrame {
                     }
                 }
             }
-            conn.close();
             comp1();
             JOptionPane.showMessageDialog(this, "Success!");
         } catch (SQLException e) {
@@ -1961,7 +1951,6 @@ public class PostLogin extends javax.swing.JFrame {
                     + "(name, date, defaultMark) VALUES ('" + jTextField19.getText() + "', "
                     + "'" + jTextField31.getText() + "-" + jTextField32.getText()
                     + "-" + jTextField33.getText() + "', '" + jTextField29.getText() + "')");
-            conn.close();
             comp2();
             JOptionPane.showMessageDialog(this, "Success!");
         } catch (SQLException e) {
@@ -1977,7 +1966,6 @@ public class PostLogin extends javax.swing.JFrame {
             stmt.executeUpdate("INSERT INTO activities "
                     + "(name, defaultMark) VALUES ('" + jTextField25.getText() + "', "
                     + "'" + jTextField26.getText() + "')");
-            conn.close();
             comp3();
             JOptionPane.showMessageDialog(this, "Success!");
         } catch (SQLException e) {
@@ -2059,7 +2047,6 @@ public class PostLogin extends javax.swing.JFrame {
                 jTextField30.setText(rs.getString("whatsapp"));
                 jLabel13.setText(dateCalc(rs.getString("birthDate")));
             }
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -2096,7 +2083,6 @@ public class PostLogin extends javax.swing.JFrame {
                     + "'" + jTextField5.getText() + "-" + jTextField6.getText() + "-" + jTextField7.getText() + "', "
                     + "'" + jTextField10.getText() + "', '" + jTextField11.getText() + "', "
                     + "'" + jTextField12.getText() + "', '" + jTextField30.getText() + "')");
-            conn.close();
             jButton3ActionPerformed(evt);
             comp4();
             JOptionPane.showMessageDialog(this, "Success!");
@@ -2120,9 +2106,8 @@ public class PostLogin extends javax.swing.JFrame {
                     + "address='" + jTextField10.getText() + "', "
                     + "guardianName='" + jTextField11.getText() + "', "
                     + "guardianContact='" + jTextField12.getText() + "', "
-                    + "whatsapp='" + jTextField30 + "' "
+                    + "whatsapp='" + jTextField30.getText() + "' "
                     + "WHERE id='" + jLabel11.getText() + "'");
-            conn.close();
             jButton3ActionPerformed(evt);
             comp4();
             JOptionPane.showMessageDialog(this, "Success!");
@@ -2137,7 +2122,6 @@ public class PostLogin extends javax.swing.JFrame {
         try {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("DELETE FROM scouts WHERE id='" + jLabel11.getText() + "'");
-            conn.close();
             jButton3ActionPerformed(evt);
             comp4();
             JOptionPane.showMessageDialog(this, "Success!");
@@ -2153,7 +2137,6 @@ public class PostLogin extends javax.swing.JFrame {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("DELETE FROM activities "
                     + "WHERE id='" + jTextField34.getText() + "'");
-            conn.close();
             JOptionPane.showMessageDialog(this, "Success!");
         } catch (SQLException e) {
             System.out.println(e);
@@ -2167,7 +2150,6 @@ public class PostLogin extends javax.swing.JFrame {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("DELETE FROM tests "
                     + "WHERE id='" + jTextField35.getText() + "'");
-            conn.close();
             JOptionPane.showMessageDialog(this, "Success!");
         } catch (SQLException e) {
             System.out.println(e);
@@ -2222,7 +2204,6 @@ public class PostLogin extends javax.swing.JFrame {
                     rs.getString(3), rs.getString(4), attend};
                 model.addRow(row);
             }
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -2247,7 +2228,6 @@ public class PostLogin extends javax.swing.JFrame {
                     rs.getString(3), rs.getString(4)};
                 model.addRow(row);
             }
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -2266,7 +2246,6 @@ public class PostLogin extends javax.swing.JFrame {
                     rs.getString(3)};
                 model.addRow(row);
             }
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -2285,7 +2264,6 @@ public class PostLogin extends javax.swing.JFrame {
                     rs.getString(3), rs.getString(4)};
                 model.addRow(row);
             }
-            conn.close();
         } catch (SQLException e) {
             System.out.println(e);
         }
