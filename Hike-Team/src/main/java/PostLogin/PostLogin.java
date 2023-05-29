@@ -1,5 +1,6 @@
 package PostLogin;
 
+import java.awt.Frame;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -1976,21 +1977,30 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
-        new PreAttendance().setVisible(true);
+        if (PreAttendance.focus == 0) {
+            new PreAttendance().setVisible(true);
+            PreAttendance.focus = 1;
+        }
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
         // TODO add your handling code here:
-        Results.event = "test";
-        Results.eventId = jTable3.getValueAt(jTable3.getSelectedRow(), 0).toString();
-        new Results().setVisible(true);
+        if (Results.focus != 0) {
+            Results.event = "test";
+            Results.eventId = jTable3.getValueAt(jTable3.getSelectedRow(), 0).toString();
+            new Results().setVisible(true);
+            Results.focus = 1;
+        }
     }//GEN-LAST:event_jTable3MouseClicked
 
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
         // TODO add your handling code here:
-        Results.event = "activity";
-        Results.eventId = jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString();
-        new Results().setVisible(true);
+        if (Results.focus != 0) {
+            Results.event = "activity";
+            Results.eventId = jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString();
+            new Results().setVisible(true);
+            Results.focus = 1;
+        }
     }//GEN-LAST:event_jTable4MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
