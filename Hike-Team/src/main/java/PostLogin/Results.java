@@ -400,6 +400,7 @@ public class Results extends javax.swing.JFrame {
                                     + "('" + model.getValueAt(i, 0) + "', "
                                     + "'" + eventId + "', '" + date + "', "
                                     + "'" + model.getValueAt(i, 4) + "')");
+                            System.out.println(model.getValueAt(i, 0)+ " - "+eventId+" - "+date+" - "+model.getValueAt(i, 4));
                         }
                     } else {
                         for (int i = 0; i < jTable1.getRowCount(); i++) {
