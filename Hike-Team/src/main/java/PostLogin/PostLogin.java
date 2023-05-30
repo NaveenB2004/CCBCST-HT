@@ -2003,7 +2003,7 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
         // TODO add your handling code here:
-        if (Results.focus != 0) {
+        if (Results.focus == 0) {
             Results.event = "test";
             Results.eventId = jTable3.getValueAt(jTable3.getSelectedRow(), 0).toString();
             new Results().setVisible(true);
@@ -2013,7 +2013,7 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void jTable4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable4MouseClicked
         // TODO add your handling code here:
-        if (Results.focus != 0) {
+        if (Results.focus == 0) {
             Results.event = "activity";
             Results.eventId = jTable4.getValueAt(jTable4.getSelectedRow(), 0).toString();
             new Results().setVisible(true);
@@ -2205,7 +2205,7 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
         // TODO add your handling code here:
-        if (jComboBox5.getSelectedItem()!=null && )
+//        if (jComboBox5.getSelectedItem()!=null && )
     }//GEN-LAST:event_jComboBox5ActionPerformed
     
     private void comp1() {
