@@ -29,10 +29,10 @@ public class PostLogin extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
         setExtendedState(this.MAXIMIZED_BOTH);
     }
-
+    
     Connection conn = Main.Database.conn();
     static String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-
+    
     private void preLoader() {
         // loads the 1st component in tabbed pane (summary)
         jLabel66.setText("---");
@@ -48,7 +48,7 @@ public class PostLogin extends javax.swing.JFrame {
         jLabel59.setText("---");
         jLabel71.setText("---");
         jLabel78.setText("---");
-
+        
         DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
         model.setRowCount(0);
         int count = 0;
@@ -535,6 +535,19 @@ public class PostLogin extends javax.swing.JFrame {
 
         jLabel74.setText("by Class (Grade) :");
 
+        jTextField27.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField27KeyTyped(evt);
+            }
+        });
+
+        jTextField28.setToolTipText("Will find the column 'Call Name'");
+        jTextField28.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField28KeyTyped(evt);
+            }
+        });
+
         jButton17.setText("Reset");
         jButton17.setEnabled(false);
 
@@ -546,6 +559,11 @@ public class PostLogin extends javax.swing.JFrame {
         });
 
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Please Select...", "6", "7", "8", "9", "10", "11", "12", "13" }));
+        jComboBox5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -1777,7 +1795,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-
+        
         try {
             Statement stmt1 = conn.createStatement();
             ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(DISTINCT date) "
@@ -1796,7 +1814,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-
+        
         try {
             Statement stmt3 = conn.createStatement();
             ResultSet rs3 = stmt3.executeQuery("SELECT SUM(defaultMark) "
@@ -1813,7 +1831,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-
+        
         try {
             Statement stmt5 = conn.createStatement();
             ResultSet rs5 = stmt5.executeQuery("SELECT SUM(defaultMark) "
@@ -1831,7 +1849,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-
+        
         try {
             Statement stmt7 = conn.createStatement();
             ResultSet rs7 = stmt7.executeQuery("SELECT SUM(defaultMark) "
@@ -1848,7 +1866,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-
+        
         try {
             Statement stmt9 = conn.createStatement();
             ResultSet rs9 = stmt9.executeQuery("SELECT SUM(defaultMark) "
@@ -1869,7 +1887,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-
+        
         int total = 0;
         try {
             Statement stmt11 = conn.createStatement();
@@ -2030,7 +2048,7 @@ public class PostLogin extends javax.swing.JFrame {
         jButton6.setEnabled(false);
         jButton4.setEnabled(true);
         jButton5.setEnabled(true);
-
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int selectedRow = jTable1.getSelectedRow();
         try {
@@ -2061,7 +2079,7 @@ public class PostLogin extends javax.swing.JFrame {
             System.out.println(e);
         }
     }//GEN-LAST:event_jTable1MouseClicked
-
+    
     private static String dateCalc(String date) {
         String calculated = null;
         try {
@@ -2173,6 +2191,23 @@ public class PostLogin extends javax.swing.JFrame {
         comp1();
     }//GEN-LAST:event_jButton21ActionPerformed
 
+    private void jTextField27KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField27KeyTyped
+        // TODO add your handling code here:
+        jTextField28.setText("");
+        jComboBox5.setSelectedIndex(0);
+    }//GEN-LAST:event_jTextField27KeyTyped
+
+    private void jTextField28KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField28KeyTyped
+        // TODO add your handling code here:
+        jTextField27.setText("");
+        jComboBox5.setSelectedIndex(0);
+    }//GEN-LAST:event_jTextField28KeyTyped
+
+    private void jComboBox5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox5ActionPerformed
+        // TODO add your handling code here:
+        if (jComboBox5.getSelectedItem()!=null && )
+    }//GEN-LAST:event_jComboBox5ActionPerformed
+    
     private void comp1() {
         // 2nd component in tabbed pane
         jLabel27.setText(todayDate);
@@ -2216,7 +2251,7 @@ public class PostLogin extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-
+    
     private void comp2() {
         //3rd component in tabbed pane
         jTextField19.setText("");
@@ -2224,7 +2259,7 @@ public class PostLogin extends javax.swing.JFrame {
         jTextField32.setText("");
         jTextField33.setText("");
         jTextField29.setText("");
-
+        
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         model.setRowCount(0);
         try {
@@ -2240,7 +2275,7 @@ public class PostLogin extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-
+    
     private void comp3() {
         //4th component in tabbed pane
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
@@ -2258,7 +2293,7 @@ public class PostLogin extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-
+    
     private void comp4() {
         //5th component in tabbed pane
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
