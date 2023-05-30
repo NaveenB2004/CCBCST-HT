@@ -1778,7 +1778,7 @@ public class PostLogin extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery("SELECT COUNT(DISTINCT date) "
                     + "FROM attendance");
             while (rs.next()) {
-                jLabel66.setText("" + rs.getInt(1) * 10);
+                jLabel66.setText("" + rs.getInt(1));
             }
             Statement stmt0 = conn.createStatement();
             ResultSet rs0 = stmt0.executeQuery("SELECT COUNT(id) "
