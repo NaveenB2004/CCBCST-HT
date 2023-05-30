@@ -6,8 +6,8 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{7F40B7A0-ACEF-4377-8049-FB6D9AFD98C0}
 AppName=CCBCST Hike-Team
-AppVersion=0.1
-;AppVerName=CCBCST Hike-Team 0.1
+AppVersion=0.2
+;AppVerName=CCBCST Hike-Team 0.2
 AppPublisher=NaveenB2004
 AppPublisherURL=https://sites.google.com/view/scoutsofccbc
 AppSupportURL=https://sites.google.com/view/scoutsofccbc
