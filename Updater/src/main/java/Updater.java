@@ -6,9 +6,9 @@
 public class Updater {
 
     public static void main(String[] args) {
-        try {
+        if (args[0].isEmpty()) {
             new process.process().installer();
-        } catch (Exception e) {
+        } else {
             new process.process().checkUpdates();
         }
     }
