@@ -1,5 +1,7 @@
 package process;
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author NaveenB2004
@@ -11,6 +13,7 @@ public class prograss extends javax.swing.JFrame {
      */
     public prograss() {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
     }
 
     /**
@@ -89,11 +92,14 @@ public class prograss extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void disposeTextPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_disposeTextPropertyChange
         // TODO add your handling code here:
-        this.dispose();
+        if (disposeText.getText().equals("0")) {
+            this.dispose();
+        }
     }//GEN-LAST:event_disposeTextPropertyChange
 
     /**
@@ -132,7 +138,7 @@ public class prograss extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel disposeText;
+    public static javax.swing.JLabel disposeText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

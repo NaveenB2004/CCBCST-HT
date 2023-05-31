@@ -19,7 +19,7 @@ import org.apache.commons.io.FileUtils;
  * @author NaveenB2004
  */
 public class process {
-
+    
     public void checkUpdates() {
         // version link 1st row :
         // package link 2nd row :
@@ -42,8 +42,7 @@ public class process {
         } catch (IOException e) {
             System.out.println(e);
         }
-        System.out.println("update check ok");
-
+        
         String thisVer = null;
         try (Stream<String> lines = Files.lines(
                 Paths.get("version.ini"))) {
@@ -51,8 +50,7 @@ public class process {
         } catch (Exception e) {
             System.out.println(e);
         }
-        System.out.println("version get ok");
-
+        
         try {
             if (Float.parseFloat(thisVer) < Float.parseFloat(tempVer)) {
                 downloadUpdate(tempVer);
@@ -60,10 +58,8 @@ public class process {
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
-        System.out.println("version compare ok");
-
     }
-
+    
     private void downloadUpdate(String tempVer) {
         new prograss().setVisible(true);
         String newURL = null;
@@ -86,7 +82,6 @@ public class process {
         } catch (IOException e) {
             System.out.println(e);
         }
-        System.out.println("file link get ok");
         
         try {
             FileUtils.copyURLToFile(urlx, new File("CCBCST Hike-Team.nnb"));
@@ -99,8 +94,10 @@ public class process {
         } catch (FileNotFoundException ex) {
             System.out.println(ex);
         }
+        
+        prograss.disposeText.setText("0");
     }
-
+    
     public void installer() {
         try {
             Thread.sleep(1000);
