@@ -42,6 +42,7 @@ public class process {
         } catch (IOException e) {
             System.out.println(e);
         }
+        System.out.println("update check ok");
 
         String thisVer = null;
         try (Stream<String> lines = Files.lines(
@@ -50,6 +51,7 @@ public class process {
         } catch (Exception e) {
             System.out.println(e);
         }
+        System.out.println("version get ok");
 
         try {
             if (Float.parseFloat(thisVer) < Float.parseFloat(tempVer)) {
@@ -58,6 +60,7 @@ public class process {
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
+        System.out.println("version compare ok");
 
     }
 
@@ -83,6 +86,8 @@ public class process {
         } catch (IOException e) {
             System.out.println(e);
         }
+        System.out.println("file link get ok");
+        
         try {
             FileUtils.copyURLToFile(urlx, new File("CCBCST Hike-Team.nnb"));
         } catch (IOException ex) {

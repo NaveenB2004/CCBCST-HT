@@ -43,7 +43,7 @@ public class prograss extends javax.swing.JFrame {
         jLabel1.setText("Updating Hike-Team Application...");
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/process/Loding(100x25).gif"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Loding(100x25).gif"))); // NOI18N
 
         jLabel3.setText("(You can close this window during the update)");
 
