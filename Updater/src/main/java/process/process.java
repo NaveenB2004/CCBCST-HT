@@ -31,8 +31,12 @@ public class process {
             InputStream is = con.getInputStream();
             try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
                 String line = null;
+                int x = 0;
                 while ((line = br.readLine()) != null) {
-                    tempVer = line;
+                    if (x == 0) {
+                        tempVer = line;
+                    }
+                    x++;
                 }
             }
         } catch (IOException e) {
@@ -66,9 +70,9 @@ public class process {
             URLConnection con = url.openConnection();
             InputStream is = con.getInputStream();
             try (BufferedReader br = new BufferedReader(new InputStreamReader(is))) {
-                String line = null;
+                String line;
+                int x = 0;
                 while ((line = br.readLine()) != null) {
-                    int x = 0;
                     if (x != 0) {
                         newURL = line;
                     }
