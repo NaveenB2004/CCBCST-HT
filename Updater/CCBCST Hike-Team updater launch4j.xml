@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch4jConfig>
   <dontWrapJar>true</dontWrapJar>
-  <headerType>console</headerType>
+  <headerType>gui</headerType>
   <jar>updater.jar</jar>
   <outfile>C:\Users\Dell\Desktop\CCBCST Hike-Team\updater.exe</outfile>
   <errTitle></errTitle>

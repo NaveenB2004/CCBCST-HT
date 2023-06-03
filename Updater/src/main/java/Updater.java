@@ -6,12 +6,12 @@
 public class Updater {
 
     public static void main(String[] args) {
-        try {
-            String y = args[0];
+        String y = args[0];
+        if (y.equals("install")) {
             new process.process().installer();
-        } catch (Exception e) {
-            System.out.println(e);
+        } else {
             new process.process().checkUpdates();
         }
+
     }
 }
