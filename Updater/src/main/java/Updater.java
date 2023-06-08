@@ -6,10 +6,10 @@
 public class Updater {
 
     public static void main(String[] args) {
-        String y = args[0];
-        if (y.equals("install")) {
+        try {
+            String y = args[0];
             new process.process().installer();
-        } else {
+        } catch (Exception e) {
             new process.process().checkUpdates();
         }
 
