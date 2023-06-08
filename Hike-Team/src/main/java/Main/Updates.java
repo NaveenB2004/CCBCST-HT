@@ -1,5 +1,6 @@
 package Main;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -9,15 +10,23 @@ import java.io.IOException;
 public class Updates {
 
     public void updateCheck() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    new ProcessBuilder("cmd.exe", "/c",
-                        "JRE\\bin\\java.exe -jar updater.jar").start();
-                } catch (IOException ex) {
-                    System.out.println(ex);}
-                        }
-        }).start();
+        try {
+            new ProcessBuilder("cmd.exe", "/c",
+                    "JRE\\bin\\java.exe -jar updater.jar noInstall").start();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public void updateInstall() {
+        if (new File("CCBCST Hike-Team.nnb").exists()) {
+            try {
+                new ProcessBuilder("cmd.exe", "/c",
+                        "JRE\\bin\\java.exe -jar updater.jar install").start();
+                System.exit(0);
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+        }
     }
 }

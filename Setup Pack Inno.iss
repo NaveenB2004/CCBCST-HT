@@ -38,7 +38,6 @@ Source: "C:\Users\Dell\Desktop\CCBCST Hike-Team\*"; DestDir: "{app}"; Flags: ign
 
 [Icons]
 Name: "{group}\CCBCST Hike-Team"; Filename: "{app}\CCBCST Hike-Team.exe"
-Name: "{userstartup}\CCBCST Hike-Team"; Filename: "{app}\updater.exe"
 Name: "{group}\{cm:ProgramOnTheWeb,CCBCST Hike-Team}"; Filename: "https://sites.google.com/view/scoutsofccbc"
 Name: "{group}\{cm:UninstallProgram,CCBCST Hike-Team}"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\CCBCST Hike-Team"; Filename: "{app}\CCBCST Hike-Team.exe"; Tasks: desktopicon

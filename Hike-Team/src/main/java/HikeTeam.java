@@ -48,20 +48,12 @@ public class HikeTeam {
             FlatDarkLaf.setup();
         }
         new Main.SplashScreen().setVisible(true);
+        
+        // install updates when available (next start)
+        new Main.Updates().updateInstall();
 
         // check updates
         new Main.Updates().updateCheck();
-        
-        // install updates when available (next start)
-        if (new File("CCBCST Hike-Team.nnb").exists()) {
-            try {
-                new ProcessBuilder("cmd.exe", "/c",
-                        "JRE\\bin\\java.exe -jar updater.jar install").start();
-                System.exit(0);
-            } catch (IOException e) {
-                System.out.println(e);
-            }
-        }
 
         // get db status
         if (!new File("database.db").exists()) {

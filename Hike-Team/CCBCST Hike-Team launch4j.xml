@@ -22,12 +22,12 @@
     <maxVersion></maxVersion>
   </jre>
   <versionInfo>
-    <fileVersion>0.2.0.0</fileVersion>
-    <txtFileVersion>0.2.0.0</txtFileVersion>
+    <fileVersion>0.3.0.0</fileVersion>
+    <txtFileVersion>0.3.0.0</txtFileVersion>
     <fileDescription>CCBCST Hike-Team</fileDescription>
     <copyright>NaveenB2004</copyright>
-    <productVersion>0.2.0.0</productVersion>
-    <txtProductVersion>0.2.0.0</txtProductVersion>
+    <productVersion>0.3.0.0</productVersion>
+    <txtProductVersion>0.3.0.0</txtProductVersion>
     <productName>CCBCST Hike-Team</productName>
     <companyName>NaveenB2004</companyName>
     <internalName>CCBCST Hike-Team</internalName>
