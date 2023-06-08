@@ -49,7 +49,10 @@ public class HikeTeam {
         }
         new Main.SplashScreen().setVisible(true);
 
-        // install updates when available
+        // check updates
+        new Main.Updates().updateCheck();
+        
+        // install updates when available (next start)
         if (new File("CCBCST Hike-Team.nnb").exists()) {
             try {
                 new ProcessBuilder("cmd.exe", "/c",
