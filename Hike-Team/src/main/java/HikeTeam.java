@@ -18,8 +18,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class HikeTeam {
 
     public static void main(String[] args) {
-        String version = "0.3";
-
         // set theme
         if (new File("theme.ini").exists()) {
             try (Stream<String> lines = Files.lines(Paths.get("theme.ini"))) {
@@ -48,7 +46,7 @@ public class HikeTeam {
             FlatDarkLaf.setup();
         }
         new Main.SplashScreen().setVisible(true);
-        
+
         // install updates when available (next start)
         new Main.Updates().updateInstall();
 
@@ -63,7 +61,7 @@ public class HikeTeam {
         // set application version
         try (PrintStream out = new PrintStream(
                 new File("version.ini"))) {
-            out.println(version);
+            out.println(Main.Updates.version);
         } catch (FileNotFoundException ex) {
             System.out.println(ex);
         }

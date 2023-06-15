@@ -9,6 +9,8 @@ import java.io.IOException;
  */
 public class Updates {
 
+    public static String version = "0.3";
+
     public void updateCheck() {
         try {
             new ProcessBuilder("cmd.exe", "/c",
