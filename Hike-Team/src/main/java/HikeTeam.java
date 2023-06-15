@@ -2,9 +2,7 @@
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Stream;
@@ -47,27 +45,16 @@ public class HikeTeam {
         }
         new Main.SplashScreen().setVisible(true);
 
-        // install updates when available (next start)
-        new Main.Updates().updateInstall();
-
-        // check updates
-        new Main.Updates().updateCheck();
-
+        // check & install updates when available
+        new Main.Updates().update();
+        
         // get db status
         if (!new File("database.db").exists()) {
             new Main.Database().mkdb();
         }
 
-        // set application version
-        try (PrintStream out = new PrintStream(
-                new File("version.ini"))) {
-            out.println(Main.Updates.version);
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex);
-        }
-
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             System.out.println(e);
         }

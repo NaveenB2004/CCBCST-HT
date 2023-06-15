@@ -19,7 +19,7 @@ import org.apache.commons.io.FileUtils;
  * @author NaveenB2004
  */
 public class process {
-    
+
     public void checkUpdates() {
         // version link 1st row :
         // package link 2nd row :
@@ -42,7 +42,7 @@ public class process {
         } catch (IOException e) {
             System.out.println(e);
         }
-        
+
         String thisVer = null;
         try (Stream<String> lines = Files.lines(
                 Paths.get("version.ini"))) {
@@ -50,18 +50,19 @@ public class process {
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         try {
             if (Float.parseFloat(thisVer) < Float.parseFloat(tempVer)) {
-                downloadUpdate(tempVer);
+                downloadUpdate(tempVer, thisVer);
             }
         } catch (NumberFormatException e) {
             System.out.println(e);
         }
     }
-    
-    private void downloadUpdate(String tempVer) {
+
+    private void downloadUpdate(String tempVer, String thisVer) {
         new prograss().setVisible(true);
+        prograss.jLabel4.setText("Your Version : " + thisVer + " - New Version : " + tempVer);
         String newURL = null;
         URL urlx = null;
         try {
@@ -82,9 +83,9 @@ public class process {
         } catch (IOException e) {
             System.out.println(e);
         }
-        
+
         try {
-            FileUtils.copyURLToFile(urlx, new File("CCBCST Hike-Team.nnb"));
+            FileUtils.copyURLToFile(urlx, new File("CCBCST Hike-Team.temp"));
         } catch (IOException ex) {
             System.out.println(ex);
         }
@@ -94,10 +95,11 @@ public class process {
         } catch (FileNotFoundException ex) {
             System.out.println(ex);
         }
-        
+        new File("CCBCST Hike-Team.temp").renameTo(new File("CCBCST Hike-Team.nnb"));
+
         prograss.disposeText.setText("0");
     }
-    
+
     public void installer() {
         try {
             Thread.sleep(1000);
