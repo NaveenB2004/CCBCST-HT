@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -136,13 +137,17 @@ public class PostLogin extends javax.swing.JFrame {
         jLabel80 = new javax.swing.JLabel();
         jPanel19 = new javax.swing.JPanel();
         jLabel87 = new javax.swing.JLabel();
-        jLabel88 = new javax.swing.JLabel();
         jLabel89 = new javax.swing.JLabel();
+        jLabel88 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel94 = new javax.swing.JLabel();
         jTextField36 = new javax.swing.JTextField();
         jLabel95 = new javax.swing.JLabel();
         jButton21 = new javax.swing.JButton();
+        jLabel20 = new javax.swing.JLabel();
+        jTextField13 = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jTextField14 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
@@ -543,7 +548,7 @@ public class PostLogin extends javax.swing.JFrame {
             }
         });
 
-        jButton10.setText("Previous Attendance");
+        jButton10.setText("All Previous Attendance");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -558,9 +563,9 @@ public class PostLogin extends javax.swing.JFrame {
 
         jLabel87.setText("Attended :              0");
 
-        jLabel88.setText("Not Attended :   -10");
-
         jLabel89.setText("Early Leave :          -5");
+
+        jLabel88.setText("Not Attended :   -10");
 
         javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
         jPanel19.setLayout(jPanel19Layout);
@@ -568,20 +573,23 @@ public class PostLogin extends javax.swing.JFrame {
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel87)
+                .addGap(8, 8, 8))
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel87)
-                    .addComponent(jLabel88)
-                    .addComponent(jLabel89))
-                .addContainerGap())
+                    .addComponent(jLabel89)
+                    .addComponent(jLabel88))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel19Layout.createSequentialGroup()
                 .addComponent(jLabel87)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel88)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel89)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel88)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -598,21 +606,33 @@ public class PostLogin extends javax.swing.JFrame {
             }
         });
 
+        jLabel20.setText("-");
+
+        jLabel21.setText("-");
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField36)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel94)
                     .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel94)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addComponent(jLabel95)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                        .addComponent(jButton21)))
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextField36, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel95, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jLabel20)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel21)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton21))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
@@ -621,7 +641,12 @@ public class PostLogin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel94)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20)
+                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21)
+                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel95)
@@ -634,19 +659,20 @@ public class PostLogin extends javax.swing.JFrame {
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 592, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-                    .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel79)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel80, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 245, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel10Layout.createSequentialGroup()
+                            .addComponent(jLabel79)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabel80, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                            .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
@@ -1523,17 +1549,22 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.executeUpdate("INSERT INTO tests "
-                    + "(name, date, defaultMark) VALUES ('" + jTextField19.getText() + "', "
-                    + "'" + jTextField31.getText() + "-" + jTextField32.getText()
-                    + "-" + jTextField33.getText() + "', '" + jTextField29.getText() + "')");
-            comp2();
-            JOptionPane.showMessageDialog(this, "Success!");
-        } catch (SQLException e) {
-            System.out.println(e);
-            JOptionPane.showMessageDialog(this, "Error!\n" + e);
+        verifire3();
+        if (validWar == false) {
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate("INSERT INTO tests "
+                        + "(name, date, defaultMark) VALUES ('" + jTextField19.getText() + "', "
+                        + "'" + jTextField31.getText() + "-" + jTextField32.getText()
+                        + "-" + jTextField33.getText() + "', '" + jTextField29.getText() + "')");
+                comp2();
+                JOptionPane.showMessageDialog(this, "Success!");
+            } catch (SQLException e) {
+                System.out.println(e);
+                JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            }
+        } else {
+            validWar = false;
         }
     }//GEN-LAST:event_jButton13ActionPerformed
 
@@ -1731,36 +1762,61 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
         // TODO add your handling code here:
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.executeUpdate("DELETE FROM activities "
-                    + "WHERE id='" + jTextField34.getText() + "'");
-            comp3();
-            JOptionPane.showMessageDialog(this, "Success!");
-        } catch (SQLException e) {
-            System.out.println(e);
-            JOptionPane.showMessageDialog(this, "Error!\n" + e);
+        boolean valid = false;
+        for (int i = 0; i < jTable4.getRowCount(); i++) {
+            if (jTable4.getValueAt(i, 0).toString().equals(jTextField34.getText())) {
+                valid = true;
+            }
+        }
+        if (valid == true) {
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate("DELETE FROM activities "
+                        + "WHERE id='" + jTextField34.getText() + "'");
+                comp3();
+                JOptionPane.showMessageDialog(this, "Success!");
+            } catch (SQLException e) {
+                System.out.println(e);
+                JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid Activity No.!");
         }
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
         // TODO add your handling code here:
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.executeUpdate("DELETE FROM tests "
-                    + "WHERE id='" + jTextField35.getText() + "'");
-            comp2();
-            JOptionPane.showMessageDialog(this, "Success!");
-        } catch (SQLException e) {
-            System.out.println(e);
-            JOptionPane.showMessageDialog(this, "Error!\n" + e);
+        boolean valid = false;
+        for (int i = 0; i < jTable3.getRowCount(); i++) {
+            if (jTable3.getValueAt(i, 0).toString().equals(jTextField35.getText())) {
+                valid = true;
+            }
         }
-
+        if (valid == true) {
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate("DELETE FROM tests "
+                        + "WHERE id='" + jTextField35.getText() + "'");
+                comp2();
+                JOptionPane.showMessageDialog(this, "Success!");
+            } catch (SQLException e) {
+                System.out.println(e);
+                JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid Test No.!");
+        }
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
         // TODO add your handling code here:
-        comp1();
+        if (!StringUtils.isNumeric(jTextField36.getText()) || jTextField36.getText().length() != 4
+                || !StringUtils.isNumeric(jTextField13.getText()) || jTextField13.getText().length() != 2
+                || !StringUtils.isNumeric(jTextField14.getText()) || jTextField14.getText().length() != 2) {
+            JOptionPane.showMessageDialog(this, "Invalid date!\n(Ex: 2020-02-04)");
+        } else {
+            comp1();
+        }
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jTextField31KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField31KeyTyped
@@ -1779,7 +1835,7 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void comp1() {
         // 2nd component in tabbed pane
-        String date = jTextField36.getText();
+        String date = jTextField36.getText() + "-" + jTextField13.getText() + "-" + jTextField14.getText();
         jLabel80.setText(date);
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
@@ -1868,6 +1924,20 @@ public class PostLogin extends javax.swing.JFrame {
             }
         } catch (SQLException e) {
             System.out.println(e);
+        }
+    }
+
+    private void verifire3() {
+        String warnings = "Validation Warning!";
+        if (!StringUtils.isNumeric(jTextField31.getText()) || jTextField31.getText().length() != 4
+                || !StringUtils.isNumeric(jTextField32.getText()) || jTextField32.getText().length() != 2
+                || !StringUtils.isNumeric(jTextField33.getText()) || jTextField33.getText().length() != 2) {
+            warnings = "\nInvalid Date! (Ex: 2020-02-04)";
+            validWar = true;
+        }
+        if (!StringUtils.isNumeric(jTextField29.getText())) {
+            warnings = "\nInvalid Default Mark! (Only contain numbers)";
+            validWar = true;
         }
     }
 
@@ -1968,6 +2038,8 @@ public class PostLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
@@ -2056,6 +2128,8 @@ public class PostLogin extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField11;
     private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
+    private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField25;
