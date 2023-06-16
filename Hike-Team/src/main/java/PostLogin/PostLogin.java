@@ -1679,7 +1679,7 @@ public class PostLogin extends javax.swing.JFrame {
         LocalDate date2 = LocalDate.now();
         int years = Years.yearsBetween(date1, date2).getYears();
         int months = Months.monthsBetween(date1, date2).getMonths();
-        int monthsx = months - (years * months);
+        int monthsx = months - (years * 12);
         calculated = "Years: " + years + " - Months: " + monthsx;
         return calculated;
     }
