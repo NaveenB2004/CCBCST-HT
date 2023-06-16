@@ -47,9 +47,6 @@ public class HikeTeam {
         }
         new Main.SplashScreen().setVisible(true);
 
-        // apply version changes
-        new Main.VerChanges().callChanges();
-
         // check & install updates when available
         new Main.Updates().update();
 
@@ -57,6 +54,9 @@ public class HikeTeam {
         if (!new File("database.db").exists()) {
             new Main.Database().mkdb();
         }
+
+        // apply version changes
+        new Main.VerChanges().callChanges();
 
         try {
             Thread.sleep(1000);
