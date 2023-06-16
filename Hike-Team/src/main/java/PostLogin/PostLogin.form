@@ -1801,7 +1801,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel12">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Age (Today) : "/>
+                    <Property name="text" type="java.lang.String" value="Age (This Month) : "/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel13">

@@ -15,6 +15,13 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.Days;
+import org.joda.time.LocalDate;
+import org.joda.time.Months;
+import org.joda.time.Period;
+import org.joda.time.Years;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
 
 /**
  *
@@ -1091,7 +1098,7 @@ public class PostLogin extends javax.swing.JFrame {
 
         jTextField9.setToolTipText("Class (Letter)");
 
-        jLabel12.setText("Age (Today) : ");
+        jLabel12.setText("Age (This Month) : ");
 
         jLabel13.setText("--");
 
@@ -1675,19 +1682,12 @@ public class PostLogin extends javax.swing.JFrame {
 
     private static String dateCalc(String date) {
         String calculated = null;
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-            Date firstDate = sdf.parse(date);
-            Date secondDate = sdf.parse(todayDate);
-            long difference_In_Time = secondDate.getTime() - firstDate.getTime();
-            long days = TimeUnit.MILLISECONDS.toDays(difference_In_Time);
-            long yearCount = days / 365;
-            long monthCount = (days % 365) / 12;
-            long dayCount = (days % 365) % 12;
-            calculated = "Years : " + yearCount + " - Months : " + monthCount + " - Days : " + dayCount;
-        } catch (ParseException e) {
-            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
-        }
+        LocalDate date1 = LocalDate.parse(date);
+        LocalDate date2 = LocalDate.now();
+        int years = Years.yearsBetween(date1, date2).getYears();
+        int months = Months.monthsBetween(date1, date2).getMonths();
+        int monthsx = months - (years * months);
+        calculated = "Years: " + years + " - Months: " + monthsx;
         return calculated;
     }
 
@@ -1913,10 +1913,10 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void comp4() {
         //5th component in tabbed pane
-        
+
         // turn off warnings
         jLabel19.setVisible(false);
-        
+
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         try {
