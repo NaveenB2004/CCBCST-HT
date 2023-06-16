@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -302,7 +301,7 @@ public class PostLogin extends javax.swing.JFrame {
 
         jLabel46.setText("# Total Attendance : ");
 
-        jLabel47.setText("# Month Attendance : ");
+        jLabel47.setText("# Last 4 Attendance : ");
 
         jLabel48.setText("Tests Marks : ");
 
@@ -1389,15 +1388,14 @@ public class PostLogin extends javax.swing.JFrame {
         try {
             Statement stmt1 = conn.createStatement();
             ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(DISTINCT date) "
-                    + "FROM attendance WHERE date <= '" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "' AND date >= '"
-                    + new SimpleDateFormat("yyyy-MM").format(new Date()) + "-01'");
+                    + "FROM attendance ORDER BY date DESC LIMIT 4");
             while (rs1.next()) {
                 jLabel67.setText("" + rs1.getInt(1));
             }
             Statement stmt2 = conn.createStatement();
             ResultSet rs2 = stmt2.executeQuery("SELECT COUNT(DISTINCT date) "
-                    + "FROM attendance WHERE date <= '" + new SimpleDateFormat("yyyy-MM-dd").format(new Date()) + "' AND date >= '"
-                    + new SimpleDateFormat("yyyy-MM").format(new Date()) + "-01' AND scoutId='" + scoutId + "'");
+                    + "FROM attendance WHERE scoutId='" + scoutId + "' "
+                    + "ORDER BY date DESC LIMIT 4");
             while (rs2.next()) {
                 jLabel55.setText("" + rs2.getInt(1));
             }

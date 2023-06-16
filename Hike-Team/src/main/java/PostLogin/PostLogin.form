@@ -397,7 +397,7 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel47">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="# Month Attendance : "/>
+                    <Property name="text" type="java.lang.String" value="# Last 4 Attendance : "/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel48">
