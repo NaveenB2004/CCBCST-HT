@@ -1048,6 +1048,12 @@ public class PostLogin extends javax.swing.JFrame {
 
         jLabel11.setText("---");
 
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
+            }
+        });
+
         jTextField5.setToolTipText("YYYY");
         jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -1775,6 +1781,10 @@ public class PostLogin extends javax.swing.JFrame {
             jTextField33.requestFocus();
         }
     }//GEN-LAST:event_jTextField32KeyTyped
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3KeyTyped
 
     private void comp1() {
         // 2nd component in tabbed pane
