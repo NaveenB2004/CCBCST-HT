@@ -1,6 +1,5 @@
 package PostLogin;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,9 +12,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import org.apache.commons.lang3.Range;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 
 /**
  *
@@ -32,11 +29,18 @@ public class PostLogin extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
         setExtendedState(this.MAXIMIZED_BOTH);
     }
-    
+
+    // call database connection
     Connection conn = Main.Database.conn();
+    // today date
     static String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    
+    // validation warnings
+    boolean validWar = false;
+
     private void preLoader() {
+        // off warnings
+        jLabel19.setVisible(false);
+
         // loads the 1st component in tabbed pane (summary)
         jLabel66.setText("---");
         jLabel54.setText("---");
@@ -51,7 +55,7 @@ public class PostLogin extends javax.swing.JFrame {
         jLabel59.setText("---");
         jLabel71.setText("---");
         jLabel78.setText("---");
-        
+
         DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
         model.setRowCount(0);
         int count = 0;
@@ -212,6 +216,7 @@ public class PostLogin extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jLabel77 = new javax.swing.JLabel();
         jTextField30 = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
 
         AttendaceDropdown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Not Recorded", "Attended", "Not Attended" }));
 
@@ -1108,6 +1113,9 @@ public class PostLogin extends javax.swing.JFrame {
 
         jLabel77.setText("Whatsapp No. : ");
 
+        jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/warning.png"))); // NOI18N
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -1172,7 +1180,9 @@ public class PostLogin extends javax.swing.JFrame {
                                 .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1258,7 +1268,8 @@ public class PostLogin extends javax.swing.JFrame {
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1348,7 +1359,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
         try {
             Statement stmt1 = conn.createStatement();
             ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(DISTINCT date) "
@@ -1367,7 +1378,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
         try {
             Statement stmt3 = conn.createStatement();
             ResultSet rs3 = stmt3.executeQuery("SELECT SUM(defaultMark) "
@@ -1384,7 +1395,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
         try {
             Statement stmt5 = conn.createStatement();
             ResultSet rs5 = stmt5.executeQuery("SELECT SUM(defaultMark) "
@@ -1402,7 +1413,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
         try {
             Statement stmt7 = conn.createStatement();
             ResultSet rs7 = stmt7.executeQuery("SELECT SUM(defaultMark) "
@@ -1419,7 +1430,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
         try {
             Statement stmt9 = conn.createStatement();
             ResultSet rs9 = stmt9.executeQuery("SELECT SUM(defaultMark) "
@@ -1440,7 +1451,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println(e);
         }
-        
+
         int total = 0;
         try {
             Statement stmt11 = conn.createStatement();
@@ -1597,7 +1608,7 @@ public class PostLogin extends javax.swing.JFrame {
         jButton6.setEnabled(false);
         jButton4.setEnabled(true);
         jButton5.setEnabled(true);
-        
+
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int selectedRow = jTable1.getSelectedRow();
         try {
@@ -1628,7 +1639,7 @@ public class PostLogin extends javax.swing.JFrame {
             System.out.println(e);
         }
     }//GEN-LAST:event_jTable1MouseClicked
-    
+
     private static String dateCalc(String date) {
         String calculated = null;
         try {
@@ -1649,48 +1660,58 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.executeUpdate("INSERT INTO scouts "
-                    + "(schoolIndex, callName, fullName, nameWithInitials, "
-                    + "class, birthDate, address, guardianName, guardianContact, whatsapp) "
-                    + "VALUES ('" + jTextField1.getText() + "', '" + jTextField2.getText() + "', "
-                    + "'" + jTextField3.getText() + "', '" + jTextField4.getText() + "', "
-                    + "'" + jTextField8.getText() + "-" + jTextField9.getText() + "', "
-                    + "'" + jTextField5.getText() + "-" + jTextField6.getText() + "-" + jTextField7.getText() + "', "
-                    + "'" + jTextField10.getText() + "', '" + jTextField11.getText() + "', "
-                    + "'" + jTextField12.getText() + "', '" + jTextField30.getText() + "')");
-            jButton3ActionPerformed(evt);
-            comp4();
-            JOptionPane.showMessageDialog(this, "Success!");
-        } catch (SQLException e) {
-            System.out.println(e);
-            JOptionPane.showMessageDialog(this, "Error!\n" + e);
+        verifire5();
+        if (validWar == false) {
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate("INSERT INTO scouts "
+                        + "(schoolIndex, callName, fullName, nameWithInitials, "
+                        + "class, birthDate, address, guardianName, guardianContact, whatsapp) "
+                        + "VALUES ('" + jTextField1.getText() + "', '" + jTextField2.getText() + "', "
+                        + "'" + jTextField3.getText() + "', '" + jTextField4.getText() + "', "
+                        + "'" + jTextField8.getText() + "-" + jTextField9.getText() + "', "
+                        + "'" + jTextField5.getText() + "-" + jTextField6.getText() + "-" + jTextField7.getText() + "', "
+                        + "'" + jTextField10.getText() + "', '" + jTextField11.getText() + "', "
+                        + "'" + jTextField12.getText() + "', '" + jTextField30.getText() + "')");
+                jButton3ActionPerformed(evt);
+                comp4();
+                JOptionPane.showMessageDialog(this, "Success!");
+            } catch (SQLException e) {
+                System.out.println(e);
+                JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            }
+        } else {
+            validWar = false;
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.executeUpdate("UPDATE scouts SET "
-                    + "schoolIndex='" + jTextField1.getText() + "', "
-                    + "callName='" + jTextField2.getText() + "', "
-                    + "fullName='" + jTextField3.getText() + "', "
-                    + "nameWithInitials='" + jTextField4.getText() + "', "
-                    + "class='" + jTextField8.getText() + "-" + jTextField9.getText() + "', "
-                    + "birthDate='" + jTextField5.getText() + "-" + jTextField6.getText() + "-" + jTextField7.getText() + "', "
-                    + "address='" + jTextField10.getText() + "', "
-                    + "guardianName='" + jTextField11.getText() + "', "
-                    + "guardianContact='" + jTextField12.getText() + "', "
-                    + "whatsapp='" + jTextField30.getText() + "' "
-                    + "WHERE id='" + jLabel11.getText() + "'");
-            jButton3ActionPerformed(evt);
-            comp4();
-            JOptionPane.showMessageDialog(this, "Success!");
-        } catch (SQLException e) {
-            System.out.println(e);
-            JOptionPane.showMessageDialog(this, "Error!\n" + e);
+        verifire5();
+        if (validWar == false) {
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate("UPDATE scouts SET "
+                        + "schoolIndex='" + jTextField1.getText() + "', "
+                        + "callName='" + jTextField2.getText() + "', "
+                        + "fullName='" + jTextField3.getText() + "', "
+                        + "nameWithInitials='" + jTextField4.getText() + "', "
+                        + "class='" + jTextField8.getText() + "-" + jTextField9.getText() + "', "
+                        + "birthDate='" + jTextField5.getText() + "-" + jTextField6.getText() + "-" + jTextField7.getText() + "', "
+                        + "address='" + jTextField10.getText() + "', "
+                        + "guardianName='" + jTextField11.getText() + "', "
+                        + "guardianContact='" + jTextField12.getText() + "', "
+                        + "whatsapp='" + jTextField30.getText() + "' "
+                        + "WHERE id='" + jLabel11.getText() + "'");
+                jButton3ActionPerformed(evt);
+                comp4();
+                JOptionPane.showMessageDialog(this, "Success!");
+            } catch (SQLException e) {
+                System.out.println(e);
+                JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            }
+        } else {
+            validWar = false;
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -1755,7 +1776,7 @@ public class PostLogin extends javax.swing.JFrame {
             jTextField33.requestFocus();
         }
     }//GEN-LAST:event_jTextField32KeyTyped
-    
+
     private void comp1() {
         // 2nd component in tabbed pane
         String date = jTextField36.getText();
@@ -1784,7 +1805,7 @@ public class PostLogin extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-    
+
     private void comp2() {
         //3rd component in tabbed pane
         jTextField19.setText("");
@@ -1793,7 +1814,7 @@ public class PostLogin extends javax.swing.JFrame {
         jTextField33.setText("");
         jTextField29.setText("");
         jTextField35.setText("");
-        
+
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         model.setRowCount(0);
         try {
@@ -1809,13 +1830,13 @@ public class PostLogin extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-    
+
     private void comp3() {
         //4th component in tabbed pane
         jTextField25.setText("");
         jTextField26.setText("");
         jTextField34.setText("");
-        
+
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
         model.setRowCount(0);
         try {
@@ -1831,7 +1852,7 @@ public class PostLogin extends javax.swing.JFrame {
             System.out.println(e);
         }
     }
-    
+
     private void comp4() {
         //5th component in tabbed pane
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
@@ -1847,6 +1868,41 @@ public class PostLogin extends javax.swing.JFrame {
             }
         } catch (SQLException e) {
             System.out.println(e);
+        }
+    }
+
+    private void verifire5() {
+        // 5th component data verifier in tabbed pane
+        String warnings = "Validation Warning!";
+        if (!StringUtils.isAlpha(jTextField2.getText())) {
+            warnings = warnings + "\n- Invalid Call Name (Only contain letters)";
+            validWar = true;
+        }
+        if (!StringUtils.isAlphaSpace(jTextField3.getText())) {
+            warnings = warnings + "\n- Invalid Full Name (Only contain letters & spaces)";
+            validWar = true;
+        }
+        if (!StringUtils.isNumeric(jTextField5.getText()) || jTextField5.getText().length() != 4
+                || !StringUtils.isNumeric(jTextField6.getText()) || jTextField6.getText().length() != 2
+                || !StringUtils.isNumeric(jTextField7.getText()) || jTextField7.getText().length() != 2) {
+            warnings = warnings + "\n- Invalid Birth Date (Ex: 2020-04-03)";
+            validWar = true;
+        }
+        if (!StringUtils.isAlphaSpace(jTextField11.getText())) {
+            warnings = warnings + "\n- Invalid Guardian Name (Only contain letters & spaces)";
+            validWar = true;
+        }
+        if (!StringUtils.isNumeric(jTextField12.getText()) || jTextField12.getText().length() != 10) {
+            warnings = warnings + "\n- Invalid Guardian Contact No. (Only numbers, should be 10)";
+            validWar = true;
+        }
+        if (!StringUtils.isNumeric(jTextField30.getText()) || jTextField30.getText().length() != 10) {
+            warnings = warnings + "\n- Invalid Whatsapp No. (Only numbers, should be 10)";
+            validWar = true;
+        }
+        if (validWar == true) {
+            jLabel19.setVisible(true);
+            jLabel19.setToolTipText(warnings);
         }
     }
 
@@ -1910,6 +1966,7 @@ public class PostLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel35;
