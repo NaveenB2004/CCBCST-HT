@@ -11,7 +11,7 @@ import java.io.PrintStream;
  */
 public class Updates {
 
-    public static String version = "0.3";
+    public static String version = "0.4";
 
     public void update() {
         if (new File("CCBCST Hike-Team.nnb").exists()) {
