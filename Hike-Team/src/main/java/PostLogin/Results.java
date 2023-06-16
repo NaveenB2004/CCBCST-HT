@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -90,7 +92,7 @@ public class Results extends javax.swing.JFrame {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(Results.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -133,8 +135,8 @@ public class Results extends javax.swing.JFrame {
                     }
                 }
             }
-        } catch (SQLException ex) {
-            System.out.println(ex);
+        } catch (SQLException e) {
+            Logger.getLogger(Results.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -331,7 +333,7 @@ public class Results extends javax.swing.JFrame {
                     }
                 }
             } catch (SQLException e) {
-                System.out.println(e);
+                Logger.getLogger(Results.class.getName()).log(Level.SEVERE, null, e);
             }
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -363,7 +365,7 @@ public class Results extends javax.swing.JFrame {
                 }
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException e) {
-                System.out.println(e);
+                Logger.getLogger(Results.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
             }
         } else {
@@ -397,7 +399,7 @@ public class Results extends javax.swing.JFrame {
                 }
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException e) {
-                System.out.println(e);
+                Logger.getLogger(Results.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
             }
         }

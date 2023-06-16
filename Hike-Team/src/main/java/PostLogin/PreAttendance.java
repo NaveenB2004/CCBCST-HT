@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -53,7 +55,7 @@ public class PreAttendance extends javax.swing.JFrame {
                 jComboBox3.addItem(rs1.getString(1));
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PreAttendance.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -183,7 +185,7 @@ public class PreAttendance extends javax.swing.JFrame {
                     }
                 }
             } catch (SQLException e) {
-                System.out.println(e);
+                Logger.getLogger(PreAttendance.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
             }
         }

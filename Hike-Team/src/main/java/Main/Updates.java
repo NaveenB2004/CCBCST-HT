@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,7 +22,7 @@ public class Updates {
                         "JRE\\bin\\java.exe -jar updater.jar install").start();
                 System.exit(0);
             } catch (IOException e) {
-                System.out.println(e);
+                Logger.getLogger(Updates.class.getName()).log(Level.SEVERE, null, e);
             }
         } else {
             // set application version
@@ -28,14 +30,14 @@ public class Updates {
                     new File("version.ini"))) {
                 out.println(Main.Updates.version);
             } catch (FileNotFoundException ex) {
-                System.out.println(ex);
+                Logger.getLogger(Updates.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             try {
                 new ProcessBuilder("cmd.exe", "/c",
                         "JRE\\bin\\java.exe -jar updater.jar noInstall").start();
             } catch (IOException ex) {
-                System.out.println(ex);
+                Logger.getLogger(Updates.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

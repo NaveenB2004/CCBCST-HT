@@ -3,6 +3,8 @@ package Main;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,7 +24,7 @@ public class VerChanges {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("DROP TABLE IF EXISTS login");
         } catch (SQLException ex) {
-            System.out.println(ex);
+            Logger.getLogger(VerChanges.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

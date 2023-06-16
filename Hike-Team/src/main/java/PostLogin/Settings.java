@@ -11,6 +11,8 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -31,7 +33,7 @@ public class Settings extends javax.swing.JFrame {
     }
 
     public static int focus = 0;
-    
+
     public static String lastLogin;
     Connection conn = Main.Database.conn();
 
@@ -47,8 +49,8 @@ public class Settings extends javax.swing.JFrame {
                     case "2":
                         jComboBox1.setSelectedIndex(2);
                 }
-            } catch (IOException ex) {
-                System.out.println(ex);
+            } catch (IOException e) {
+                Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
             }
         }
     }
@@ -133,8 +135,8 @@ public class Settings extends javax.swing.JFrame {
         try (PrintStream out = new PrintStream(
                 new File("theme.ini"))) {
             out.println("" + jComboBox1.getSelectedIndex());
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex);
+        } catch (FileNotFoundException e) {
+            Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
         }
         switch (jComboBox1.getSelectedIndex()) {
             case 0 -> {
@@ -150,8 +152,8 @@ public class Settings extends javax.swing.JFrame {
                     UIManager.setLookAndFeel(
                             UIManager.getSystemLookAndFeelClassName());
                 } catch (ClassNotFoundException | IllegalAccessException | InstantiationException
-                        | UnsupportedLookAndFeelException ex) {
-                    System.out.println(ex);
+                        | UnsupportedLookAndFeelException e) {
+                    Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
                 }
                 FlatLaf.updateUI();
             }

@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.commons.lang3.StringUtils;
@@ -71,7 +73,7 @@ public class PostLogin extends javax.swing.JFrame {
             }
             jLabel78.setText("" + count);
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -508,7 +510,7 @@ public class PostLogin extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -691,7 +693,7 @@ public class PostLogin extends javax.swing.JFrame {
                             .addComponent(jLabel80))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -889,7 +891,7 @@ public class PostLogin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1024,7 +1026,7 @@ public class PostLogin extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1317,7 +1319,7 @@ public class PostLogin extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 147, Short.MAX_VALUE)))
+                        .addGap(0, 141, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1327,10 +1329,10 @@ public class PostLogin extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTabbedPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1338,9 +1340,10 @@ public class PostLogin extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -1382,7 +1385,7 @@ public class PostLogin extends javax.swing.JFrame {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
 
         try {
@@ -1400,7 +1403,7 @@ public class PostLogin extends javax.swing.JFrame {
                 jLabel55.setText("" + rs2.getInt(1));
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
 
         try {
@@ -1417,7 +1420,7 @@ public class PostLogin extends javax.swing.JFrame {
                 jLabel56.setText("" + rs4.getInt(1));
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
 
         try {
@@ -1435,7 +1438,7 @@ public class PostLogin extends javax.swing.JFrame {
                 jLabel57.setText("" + rs6.getInt(1));
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
 
         try {
@@ -1452,7 +1455,7 @@ public class PostLogin extends javax.swing.JFrame {
                 jLabel58.setText("" + rs8.getInt(1));
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
 
         try {
@@ -1473,7 +1476,7 @@ public class PostLogin extends javax.swing.JFrame {
                 jLabel59.setText("" + rs10.getInt(1));
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
 
         int total = 0;
@@ -1485,7 +1488,7 @@ public class PostLogin extends javax.swing.JFrame {
                 total = rs11.getInt(1);
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
         total = total + Integer.parseInt(jLabel56.getText()) + Integer.parseInt(jLabel58.getText());
         jLabel91.setText("" + total);
@@ -1540,7 +1543,7 @@ public class PostLogin extends javax.swing.JFrame {
             comp1();
             JOptionPane.showMessageDialog(this, "Success!");
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
             JOptionPane.showMessageDialog(this, "Error!\n" + e);
         }
     }//GEN-LAST:event_jButton9ActionPerformed
@@ -1558,7 +1561,7 @@ public class PostLogin extends javax.swing.JFrame {
                 comp2();
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException e) {
-                System.out.println(e);
+                Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
             }
         } else {
@@ -1579,7 +1582,7 @@ public class PostLogin extends javax.swing.JFrame {
                 comp3();
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException e) {
-                System.out.println(e);
+                Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
             }
         }
@@ -1669,7 +1672,7 @@ public class PostLogin extends javax.swing.JFrame {
                 jLabel13.setText(dateCalc(rs.getString("birthDate")));
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -1686,7 +1689,7 @@ public class PostLogin extends javax.swing.JFrame {
             long dayCount = (days % 365) % 12;
             calculated = "Years : " + yearCount + " - Months : " + monthCount + " - Days : " + dayCount;
         } catch (ParseException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
         return calculated;
     }
@@ -1710,7 +1713,7 @@ public class PostLogin extends javax.swing.JFrame {
                 comp4();
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException e) {
-                System.out.println(e);
+                Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
             }
         } else {
@@ -1740,7 +1743,7 @@ public class PostLogin extends javax.swing.JFrame {
                 comp4();
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException e) {
-                System.out.println(e);
+                Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
             }
         } else {
@@ -1757,7 +1760,7 @@ public class PostLogin extends javax.swing.JFrame {
             comp4();
             JOptionPane.showMessageDialog(this, "Success!");
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
             JOptionPane.showMessageDialog(this, "Error!\n" + e);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
@@ -1778,7 +1781,7 @@ public class PostLogin extends javax.swing.JFrame {
                 comp3();
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException e) {
-                System.out.println(e);
+                Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
             }
         } else {
@@ -1802,7 +1805,7 @@ public class PostLogin extends javax.swing.JFrame {
                 comp2();
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException e) {
-                System.out.println(e);
+                Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
             }
         } else {
@@ -1860,7 +1863,7 @@ public class PostLogin extends javax.swing.JFrame {
                 model.addRow(row);
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -1885,7 +1888,7 @@ public class PostLogin extends javax.swing.JFrame {
                 model.addRow(row);
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -1907,7 +1910,7 @@ public class PostLogin extends javax.swing.JFrame {
                 model.addRow(row);
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -1925,7 +1928,7 @@ public class PostLogin extends javax.swing.JFrame {
                 model.addRow(row);
             }
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 

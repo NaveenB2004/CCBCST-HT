@@ -4,6 +4,8 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,7 +18,7 @@ public class Database {
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:database.db");
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, e);
         }
         return conn;
     }
@@ -89,7 +91,7 @@ public class Database {
                     + "ON DELETE CASCADE)");
             conn().close();
         } catch (SQLException e) {
-            System.out.println(e);
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 }
