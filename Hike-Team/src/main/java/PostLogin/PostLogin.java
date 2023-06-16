@@ -40,9 +40,6 @@ public class PostLogin extends javax.swing.JFrame {
     boolean validWar = false;
 
     private void preLoader() {
-        // off warnings
-        jLabel19.setVisible(false);
-
         // loads the 1st component in tabbed pane (summary)
         jLabel66.setText("---");
         jLabel54.setText("---");
@@ -1916,6 +1913,10 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void comp4() {
         //5th component in tabbed pane
+        
+        // turn off warnings
+        jLabel19.setVisible(false);
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         try {
