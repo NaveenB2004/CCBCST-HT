@@ -45,9 +45,12 @@ public class HikeTeam {
         }
         new Main.SplashScreen().setVisible(true);
 
+        // apply version changes
+        new Main.VerChanges().callChanges();
+
         // check & install updates when available
         new Main.Updates().update();
-        
+
         // get db status
         if (!new File("database.db").exists()) {
             new Main.Database().mkdb();

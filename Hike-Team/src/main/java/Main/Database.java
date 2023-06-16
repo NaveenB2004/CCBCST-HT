@@ -23,14 +23,6 @@ public class Database {
 
     public void mkdb() {
         try {
-            // table for login
-            Statement stmt0 = conn().createStatement();
-            stmt0.executeUpdate("CREATE TABLE login("
-                    + "id INTEGER PRIMARY KEY,"
-                    + "userName TEXT NOT NULL,"
-                    + "password TEXT NOT NULL,"
-                    + "lastLogin TEXT)");
-
             // table for scouts
             Statement stmt1 = conn().createStatement();
             stmt1.executeUpdate("CREATE TABLE scouts("
@@ -95,12 +87,6 @@ public class Database {
                     + " ON DELETE CASCADE,"
                     + "FOREIGN KEY (activityId) REFERENCES activities(id) "
                     + "ON DELETE CASCADE)");
-
-            // add user login credentials
-            Statement stmt7 = conn().createStatement();
-            stmt7.executeUpdate("INSERT INTO login "
-                    + "(id, username, password, lastLogin) VALUES "
-                    + "(1, 'admin', 'admin', 'First Login!')");
             conn().close();
         } catch (SQLException e) {
             System.out.println(e);
