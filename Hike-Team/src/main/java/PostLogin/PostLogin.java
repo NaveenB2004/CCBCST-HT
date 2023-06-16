@@ -1570,16 +1570,20 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
         // TODO add your handling code here:
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.executeUpdate("INSERT INTO activities "
-                    + "(name, defaultMark) VALUES ('" + jTextField25.getText() + "', "
-                    + "'" + jTextField26.getText() + "')");
-            comp3();
-            JOptionPane.showMessageDialog(this, "Success!");
-        } catch (SQLException e) {
-            System.out.println(e);
-            JOptionPane.showMessageDialog(this, "Error!\n" + e);
+        if (!StringUtils.isNumeric(jTextField26.getText())) {
+            JOptionPane.showMessageDialog(this, "Invalid Default Mark!");
+        } else {
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate("INSERT INTO activities "
+                        + "(name, defaultMark) VALUES ('" + jTextField25.getText() + "', "
+                        + "'" + jTextField26.getText() + "')");
+                comp3();
+                JOptionPane.showMessageDialog(this, "Success!");
+            } catch (SQLException e) {
+                System.out.println(e);
+                JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            }
         }
     }//GEN-LAST:event_jButton16ActionPerformed
 
