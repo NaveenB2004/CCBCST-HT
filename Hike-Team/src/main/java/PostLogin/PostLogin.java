@@ -718,7 +718,19 @@ public class PostLogin extends javax.swing.JFrame {
 
         jLabel81.setText("Date : ");
 
+        jTextField31.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField31KeyTyped(evt);
+            }
+        });
+
         jLabel82.setText("-");
+
+        jTextField32.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField32KeyTyped(evt);
+            }
+        });
 
         jLabel83.setText("-");
 
@@ -1037,8 +1049,18 @@ public class PostLogin extends javax.swing.JFrame {
         jLabel11.setText("---");
 
         jTextField5.setToolTipText("YYYY");
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField5KeyTyped(evt);
+            }
+        });
 
         jTextField6.setToolTipText("MM");
+        jTextField6.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField6KeyTyped(evt);
+            }
+        });
 
         jTextField7.setToolTipText("DD");
 
@@ -1725,6 +1747,34 @@ public class PostLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         comp1();
     }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jTextField5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyTyped
+        // TODO add your handling code here:
+        if (jTextField5.getText().length() == 4) {
+            jTextField6.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField5KeyTyped
+
+    private void jTextField6KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField6KeyTyped
+        // TODO add your handling code here:
+        if (jTextField6.getText().length() == 2) {
+            jTextField7.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField6KeyTyped
+
+    private void jTextField31KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField31KeyTyped
+        // TODO add your handling code here:
+        if (jTextField31.getText().length() == 4) {
+            jTextField32.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField31KeyTyped
+
+    private void jTextField32KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField32KeyTyped
+        // TODO add your handling code here:
+        if (jTextField32.getText().length() == 4) {
+            jTextField33.requestFocus();
+        }
+    }//GEN-LAST:event_jTextField32KeyTyped
 
     private void comp1() {
         // 2nd component in tabbed pane
