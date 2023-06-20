@@ -32,6 +32,13 @@ public class Updates {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Updates.class.getName()).log(Level.SEVERE, null, ex);
             }
+
+            try {
+                new ProcessBuilder("cmd.exe", "/c",
+                        "JRE\\bin\\java.exe -jar updater.jar noInstall").start();
+            } catch (IOException ex) {
+                Logger.getLogger(Updates.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

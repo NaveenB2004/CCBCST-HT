@@ -12,6 +12,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
@@ -42,7 +44,7 @@ public class process {
                 }
             }
         } catch (IOException e) {
-            System.out.println(e);
+            Logger.getLogger(process.class.getName()).log(Level.SEVERE, null, e);
         }
 
         String thisVer = null;
@@ -50,7 +52,7 @@ public class process {
                 Paths.get("version.ini"))) {
             thisVer = lines.skip(0).findFirst().get();
         } catch (Exception e) {
-            System.out.println(e);
+            Logger.getLogger(process.class.getName()).log(Level.SEVERE, null, e);
         }
 
         try {
@@ -61,7 +63,7 @@ public class process {
                 System.exit(0);
             }
         } catch (NumberFormatException e) {
-            System.out.println(e);
+            Logger.getLogger(process.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
@@ -86,19 +88,19 @@ public class process {
             }
             urlx = new URL(newURL);
         } catch (IOException e) {
-            System.out.println(e);
+            Logger.getLogger(process.class.getName()).log(Level.SEVERE, null, e);
         }
 
         try {
             FileUtils.copyURLToFile(urlx, new File("CCBCST Hike-Team.temp"));
-        } catch (IOException ex) {
-            System.out.println(ex);
+        } catch (IOException e) {
+            Logger.getLogger(process.class.getName()).log(Level.SEVERE, null, e);
         }
         try (PrintStream out = new PrintStream(
                 new File("version.ini"))) {
             out.println(tempVer);
-        } catch (FileNotFoundException ex) {
-            System.out.println(ex);
+        } catch (FileNotFoundException e) {
+            Logger.getLogger(process.class.getName()).log(Level.SEVERE, null, e);
         }
         new File("CCBCST Hike-Team.temp").renameTo(new File("CCBCST Hike-Team.nnb"));
 
@@ -109,7 +111,7 @@ public class process {
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
-            System.out.println(e);
+            Logger.getLogger(process.class.getName()).log(Level.SEVERE, null, e);
         }
         new File("CCBCST Hike-Team.jar").delete();
         new File("CCBCST Hike-Team.nnb").renameTo(new File("CCBCST Hike-Team.jar"));
@@ -117,8 +119,8 @@ public class process {
             new ProcessBuilder("cmd.exe", "/c",
                     "JRE\\bin\\java.exe -jar \"CCBCST Hike-Team.jar\"").start();
             System.exit(0);
-        } catch (IOException ex) {
-            System.out.println(ex);
+        } catch (IOException e) {
+            Logger.getLogger(process.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 }
