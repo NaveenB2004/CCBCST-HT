@@ -56,11 +56,8 @@ public class process {
         }
 
         try {
-            if (Float.parseFloat(thisVer) != Float.parseFloat(tempVer)) {
+            if (Float.parseFloat(thisVer) < Float.parseFloat(tempVer)) {
                 downloadUpdate(tempVer, thisVer);
-            } else {
-                JOptionPane.showMessageDialog(new Frame(), "This is the latest version!");
-                System.exit(0);
             }
         } catch (NumberFormatException e) {
             Logger.getLogger(process.class.getName()).log(Level.SEVERE, null, e);
