@@ -1,7 +1,5 @@
 package process;
 
-import com.formdev.flatlaf.FlatDarkLaf;
-import com.formdev.flatlaf.FlatLaf;
 import java.awt.Toolkit;
 
 /**
@@ -15,13 +13,7 @@ public class prograss extends javax.swing.JFrame {
      */
     public prograss() {
         initComponents();
-        startup();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
-    }
-    
-    private void startup(){
-            FlatDarkLaf.setup();
-            FlatLaf.updateUI();
     }
 
     /**
