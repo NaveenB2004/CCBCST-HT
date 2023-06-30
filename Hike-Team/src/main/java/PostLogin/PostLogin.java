@@ -6,7 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -1342,10 +1348,7 @@ public class PostLogin extends javax.swing.JFrame {
 
         jTable6.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Rank", "Scout ID", "Name", "Total Marks"
@@ -1382,10 +1385,7 @@ public class PostLogin extends javax.swing.JFrame {
 
         jTable8.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Rank", "Scout ID", "Name", "Total Marks"
@@ -1422,10 +1422,7 @@ public class PostLogin extends javax.swing.JFrame {
 
         jTable7.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Rank", "Scout ID", "Name", "Total Marks"
@@ -1461,10 +1458,7 @@ public class PostLogin extends javax.swing.JFrame {
 
         jTable9.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Rank", "Scout ID", "Name", "Total Marks"
@@ -1713,6 +1707,8 @@ public class PostLogin extends javax.swing.JFrame {
                 comp3();
             case 4:
                 comp4();
+            case 5:
+                comp5();
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
@@ -2113,7 +2109,6 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void comp4() {
         //5th component in tabbed pane
-
         // turn off warnings
         jLabel19.setVisible(false);
 
@@ -2131,6 +2126,114 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+
+    private void comp5() {
+        //6th component in tabbed pane
+        DefaultTableModel model0 = (DefaultTableModel) jTable6.getModel();
+        DefaultTableModel model1 = (DefaultTableModel) jTable7.getModel();
+        DefaultTableModel model2 = (DefaultTableModel) jTable8.getModel();
+        DefaultTableModel model3 = (DefaultTableModel) jTable9.getModel();
+
+        model0.setRowCount(0);
+        model1.setRowCount(0);
+        model2.setRowCount(0);
+        model3.setRowCount(0);
+
+        try {
+            int rank = 1;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT scoutId, SUM(status) "
+                    + "FROM attendance ORDER BY SUM(status)");
+            while (rs.next()) {
+                Statement stmt0 = conn.createStatement();
+                ResultSet rs0 = stmt0.executeQuery("SELECT callName "
+                        + "FROM scouts WHERE id='" + rs.getString(1) + "'");
+                while (rs0.next()) {
+                    Object[] row = {rank, rs.getString(1),
+                        rs0.getString(1), rs.getString(2)};
+                    model0.addRow(row);
+                    rank++;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            int rank = 1;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT scoutId, SUM(marks) "
+                    + "FROM testMarks ORDER BY SUM(marks)");
+            while (rs.next()) {
+                Statement stmt0 = conn.createStatement();
+                ResultSet rs0 = stmt0.executeQuery("SELECT callName "
+                        + "FROM scouts WHERE id='" + rs.getString(1) + "'");
+                while (rs0.next()) {
+                    Object[] row = {rank, rs.getString(1),
+                        rs0.getString(1), rs.getString(2)};
+                    model1.addRow(row);
+                    rank++;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            int rank = 1;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT scoutId, SUM(marks) "
+                    + "FROM activityMarks ORDER BY SUM(marks)");
+            while (rs.next()) {
+                Statement stmt0 = conn.createStatement();
+                ResultSet rs0 = stmt0.executeQuery("SELECT callName "
+                        + "FROM scouts WHERE id='" + rs.getString(1) + "'");
+                while (rs0.next()) {
+                    Object[] row = {rank, rs.getString(1),
+                        rs0.getString(1), rs.getString(2)};
+                    model2.addRow(row);
+                    rank++;
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        HashMap<Integer, Integer> totals = new HashMap<>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT id "
+                    + "FROM scouts");
+            while (rs.next()) {
+                totals.put(rs.getInt(1), 0);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        for (int i = 0; i < model0.getRowCount(); i++) {
+            totals.put(i, totals.get(i) + Integer.valueOf(model0.getValueAt(i, 3).toString()));
+        }
+        for (int i = 0; i < model1.getRowCount(); i++) {
+            totals.put(i, totals.get(i) + Integer.valueOf(model1.getValueAt(i, 3).toString()));
+        }
+        for (int i = 0; i < model2.getRowCount(); i++) {
+            totals.put(i, totals.get(i) + Integer.valueOf(model2.getValueAt(i, 3).toString()));
+        }
+        LinkedHashMap<Integer, Integer> sortedMap = new LinkedHashMap<>();
+        ArrayList<Integer> list = new ArrayList<>();
+        for (Map.Entry<Integer, Integer> entry : totals.entrySet()) {
+            list.add(entry.getValue());
+        }
+        Collections.sort(list);
+        for (int num : list) {
+            for (Entry<Integer, Integer> entry : totals.entrySet()) {
+                if (entry.getValue().equals(num)) {
+                    sortedMap.put(entry.getKey(), num);
+                }
+            }
+        }
+        System.out.println(sortedMap.entrySet());
     }
 
     private void verifire3() {
