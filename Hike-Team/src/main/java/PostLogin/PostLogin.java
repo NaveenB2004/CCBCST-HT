@@ -2207,7 +2207,7 @@ public class PostLogin extends javax.swing.JFrame {
             ResultSet rs = stmt.executeQuery("SELECT scoutId, SUM(marks) "
                     + "AS total "
                     + "FROM activityMarks "
-                    + "GROUP BY scoutId"
+                    + "GROUP BY scoutId "
                     + "ORDER BY total");
             while (rs.next()) {
                 Statement stmt0 = conn.createStatement();
