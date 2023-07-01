@@ -42,7 +42,7 @@ public class PostLogin extends javax.swing.JFrame {
     Connection conn = Main.Database.conn();
     // validation warnings
     boolean validWar = false;
-    
+
     private void comp0() {
         // loads the 1st component in tabbed pane (summary)
         jLabel66.setText("---");
@@ -60,7 +60,7 @@ public class PostLogin extends javax.swing.JFrame {
         jLabel78.setText("---");
         jLabel91.setText("---");
         jLabel93.setText("---");
-        
+
         DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
         model.setRowCount(0);
         try {
@@ -297,7 +297,7 @@ public class PostLogin extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -524,7 +524,7 @@ public class PostLogin extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -708,7 +708,7 @@ public class PostLogin extends javax.swing.JFrame {
                             .addComponent(jLabel80))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -906,7 +906,7 @@ public class PostLogin extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -1041,7 +1041,7 @@ public class PostLogin extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1336,7 +1336,7 @@ public class PostLogin extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 25, Short.MAX_VALUE)))
+                        .addGap(0, 94, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -1375,8 +1375,8 @@ public class PostLogin extends javax.swing.JFrame {
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel16.setBorder(javax.swing.BorderFactory.createTitledBorder("Activities : "));
@@ -1412,7 +1412,7 @@ public class PostLogin extends javax.swing.JFrame {
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1448,7 +1448,7 @@ public class PostLogin extends javax.swing.JFrame {
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1485,7 +1485,7 @@ public class PostLogin extends javax.swing.JFrame {
             jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel20Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1508,14 +1508,14 @@ public class PostLogin extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Ranking", jPanel8);
@@ -1582,7 +1582,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         try {
             Statement stmt1 = conn.createStatement();
             ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(DISTINCT date) "
@@ -1600,7 +1600,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         try {
             Statement stmt3 = conn.createStatement();
             ResultSet rs3 = stmt3.executeQuery("SELECT SUM(defaultMark) "
@@ -1617,7 +1617,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         try {
             Statement stmt5 = conn.createStatement();
             ResultSet rs5 = stmt5.executeQuery("SELECT SUM(defaultMark) "
@@ -1635,7 +1635,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         try {
             Statement stmt7 = conn.createStatement();
             ResultSet rs7 = stmt7.executeQuery("SELECT SUM(defaultMark) "
@@ -1652,7 +1652,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         try {
             Statement stmt9 = conn.createStatement();
             ResultSet rs9 = stmt9.executeQuery("SELECT SUM(defaultMark) "
@@ -1673,7 +1673,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         int total = 0;
         try {
             Statement stmt11 = conn.createStatement();
@@ -1840,7 +1840,7 @@ public class PostLogin extends javax.swing.JFrame {
         jButton6.setEnabled(false);
         jButton4.setEnabled(true);
         jButton5.setEnabled(true);
-        
+
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int selectedRow = jTable1.getSelectedRow();
         try {
@@ -1871,7 +1871,7 @@ public class PostLogin extends javax.swing.JFrame {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jTable1MouseClicked
-    
+
     private static String dateCalc(String date) {
         String calculated = null;
         LocalDate date1 = LocalDate.parse(date);
@@ -2027,7 +2027,7 @@ public class PostLogin extends javax.swing.JFrame {
             jTextField33.requestFocus();
         }
     }//GEN-LAST:event_jTextField32KeyTyped
-    
+
     private void comp1() {
         // 2nd component in tabbed pane
         String date = jTextField36.getText() + "-" + jTextField13.getText() + "-" + jTextField14.getText();
@@ -2056,7 +2056,7 @@ public class PostLogin extends javax.swing.JFrame {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
+
     private void comp2() {
         //3rd component in tabbed pane
         jTextField19.setText("");
@@ -2065,7 +2065,7 @@ public class PostLogin extends javax.swing.JFrame {
         jTextField33.setText("");
         jTextField29.setText("");
         jTextField35.setText("");
-        
+
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         model.setRowCount(0);
         try {
@@ -2081,13 +2081,13 @@ public class PostLogin extends javax.swing.JFrame {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
+
     private void comp3() {
         //4th component in tabbed pane
         jTextField25.setText("");
         jTextField26.setText("");
         jTextField34.setText("");
-        
+
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
         model.setRowCount(0);
         try {
@@ -2103,12 +2103,12 @@ public class PostLogin extends javax.swing.JFrame {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
+
     private void comp4() {
         //5th component in tabbed pane
         // turn off warnings
         jLabel19.setVisible(false);
-        
+
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         try {
@@ -2124,19 +2124,31 @@ public class PostLogin extends javax.swing.JFrame {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-    
+
     private void comp5() {
         //6th component in tabbed pane
         DefaultTableModel model0 = (DefaultTableModel) jTable6.getModel();
         DefaultTableModel model1 = (DefaultTableModel) jTable7.getModel();
         DefaultTableModel model2 = (DefaultTableModel) jTable8.getModel();
         DefaultTableModel model3 = (DefaultTableModel) jTable9.getModel();
-        
+
         model0.setRowCount(0);
         model1.setRowCount(0);
         model2.setRowCount(0);
         model3.setRowCount(0);
-        
+
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT id "
+                    + "FROM scouts");
+            while (rs.next()) {
+                hashMap.put(rs.getInt(1), 0);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         try {
             int rank = 1;
             Statement stmt = conn.createStatement();
@@ -2146,12 +2158,13 @@ public class PostLogin extends javax.swing.JFrame {
                     + "GROUP BY scoutId "
                     + "ORDER BY total DESC");
             while (rs.next()) {
+                hashMap.put(rs.getInt(1), hashMap.get(rs.getInt(1)) + rs.getInt(2));
                 Statement stmt0 = conn.createStatement();
                 ResultSet rs0 = stmt0.executeQuery("SELECT callName "
                         + "FROM scouts WHERE id='" + rs.getString(1) + "'");
                 while (rs0.next()) {
-                    Object[] row = {rank, rs.getString(1),
-                        rs0.getString(1), rs.getString(2)};
+                    Object[] row = {rank, rs.getInt(1),
+                        rs0.getString(1), rs.getInt(2)};
                     model0.addRow(row);
                     rank++;
                 }
@@ -2159,7 +2172,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             int rank = 1;
             Statement stmt = conn.createStatement();
@@ -2169,6 +2182,7 @@ public class PostLogin extends javax.swing.JFrame {
                     + "GROUP BY scoutId "
                     + "ORDER BY total DESC");
             while (rs.next()) {
+                hashMap.put(rs.getInt(1), hashMap.get(rs.getInt(1)) + rs.getInt(2));
                 Statement stmt0 = conn.createStatement();
                 ResultSet rs0 = stmt0.executeQuery("SELECT callName "
                         + "FROM scouts WHERE id='" + rs.getString(1) + "'");
@@ -2182,7 +2196,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             int rank = 1;
             Statement stmt = conn.createStatement();
@@ -2192,6 +2206,7 @@ public class PostLogin extends javax.swing.JFrame {
                     + "GROUP BY scoutId "
                     + "ORDER BY total DESC");
             while (rs.next()) {
+                hashMap.put(rs.getInt(1), hashMap.get(rs.getInt(1)) + rs.getInt(2));
                 Statement stmt0 = conn.createStatement();
                 ResultSet rs0 = stmt0.executeQuery("SELECT callName "
                         + "FROM scouts WHERE id='" + rs.getString(1) + "'");
@@ -2205,30 +2220,9 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        HashMap<Integer, Integer> hashMap = new HashMap<>();
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT id "
-                    + "FROM scouts");
-            while (rs.next()) {
-                hashMap.put(rs.getInt(1), 0);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        for (int i = 0; i < model0.getRowCount(); i++) {
-            hashMap.put(Integer.valueOf(model0.getValueAt(i, 1).toString()),
-                    hashMap.get(i + 1) + Integer.valueOf(model0.getValueAt(i, 3).toString()));
-        }
-        for (int i = 0; i < model1.getRowCount(); i++) {
-            hashMap.put(Integer.valueOf(model1.getValueAt(i, 1).toString()),
-                    hashMap.get(i + 1) + Integer.valueOf(model1.getValueAt(i, 3).toString()));
-        }
-        for (int i = 0; i < model2.getRowCount(); i++) {
-            hashMap.put(Integer.valueOf(model2.getValueAt(i, 1).toString()),
-                    hashMap.get(i + 1) + Integer.valueOf(model2.getValueAt(i, 3).toString()));
+
+        for (Map.Entry entry : hashMap.entrySet()) {
+            System.out.print(entry.getKey() + " : " + entry.getValue() + "\n");
         }
         // Convert the HashMap to a list of entries
         List<Map.Entry<Integer, Integer>> entryList = new ArrayList<>(hashMap.entrySet());
@@ -2260,7 +2254,7 @@ public class PostLogin extends javax.swing.JFrame {
             
         }
     }
-    
+
     private void verifire3() {
         String warnings = "Validation Warning!";
         if (!StringUtils.isNumeric(jTextField31.getText()) || jTextField31.getText().length() != 4
@@ -2274,7 +2268,7 @@ public class PostLogin extends javax.swing.JFrame {
             validWar = true;
         }
     }
-    
+
     private void verifire5() {
         // 5th component data verifier in tabbed pane
         String warnings = "Validation Warning!";

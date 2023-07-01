@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  */
 public class Updates {
 
-    public static String version = "0.7";
+    public static String version = "0.8";
 
     public void update() {
         if (new File("CCBCST Hike-Team.nnb").exists()) {
