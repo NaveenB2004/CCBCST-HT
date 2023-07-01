@@ -1695,37 +1695,19 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
-//        switch (jTabbedPane1.getSelectedIndex()) {
-//            case 0:
-//                comp0();
-//            case 1:
-//                comp1();
-//            case 2:
-//                comp2();
-//            case 3:
-//                comp3();
-//            case 4:
-//                comp4();
-//            case 5:
-//                comp5();
-//        }
-        if (jTabbedPane1.getSelectedIndex() == 0) {
-            comp0();
-        }
-        if (jTabbedPane1.getSelectedIndex() == 1) {
-            comp1();
-        }
-        if (jTabbedPane1.getSelectedIndex() == 2) {
-            comp2();
-        }
-        if (jTabbedPane1.getSelectedIndex() == 3) {
-            comp3();
-        }
-        if (jTabbedPane1.getSelectedIndex() == 4) {
-            comp4();
-        }
-        if (jTabbedPane1.getSelectedIndex() == 5) {
-            comp5();
+        switch (jTabbedPane1.getSelectedIndex()) {
+            case 0 ->
+                comp0();
+            case 1 ->
+                comp1();
+            case 2 ->
+                comp2();
+            case 3 ->
+                comp3();
+            case 4 ->
+                comp4();
+            case 5 ->
+                comp5();
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
@@ -2227,6 +2209,7 @@ public class PostLogin extends javax.swing.JFrame {
         }
 
         HashMap<Integer, Integer> hashMap = new HashMap<>();
+        hashMap.put(1, 0);
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT id "
@@ -2237,15 +2220,20 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for (int i = 0; i > model0.getRowCount(); i++) {
+
+        for (int i = 0; i < hashMap.size(); i++) {
+            System.out.println("Key: " + hashMap.get(i));
+        }
+
+        for (int i = 0; i < model0.getRowCount(); i++) {
             hashMap.put(Integer.valueOf(model0.getValueAt(i, 1).toString()),
                     hashMap.get(i) + Integer.valueOf(model0.getValueAt(i, 3).toString()));
         }
-        for (int i = 0; i > model1.getRowCount(); i++) {
+        for (int i = 0; i < model1.getRowCount(); i++) {
             hashMap.put(Integer.valueOf(model1.getValueAt(i, 1).toString()),
                     hashMap.get(i) + Integer.valueOf(model1.getValueAt(i, 3).toString()));
         }
-        for (int i = 0; i > model2.getRowCount(); i++) {
+        for (int i = 0; i < model2.getRowCount(); i++) {
             hashMap.put(Integer.valueOf(model2.getValueAt(i, 1).toString()),
                     hashMap.get(i) + Integer.valueOf(model2.getValueAt(i, 3).toString()));
         }
@@ -2271,7 +2259,7 @@ public class PostLogin extends javax.swing.JFrame {
                 while (rs.next()) {
                     Object[] row = {rank, entry.getKey(), rs.getString(1),
                         entry.getValue()};
-                    model2.addRow(row);
+                    model3.addRow(row);
                     rank++;
                 }
             } catch (SQLException ex) {
