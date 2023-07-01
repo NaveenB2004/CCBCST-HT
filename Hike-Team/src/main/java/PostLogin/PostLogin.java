@@ -33,7 +33,6 @@ public class PostLogin extends javax.swing.JFrame {
      */
     public PostLogin() {
         initComponents();
-        preLoader();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
         setExtendedState(this.MAXIMIZED_BOTH);
     }
@@ -45,7 +44,7 @@ public class PostLogin extends javax.swing.JFrame {
     // validation warnings
     boolean validWar = false;
 
-    private void preLoader() {
+    private void comp0() {
         // loads the 1st component in tabbed pane (summary)
         jLabel66.setText("---");
         jLabel54.setText("---");
@@ -63,7 +62,6 @@ public class PostLogin extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
         model.setRowCount(0);
-        int count = 0;
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT id, callName, nameWithInitials, class "
@@ -72,9 +70,8 @@ public class PostLogin extends javax.swing.JFrame {
                 Object[] row = {rs.getString(1), rs.getString(2),
                     rs.getString(3), rs.getString(4)};
                 model.addRow(row);
-                count++;
             }
-            jLabel78.setText("" + count);
+            jLabel78.setText("" + model.getRowCount());
         } catch (SQLException e) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -1696,26 +1693,37 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
-        System.out.println(jTabbedPane1.getSelectedIndex());
-        switch (jTabbedPane1.getSelectedIndex()) {
-            case 0:
-                preLoader();
-                System.out.println("0");
-            case 1:
-                comp1();
-                System.out.println("1");
-            case 2:
-                comp2();
-                System.out.println("2");
-            case 3:
-                comp3();
-                System.out.println("3");
-            case 4:
-                comp4();
-                System.out.println("4");
-            case 5:
-                comp5();
-                System.out.println("5");
+//        switch (jTabbedPane1.getSelectedIndex()) {
+//            case 0:
+//                comp0();
+//            case 1:
+//                comp1();
+//            case 2:
+//                comp2();
+//            case 3:
+//                comp3();
+//            case 4:
+//                comp4();
+//            case 5:
+//                comp5();
+//        }
+        if (jTabbedPane1.getSelectedIndex() == 0) {
+            comp0();
+        }
+        if (jTabbedPane1.getSelectedIndex() == 1) {
+            comp1();
+        }
+        if (jTabbedPane1.getSelectedIndex() == 2) {
+            comp2();
+        }
+        if (jTabbedPane1.getSelectedIndex() == 3) {
+            comp3();
+        }
+        if (jTabbedPane1.getSelectedIndex() == 4) {
+            comp4();
+        }
+        if (jTabbedPane1.getSelectedIndex() == 5) {
+            comp5();
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
