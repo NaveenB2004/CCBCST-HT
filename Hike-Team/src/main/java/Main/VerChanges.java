@@ -50,4 +50,5 @@ public class VerChanges {
             Logger.getLogger(VerChanges.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

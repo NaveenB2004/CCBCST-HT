@@ -17,6 +17,8 @@ public class Database {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+            Statement stmt = conn.createStatement();
+            stmt.execute("PRAGMA foreign_keys = ON");
         } catch (SQLException e) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -85,8 +87,8 @@ public class Database {
                     + "activityId INTEGER NOT NULL,"
                     + "date TEXT NOT NULL,"
                     + "marks INTEGER NOT NULL,"
-                    + "FOREIGN KEY (scoutId) REFERENCES scouts(id)"
-                    + " ON DELETE CASCADE,"
+                    + "FOREIGN KEY (scoutId) REFERENCES scouts(id) "
+                    + "ON DELETE CASCADE,"
                     + "FOREIGN KEY (activityId) REFERENCES activities(id) "
                     + "ON DELETE CASCADE)");
             conn().close();
