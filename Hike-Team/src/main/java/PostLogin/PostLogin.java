@@ -2159,7 +2159,10 @@ public class PostLogin extends javax.swing.JFrame {
             int rank = 1;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT scoutId, SUM(status) "
-                    + "FROM attendance ORDER BY SUM(status)");
+                    + "AS total "
+                    + "FROM attendance "
+                    + "GROUP BY scoutId "
+                    + "ORDER BY total DESC");
             while (rs.next()) {
                 Statement stmt0 = conn.createStatement();
                 ResultSet rs0 = stmt0.executeQuery("SELECT callName "
@@ -2179,7 +2182,10 @@ public class PostLogin extends javax.swing.JFrame {
             int rank = 1;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT scoutId, SUM(marks) "
-                    + "FROM testMarks ORDER BY SUM(marks)");
+                    + "AS total "
+                    + "FROM testMarks "
+                    + "GROUP BY scoutId "
+                    + "ORDER BY total DESC");
             while (rs.next()) {
                 Statement stmt0 = conn.createStatement();
                 ResultSet rs0 = stmt0.executeQuery("SELECT callName "
@@ -2199,7 +2205,10 @@ public class PostLogin extends javax.swing.JFrame {
             int rank = 1;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT scoutId, SUM(marks) "
-                    + "FROM activityMarks ORDER BY SUM(marks)");
+                    + "AS total "
+                    + "FROM activityMarks "
+                    + "GROUP BY scoutId"
+                    + "ORDER BY total");
             while (rs.next()) {
                 Statement stmt0 = conn.createStatement();
                 ResultSet rs0 = stmt0.executeQuery("SELECT callName "
