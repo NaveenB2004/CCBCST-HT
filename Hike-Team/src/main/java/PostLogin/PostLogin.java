@@ -8,9 +8,11 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
@@ -2224,40 +2226,59 @@ public class PostLogin extends javax.swing.JFrame {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        HashMap<Integer, Integer> totals = new HashMap<>();
+        HashMap<Integer, Integer> hashMap = new HashMap<>();
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT id "
                     + "FROM scouts");
             while (rs.next()) {
-                totals.put(rs.getInt(1), 0);
+                hashMap.put(rs.getInt(1), 0);
             }
         } catch (SQLException ex) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
         for (int i = 0; i > model0.getRowCount(); i++) {
-            totals.put(Integer.valueOf(model0.getValueAt(i, 1).toString()), totals.get(i) + Integer.valueOf(model0.getValueAt(i, 3).toString()));
+            hashMap.put(Integer.valueOf(model0.getValueAt(i, 1).toString()),
+                    hashMap.get(i) + Integer.valueOf(model0.getValueAt(i, 3).toString()));
         }
         for (int i = 0; i > model1.getRowCount(); i++) {
-            totals.put(Integer.valueOf(model1.getValueAt(i, 1).toString()), totals.get(i) + Integer.valueOf(model1.getValueAt(i, 3).toString()));
+            hashMap.put(Integer.valueOf(model1.getValueAt(i, 1).toString()),
+                    hashMap.get(i) + Integer.valueOf(model1.getValueAt(i, 3).toString()));
         }
         for (int i = 0; i > model2.getRowCount(); i++) {
-            totals.put(Integer.valueOf(model2.getValueAt(i, 1).toString()), totals.get(i) + Integer.valueOf(model2.getValueAt(i, 3).toString()));
+            hashMap.put(Integer.valueOf(model2.getValueAt(i, 1).toString()),
+                    hashMap.get(i) + Integer.valueOf(model2.getValueAt(i, 3).toString()));
         }
+        // Convert the HashMap to a list of entries
+        List<Map.Entry<Integer, Integer>> entryList = new ArrayList<>(hashMap.entrySet());
+        // Sort the list based on the values in descending order
+        Collections.sort(entryList, Collections.reverseOrder(Comparator.comparingInt(Map.Entry::getValue)));
+        // Create a new LinkedHashMap to store the sorted entries
         LinkedHashMap<Integer, Integer> sortedMap = new LinkedHashMap<>();
-        ArrayList<Integer> list = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> entry : totals.entrySet()) {
-            list.add(entry.getValue());
+        // Iterate over the sorted list and put the entries into the new map
+        for (Map.Entry<Integer, Integer> entry : entryList) {
+            sortedMap.put(entry.getKey(), entry.getValue());
         }
-        Collections.sort(list);
-        for (int num : list) {
-            for (Entry<Integer, Integer> entry : totals.entrySet()) {
-                if (entry.getValue().equals(num)) {
-                    sortedMap.put(entry.getKey(), num);
+        // Print the sorted map
+        int rank = 1;
+        for (Map.Entry<Integer, Integer> entry : sortedMap.entrySet()) {
+            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+            try {
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT callName "
+                        + "FROM scouts "
+                        + "WHERE id='" + entry.getKey() + "'");
+                while (rs.next()) {
+                    Object[] row = {rank, entry.getKey(), rs.getString(1),
+                        entry.getValue()};
+                    model2.addRow(row);
+                    rank++;
                 }
+            } catch (SQLException ex) {
+                Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
+
         }
-        System.out.println(sortedMap.entrySet());
     }
 
     private void verifire3() {
