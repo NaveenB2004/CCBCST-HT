@@ -2209,7 +2209,6 @@ public class PostLogin extends javax.swing.JFrame {
         }
 
         HashMap<Integer, Integer> hashMap = new HashMap<>();
-        hashMap.put(1, 0);
         try {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT id "
@@ -2221,21 +2220,17 @@ public class PostLogin extends javax.swing.JFrame {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        for (int i = 0; i < hashMap.size(); i++) {
-            System.out.println("Key: " + hashMap.get(i));
-        }
-
         for (int i = 0; i < model0.getRowCount(); i++) {
             hashMap.put(Integer.valueOf(model0.getValueAt(i, 1).toString()),
-                    hashMap.get(i) + Integer.valueOf(model0.getValueAt(i, 3).toString()));
+                    hashMap.get(i + 1) + Integer.valueOf(model0.getValueAt(i, 3).toString()));
         }
         for (int i = 0; i < model1.getRowCount(); i++) {
             hashMap.put(Integer.valueOf(model1.getValueAt(i, 1).toString()),
-                    hashMap.get(i) + Integer.valueOf(model1.getValueAt(i, 3).toString()));
+                    hashMap.get(i + 1) + Integer.valueOf(model1.getValueAt(i, 3).toString()));
         }
         for (int i = 0; i < model2.getRowCount(); i++) {
             hashMap.put(Integer.valueOf(model2.getValueAt(i, 1).toString()),
-                    hashMap.get(i) + Integer.valueOf(model2.getValueAt(i, 3).toString()));
+                    hashMap.get(i + 1) + Integer.valueOf(model2.getValueAt(i, 3).toString()));
         }
         // Convert the HashMap to a list of entries
         List<Map.Entry<Integer, Integer>> entryList = new ArrayList<>(hashMap.entrySet());
