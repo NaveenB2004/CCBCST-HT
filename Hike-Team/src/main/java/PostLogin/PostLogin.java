@@ -1696,19 +1696,26 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
+        System.out.println(jTabbedPane1.getSelectedIndex());
         switch (jTabbedPane1.getSelectedIndex()) {
             case 0:
                 preLoader();
+                System.out.println("0");
             case 1:
                 comp1();
+                System.out.println("1");
             case 2:
                 comp2();
+                System.out.println("2");
             case 3:
                 comp3();
+                System.out.println("3");
             case 4:
                 comp4();
+                System.out.println("4");
             case 5:
                 comp5();
+                System.out.println("5");
         }
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
