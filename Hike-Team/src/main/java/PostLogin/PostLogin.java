@@ -2221,9 +2221,11 @@ public class PostLogin extends javax.swing.JFrame {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        for (Map.Entry entry : hashMap.entrySet()) {
-            System.out.print(entry.getKey() + " : " + entry.getValue() + "\n");
-        }
+        // get hashmap keys and values
+//        for (Map.Entry entry : hashMap.entrySet()) {
+//            System.out.println(entry.getKey() + " : " + entry.getValue());
+//        }
+
         // Convert the HashMap to a list of entries
         List<Map.Entry<Integer, Integer>> entryList = new ArrayList<>(hashMap.entrySet());
         // Sort the list based on the values in descending order
