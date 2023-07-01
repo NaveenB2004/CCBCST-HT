@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -41,11 +40,9 @@ public class PostLogin extends javax.swing.JFrame {
 
     // call database connection
     Connection conn = Main.Database.conn();
-    // today date
-    static String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
     // validation warnings
     boolean validWar = false;
-
+    
     private void comp0() {
         // loads the 1st component in tabbed pane (summary)
         jLabel66.setText("---");
@@ -61,7 +58,9 @@ public class PostLogin extends javax.swing.JFrame {
         jLabel59.setText("---");
         jLabel71.setText("---");
         jLabel78.setText("---");
-
+        jLabel91.setText("---");
+        jLabel93.setText("---");
+        
         DefaultTableModel model = (DefaultTableModel) jTable5.getModel();
         model.setRowCount(0);
         try {
@@ -1583,7 +1582,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
-
+        
         try {
             Statement stmt1 = conn.createStatement();
             ResultSet rs1 = stmt1.executeQuery("SELECT COUNT(DISTINCT date) "
@@ -1601,7 +1600,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
-
+        
         try {
             Statement stmt3 = conn.createStatement();
             ResultSet rs3 = stmt3.executeQuery("SELECT SUM(defaultMark) "
@@ -1618,7 +1617,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
-
+        
         try {
             Statement stmt5 = conn.createStatement();
             ResultSet rs5 = stmt5.executeQuery("SELECT SUM(defaultMark) "
@@ -1636,7 +1635,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
-
+        
         try {
             Statement stmt7 = conn.createStatement();
             ResultSet rs7 = stmt7.executeQuery("SELECT SUM(defaultMark) "
@@ -1653,7 +1652,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
-
+        
         try {
             Statement stmt9 = conn.createStatement();
             ResultSet rs9 = stmt9.executeQuery("SELECT SUM(defaultMark) "
@@ -1674,7 +1673,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException e) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
-
+        
         int total = 0;
         try {
             Statement stmt11 = conn.createStatement();
@@ -1688,7 +1687,6 @@ public class PostLogin extends javax.swing.JFrame {
         }
         total = total + Integer.parseInt(jLabel56.getText()) + Integer.parseInt(jLabel58.getText());
         jLabel91.setText("" + total);
-        total = 0;
         total = Integer.parseInt(jLabel68.getText()) + Integer.parseInt(jLabel70.getText());
         jLabel93.setText("" + total);
     }//GEN-LAST:event_jTable5MouseClicked
@@ -1842,7 +1840,7 @@ public class PostLogin extends javax.swing.JFrame {
         jButton6.setEnabled(false);
         jButton4.setEnabled(true);
         jButton5.setEnabled(true);
-
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         int selectedRow = jTable1.getSelectedRow();
         try {
@@ -1873,7 +1871,7 @@ public class PostLogin extends javax.swing.JFrame {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }//GEN-LAST:event_jTable1MouseClicked
-
+    
     private static String dateCalc(String date) {
         String calculated = null;
         LocalDate date1 = LocalDate.parse(date);
@@ -2029,7 +2027,7 @@ public class PostLogin extends javax.swing.JFrame {
             jTextField33.requestFocus();
         }
     }//GEN-LAST:event_jTextField32KeyTyped
-
+    
     private void comp1() {
         // 2nd component in tabbed pane
         String date = jTextField36.getText() + "-" + jTextField13.getText() + "-" + jTextField14.getText();
@@ -2058,7 +2056,7 @@ public class PostLogin extends javax.swing.JFrame {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    
     private void comp2() {
         //3rd component in tabbed pane
         jTextField19.setText("");
@@ -2067,7 +2065,7 @@ public class PostLogin extends javax.swing.JFrame {
         jTextField33.setText("");
         jTextField29.setText("");
         jTextField35.setText("");
-
+        
         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
         model.setRowCount(0);
         try {
@@ -2083,13 +2081,13 @@ public class PostLogin extends javax.swing.JFrame {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    
     private void comp3() {
         //4th component in tabbed pane
         jTextField25.setText("");
         jTextField26.setText("");
         jTextField34.setText("");
-
+        
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
         model.setRowCount(0);
         try {
@@ -2105,12 +2103,12 @@ public class PostLogin extends javax.swing.JFrame {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    
     private void comp4() {
         //5th component in tabbed pane
         // turn off warnings
         jLabel19.setVisible(false);
-
+        
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         try {
@@ -2126,19 +2124,19 @@ public class PostLogin extends javax.swing.JFrame {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
         }
     }
-
+    
     private void comp5() {
         //6th component in tabbed pane
         DefaultTableModel model0 = (DefaultTableModel) jTable6.getModel();
         DefaultTableModel model1 = (DefaultTableModel) jTable7.getModel();
         DefaultTableModel model2 = (DefaultTableModel) jTable8.getModel();
         DefaultTableModel model3 = (DefaultTableModel) jTable9.getModel();
-
+        
         model0.setRowCount(0);
         model1.setRowCount(0);
         model2.setRowCount(0);
         model3.setRowCount(0);
-
+        
         try {
             int rank = 1;
             Statement stmt = conn.createStatement();
@@ -2161,7 +2159,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         try {
             int rank = 1;
             Statement stmt = conn.createStatement();
@@ -2184,7 +2182,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         try {
             int rank = 1;
             Statement stmt = conn.createStatement();
@@ -2207,7 +2205,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         HashMap<Integer, Integer> hashMap = new HashMap<>();
         try {
             Statement stmt = conn.createStatement();
@@ -2219,7 +2217,7 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
         for (int i = 0; i < model0.getRowCount(); i++) {
             hashMap.put(Integer.valueOf(model0.getValueAt(i, 1).toString()),
                     hashMap.get(i + 1) + Integer.valueOf(model0.getValueAt(i, 3).toString()));
@@ -2259,10 +2257,10 @@ public class PostLogin extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            
         }
     }
-
+    
     private void verifire3() {
         String warnings = "Validation Warning!";
         if (!StringUtils.isNumeric(jTextField31.getText()) || jTextField31.getText().length() != 4
@@ -2276,7 +2274,7 @@ public class PostLogin extends javax.swing.JFrame {
             validWar = true;
         }
     }
-
+    
     private void verifire5() {
         // 5th component data verifier in tabbed pane
         String warnings = "Validation Warning!";
