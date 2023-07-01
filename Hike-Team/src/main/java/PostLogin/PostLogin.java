@@ -2208,7 +2208,7 @@ public class PostLogin extends javax.swing.JFrame {
                     + "AS total "
                     + "FROM activityMarks "
                     + "GROUP BY scoutId "
-                    + "ORDER BY total");
+                    + "ORDER BY total DESC");
             while (rs.next()) {
                 Statement stmt0 = conn.createStatement();
                 ResultSet rs0 = stmt0.executeQuery("SELECT callName "
