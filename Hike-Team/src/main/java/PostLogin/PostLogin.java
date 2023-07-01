@@ -2211,14 +2211,14 @@ public class PostLogin extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for (int i = 0; i < model0.getRowCount(); i++) {
-            totals.put(i, totals.get(i) + Integer.valueOf(model0.getValueAt(i, 3).toString()));
+        for (int i = 0; i > model0.getRowCount(); i++) {
+            totals.put(Integer.valueOf(model0.getValueAt(i, 1).toString()), totals.get(i) + Integer.valueOf(model0.getValueAt(i, 3).toString()));
         }
-        for (int i = 0; i < model1.getRowCount(); i++) {
-            totals.put(i, totals.get(i) + Integer.valueOf(model1.getValueAt(i, 3).toString()));
+        for (int i = 0; i > model1.getRowCount(); i++) {
+            totals.put(Integer.valueOf(model1.getValueAt(i, 1).toString()), totals.get(i) + Integer.valueOf(model1.getValueAt(i, 3).toString()));
         }
-        for (int i = 0; i < model2.getRowCount(); i++) {
-            totals.put(i, totals.get(i) + Integer.valueOf(model2.getValueAt(i, 3).toString()));
+        for (int i = 0; i > model2.getRowCount(); i++) {
+            totals.put(Integer.valueOf(model2.getValueAt(i, 1).toString()), totals.get(i) + Integer.valueOf(model2.getValueAt(i, 3).toString()));
         }
         LinkedHashMap<Integer, Integer> sortedMap = new LinkedHashMap<>();
         ArrayList<Integer> list = new ArrayList<>();
