@@ -55,9 +55,6 @@ public class HikeTeam {
             new Main.Database().mkdb();
         }
 
-        // apply version changes
-        new Main.VerChanges().callChanges();
-
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
