@@ -2176,7 +2176,7 @@ public class PostLogin extends javax.swing.JFrame {
                         + "FROM scouts WHERE id='" + rs.getString(1) + "'");
                 while (rs0.next()) {
                     Object[] row = {rank, rs.getString(1),
-                        rs0.getString(1), rs.getString(2)};
+                        rs0.getString(1), rs.getInt(2)};
                     model1.addRow(row);
                     rank++;
                 }
@@ -2245,7 +2245,6 @@ public class PostLogin extends javax.swing.JFrame {
         // Print the sorted map
         int rank = 1;
         for (Map.Entry<Integer, Integer> entry : sortedMap.entrySet()) {
-            System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
             try {
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT callName "
