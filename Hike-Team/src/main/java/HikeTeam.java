@@ -55,6 +55,11 @@ public class HikeTeam {
             new Main.Database().mkdb();
         }
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Logger.getLogger(HikeTeam.class.getName()).log(Level.SEVERE, null, e);
+        }
         Main.SplashScreen.disposeVar.setText("dispose");
         new Main.Home().setVisible(true);
     }
