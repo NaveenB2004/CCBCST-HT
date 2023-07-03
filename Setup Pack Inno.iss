@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "CCBCST Hike-Team"
-#define MyAppVersion "0.8"
+#define MyAppVersion "0.9"
 #define MyAppPublisher "NaveenB2004"
 #define MyAppURL "https://sites.google.com/view/scoutsofccbc"
 #define MyAppExeName "CCBCST Hike-Team.exe"
