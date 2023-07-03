@@ -1,6 +1,7 @@
 package PostLogin;
 
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -614,6 +615,12 @@ public class PostLogin extends javax.swing.JFrame {
 
         jLabel94.setText("Fetch data for date : ");
 
+        jTextField36.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField36ActionPerformed(evt);
+            }
+        });
+
         jLabel95.setText("(YYYY-MM-DD)");
 
         jButton21.setText("Fetch");
@@ -625,7 +632,19 @@ public class PostLogin extends javax.swing.JFrame {
 
         jLabel20.setText("-");
 
+        jTextField13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField13ActionPerformed(evt);
+            }
+        });
+
         jLabel21.setText("-");
+
+        jTextField14.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField14ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -1932,15 +1951,18 @@ public class PostLogin extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        try {
-            Statement stmt = conn.createStatement();
-            stmt.executeUpdate("DELETE FROM scouts WHERE id='" + jLabel11.getText() + "'");
-            jButton3ActionPerformed(evt);
-            comp4();
-            JOptionPane.showMessageDialog(this, "Success!");
-        } catch (SQLException e) {
-            Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
-            JOptionPane.showMessageDialog(this, "Error!\n" + e);
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure?");
+        if (confirm == JOptionPane.YES_OPTION) {
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.executeUpdate("DELETE FROM scouts WHERE id='" + jLabel11.getText() + "'");
+                jButton3ActionPerformed(evt);
+                comp4();
+                JOptionPane.showMessageDialog(this, "Success!");
+            } catch (SQLException e) {
+                Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
+                JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            }
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -1953,15 +1975,18 @@ public class PostLogin extends javax.swing.JFrame {
             }
         }
         if (valid == true) {
-            try {
-                Statement stmt = conn.createStatement();
-                stmt.executeUpdate("DELETE FROM activities "
-                        + "WHERE id='" + jTextField34.getText() + "'");
-                comp3();
-                JOptionPane.showMessageDialog(this, "Success!");
-            } catch (SQLException e) {
-                Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
-                JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure?");
+            if (confirm == JOptionPane.YES_OPTION) {
+                try {
+                    Statement stmt = conn.createStatement();
+                    stmt.executeUpdate("DELETE FROM activities "
+                            + "WHERE id='" + jTextField34.getText() + "'");
+                    comp3();
+                    JOptionPane.showMessageDialog(this, "Success!");
+                } catch (SQLException e) {
+                    Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
+                    JOptionPane.showMessageDialog(this, "Error!\n" + e);
+                }
             }
         } else {
             JOptionPane.showMessageDialog(this, "Invalid Activity No.!");
@@ -1977,15 +2002,18 @@ public class PostLogin extends javax.swing.JFrame {
             }
         }
         if (valid == true) {
-            try {
-                Statement stmt = conn.createStatement();
-                stmt.executeUpdate("DELETE FROM tests "
-                        + "WHERE id='" + jTextField35.getText() + "'");
-                comp2();
-                JOptionPane.showMessageDialog(this, "Success!");
-            } catch (SQLException e) {
-                Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
-                JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure?");
+            if (confirm == JOptionPane.YES_OPTION) {
+                try {
+                    Statement stmt = conn.createStatement();
+                    stmt.executeUpdate("DELETE FROM tests "
+                            + "WHERE id='" + jTextField35.getText() + "'");
+                    comp2();
+                    JOptionPane.showMessageDialog(this, "Success!");
+                } catch (SQLException e) {
+                    Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, e);
+                    JOptionPane.showMessageDialog(this, "Error!\n" + e);
+                }
             }
         } else {
             JOptionPane.showMessageDialog(this, "Invalid Test No.!");
@@ -2017,6 +2045,21 @@ public class PostLogin extends javax.swing.JFrame {
             jTextField33.requestFocus();
         }
     }//GEN-LAST:event_jTextField32KeyTyped
+
+    private void jTextField36ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField36ActionPerformed
+        // TODO add your handling code here:
+        jButton21ActionPerformed(evt);
+    }//GEN-LAST:event_jTextField36ActionPerformed
+
+    private void jTextField13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField13ActionPerformed
+        // TODO add your handling code here:
+        jButton21ActionPerformed(evt);
+    }//GEN-LAST:event_jTextField13ActionPerformed
+
+    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
+        // TODO add your handling code here:
+        jButton21ActionPerformed(evt);
+    }//GEN-LAST:event_jTextField14ActionPerformed
 
     private void comp1() {
         // 2nd component in tabbed pane
@@ -2215,7 +2258,6 @@ public class PostLogin extends javax.swing.JFrame {
 //        for (Map.Entry entry : hashMap.entrySet()) {
 //            System.out.println(entry.getKey() + " : " + entry.getValue());
 //        }
-
         // Convert the HashMap to a list of entries
         List<Map.Entry<Integer, Integer>> entryList = new ArrayList<>(hashMap.entrySet());
         // Sort the list based on the values in descending order
@@ -2243,7 +2285,7 @@ public class PostLogin extends javax.swing.JFrame {
             } catch (SQLException ex) {
                 Logger.getLogger(PostLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
     }
 
