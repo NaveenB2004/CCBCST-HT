@@ -3,7 +3,7 @@
   <dontWrapJar>true</dontWrapJar>
   <headerType>gui</headerType>
   <jar>CCBCST Hike-Team.jar</jar>
-  <outfile>C:\Users\Dell\Desktop\CCBCST Hike-Team\CCBCST Hike-Team.exe</outfile>
+  <outfile>C:\Users\NaveenB2004\Desktop\CCBCST Hike-Team\CCBCST Hike-Team.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>C:\Users\Dell\Documents\CCBCST\scout logo.ico</icon>
+  <icon>D:\Projects\CCBCST\scout logo.ico</icon>
   <jre>
     <path>JRE</path>
     <requiresJdk>false</requiresJdk>

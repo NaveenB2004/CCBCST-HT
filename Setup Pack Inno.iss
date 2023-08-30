@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "CCBCST Hike-Team"
-#define MyAppVersion "0.9"
+#define MyAppVersion "1.0"
 #define MyAppPublisher "NaveenB2004"
 #define MyAppURL "https://sites.google.com/view/scoutsofccbc"
 #define MyAppExeName "CCBCST Hike-Team.exe"
@@ -23,9 +23,9 @@ DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputDir=C:\Users\Dell\Desktop
+OutputDir=C:\Users\NaveenB2004\Desktop
 OutputBaseFilename=CCBCST Hike-Team
-SetupIconFile=C:\Users\Dell\Documents\CCBCST\scout logo.ico
+SetupIconFile=D:\Projects\CCBCST\scout logo.ico
 SolidCompression=yes
 Compression=lzma2/ultra64
 LZMAUseSeparateProcess=yes
@@ -38,8 +38,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\Dell\Desktop\CCBCST Hike-Team\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Dell\Desktop\CCBCST Hike-Team\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\NaveenB2004\Desktop\CCBCST Hike-Team\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\NaveenB2004\Desktop\CCBCST Hike-Team\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
