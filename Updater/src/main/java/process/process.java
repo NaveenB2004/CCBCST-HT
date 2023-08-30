@@ -1,6 +1,5 @@
 package process;
 
-import java.awt.Frame;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +14,6 @@ import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
-import javax.swing.JOptionPane;
 import org.apache.commons.io.FileUtils;
 
 /**
