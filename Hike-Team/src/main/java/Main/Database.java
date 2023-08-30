@@ -13,22 +13,24 @@ import java.util.logging.Logger;
  */
 public class Database {
 
-    public static Connection conn() {
+    public Connection conn() {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection("jdbc:sqlite:database.db");
             Statement stmt = conn.createStatement();
             stmt.execute("PRAGMA foreign_keys = ON");
         } catch (SQLException e) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Database.class.getName())
+                    .log(Level.SEVERE, null, e);
         }
         return conn;
     }
 
     public void mkdb() {
+        Connection conn = conn();
         try {
             // table for scouts
-            Statement stmt1 = conn().createStatement();
+            Statement stmt1 = conn.createStatement();
             stmt1.executeUpdate("CREATE TABLE scouts("
                     + "id INTEGER PRIMARY KEY,"
                     + "schoolIndex TEXT,"
@@ -43,7 +45,7 @@ public class Database {
                     + "whatsapp TEXT)");
 
             //table for attendance marking
-            Statement stmt2 = conn().createStatement();
+            Statement stmt2 = conn.createStatement();
             stmt2.executeUpdate("CREATE TABLE attendance("
                     + "id INTEGER PRIMARY KEY,"
                     + "scoutId INTEGER NOT NULL,"
@@ -53,7 +55,7 @@ public class Database {
                     + "ON DELETE CASCADE)");
 
             // table for tests
-            Statement stmt3 = conn().createStatement();
+            Statement stmt3 = conn.createStatement();
             stmt3.executeUpdate("CREATE TABLE tests("
                     + "id INTEGER PRIMARY KEY,"
                     + "name TEXT NOT NULL,"
@@ -61,7 +63,7 @@ public class Database {
                     + "defaultMark INTEGER NOT NULL)");
 
             // table for test marks
-            Statement stmt4 = conn().createStatement();
+            Statement stmt4 = conn.createStatement();
             stmt4.executeUpdate("CREATE TABLE testMarks("
                     + "id INTEGER PRIMARY KEY,"
                     + "scoutId INTEGER NOT NULL,"
@@ -73,14 +75,14 @@ public class Database {
                     + "ON DELETE CASCADE)");
 
             // table for activities
-            Statement stmt5 = conn().createStatement();
+            Statement stmt5 = conn.createStatement();
             stmt5.executeUpdate("CREATE TABLE activities("
                     + "id INTEGER PRIMARY KEY,"
                     + "name TEXT NOT NULL,"
                     + "defaultMark INTEGER NOT NULL)");
 
             // table for activity marks
-            Statement stmt6 = conn().createStatement();
+            Statement stmt6 = conn.createStatement();
             stmt6.executeUpdate("CREATE TABLE activityMarks("
                     + "id INTEGER PRIMARY KEY,"
                     + "scoutId INTEGER NOT NULL,"
@@ -93,7 +95,15 @@ public class Database {
                     + "ON DELETE CASCADE)");
             conn().close();
         } catch (SQLException e) {
-            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Database.class.getName())
+                    .log(Level.SEVERE, null, e);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Database.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
         }
     }
 }

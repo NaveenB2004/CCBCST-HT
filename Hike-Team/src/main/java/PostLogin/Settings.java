@@ -33,13 +33,25 @@ public class Settings extends javax.swing.JFrame {
     public Settings() {
         initComponents();
         startup();
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(
+                getClass().getResource("/scout logo.png")));
     }
 
     public static int focus = 0;
 
     public static String lastLogin;
-    Connection conn = Main.Database.conn();
+    Connection conn;
+
+    private void closeConn() {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Settings.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
     private void startup() {
         if (new File("theme.ini").exists()) {
@@ -54,7 +66,8 @@ public class Settings extends javax.swing.JFrame {
                         jComboBox1.setSelectedIndex(2);
                 }
             } catch (IOException e) {
-                Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(Settings.class.getName())
+                        .log(Level.SEVERE, null, e);
             }
         }
     }
@@ -225,12 +238,16 @@ public class Settings extends javax.swing.JFrame {
         databaseLocation.showOpenDialog(this);
         String location = databaseLocation.getSelectedFile().getAbsolutePath();
         try {
+            conn = new Main.Database().conn();
             Statement stmt = conn.createStatement();
             stmt.execute("backup to " + location + "\\CCBCSTHT_backup.db");
             JOptionPane.showMessageDialog(this, "Success!");
         } catch (SQLException ex) {
-            Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Settings.class.getName())
+                    .log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Error!\n" + ex);
+        } finally {
+            closeConn();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -244,12 +261,16 @@ public class Settings extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Invalid Database file selected!");
         } else {
             try {
+                conn = new Main.Database().conn();
                 Statement stmt = conn.createStatement();
                 stmt.execute("restore from " + location);
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException ex) {
-                Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Settings.class.getName())
+                        .log(Level.SEVERE, null, ex);
                 JOptionPane.showMessageDialog(this, "Error!\n" + ex);
+            } finally {
+                closeConn();
             }
         }
     }//GEN-LAST:event_jButton3ActionPerformed

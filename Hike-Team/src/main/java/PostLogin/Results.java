@@ -24,15 +24,27 @@ public class Results extends javax.swing.JFrame {
     public Results() {
         initComponents();
         startup();
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(
+                getClass().getResource("/scout logo.png")));
     }
 
     public static int focus = 0;
 
     public static String eventId;
     public static String event;
-    Connection conn = Main.Database.conn();
+    Connection conn;
     DefaultTableModel model;
+
+    private void closeConn() {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Results.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
@@ -49,6 +61,7 @@ public class Results extends javax.swing.JFrame {
         this.setTitle("Test Results");
         jLabel9.setText("Test");
         try {
+            conn = new Main.Database().conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * "
                     + "FROM tests WHERE id='" + eventId + "'");
@@ -92,7 +105,10 @@ public class Results extends javax.swing.JFrame {
                 }
             }
         } catch (SQLException e) {
-            Logger.getLogger(Results.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Results.class.getName())
+                    .log(Level.SEVERE, null, e);
+        } finally {
+            closeConn();
         }
     }
 
@@ -100,8 +116,8 @@ public class Results extends javax.swing.JFrame {
         this.setTitle("Activity Results");
         jLabel9.setText("Activity");
         String todayDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-        int x = 0;
         try {
+            conn = new Main.Database().conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * "
                     + "FROM activities WHERE id='" + eventId + "'");
@@ -136,7 +152,10 @@ public class Results extends javax.swing.JFrame {
                 }
             }
         } catch (SQLException e) {
-            Logger.getLogger(Results.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(Results.class.getName())
+                    .log(Level.SEVERE, null, e);
+        } finally {
+            closeConn();
         }
     }
 
@@ -316,6 +335,7 @@ public class Results extends javax.swing.JFrame {
                 && event.equals("activity")) {
             try {
                 int marks;
+                conn = new Main.Database().conn();
                 model.setRowCount(0);
                 Statement stmt2 = conn.createStatement();
                 ResultSet rs2 = stmt2.executeQuery("SELECT marks, scoutId "
@@ -333,7 +353,10 @@ public class Results extends javax.swing.JFrame {
                     }
                 }
             } catch (SQLException e) {
-                Logger.getLogger(Results.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(Results.class.getName())
+                        .log(Level.SEVERE, null, e);
+            } finally {
+                closeConn();
             }
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
@@ -342,6 +365,7 @@ public class Results extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (event.equals("test")) {
             try {
+                conn = new Main.Database().conn();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT COUNT(id) FROM "
                         + "testMarks WHERE testId='" + eventId + "'");
@@ -365,11 +389,15 @@ public class Results extends javax.swing.JFrame {
                 }
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException e) {
-                Logger.getLogger(Results.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(Results.class.getName())
+                        .log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            } finally {
+                closeConn();
             }
         } else {
             try {
+                conn = new Main.Database().conn();
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT COUNT(id) "
                         + "FROM activityMarks "
@@ -398,8 +426,11 @@ public class Results extends javax.swing.JFrame {
                 }
                 JOptionPane.showMessageDialog(this, "Success!");
             } catch (SQLException e) {
-                Logger.getLogger(Results.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(Results.class.getName())
+                        .log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            } finally {
+                closeConn();
             }
         }
         startup();

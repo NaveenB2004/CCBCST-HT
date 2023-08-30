@@ -22,17 +22,30 @@ public class PreAttendance extends javax.swing.JFrame {
     public PreAttendance() {
         initComponents();
         startup();
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/scout logo.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(
+                getClass().getResource("/scout logo.png")));
     }
 
     public static int focus = 0;
 
-    Connection conn = Main.Database.conn();
+    Connection conn;
     DefaultTableModel model;
+
+    private void closeConn() {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(PreAttendance.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
     private void startup() {
         model = (DefaultTableModel) jTable1.getModel();
         try {
+            conn = new Main.Database().conn();
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * "
                     + "FROM attendance");
@@ -55,7 +68,10 @@ public class PreAttendance extends javax.swing.JFrame {
                 jComboBox3.addItem(rs1.getString(1));
             }
         } catch (SQLException e) {
-            Logger.getLogger(PreAttendance.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(PreAttendance.class.getName())
+                    .log(Level.SEVERE, null, e);
+        } finally {
+            closeConn();
         }
     }
 
@@ -167,6 +183,7 @@ public class PreAttendance extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (jComboBox3.getSelectedIndex() != 0) {
             try {
+                conn = new Main.Database().conn();
                 model.setRowCount(0);
                 Statement stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery("SELECT * "
@@ -184,8 +201,11 @@ public class PreAttendance extends javax.swing.JFrame {
                     }
                 }
             } catch (SQLException e) {
-                Logger.getLogger(PreAttendance.class.getName()).log(Level.SEVERE, null, e);
+                Logger.getLogger(PreAttendance.class.getName())
+                        .log(Level.SEVERE, null, e);
                 JOptionPane.showMessageDialog(this, "Error!\n" + e);
+            } finally {
+                closeConn();
             }
         }
     }//GEN-LAST:event_jComboBox3ActionPerformed
